@@ -119,9 +119,10 @@ jobs:
             echo '}'
             echo '```'
             echo
-            echo "The long-stem \`g\`, the open ampersand and tabular figures are the defaults —"
-            echo "no \`font-feature-settings\` needed. Use \`pnum\` for proportional figures,"
-            echo "\`ss02\` for the original \`g\`, \`ss04\` for the original ampersand."
+            echo "The long-stem \`g\` and the open ampersand are the defaults — no"
+            echo "\`font-feature-settings\` needed. Figures are proportional; add"
+            echo "\`font-variant-numeric: tabular-nums\` on price columns and numbers that"
+            echo "update in place. \`ss02\` gives the original \`g\`, \`ss04\` the original ampersand."
             echo
             echo "## Changes"
             echo
@@ -141,7 +142,6 @@ jobs:
               echo "- **Long-stem \`g\` and open ampersand are the defaults** — previously \`ss02\` and"
               echo "  \`ss04\`, now baked in. The accented g's follow, and the ampersand keeps its own"
               echo "  width and kerning."
-              echo "- **Tabular figures by default** — digits line up in tables and UI without extra CSS."
               echo
               echo "Everything else — outlines, spacing, kerning, language coverage — is Albert Sans"
               echo "unchanged."

@@ -25,9 +25,7 @@ customize: venv
 
 build.stamp: venv sources/config.yaml $(SOURCES)
 	rm -rf fonts
-	(for config in sources/config*.yaml; do . venv/bin/activate; gftools builder $$config; done)
-	. venv/bin/activate; python3 scripts/freeze-figures.py $$(find fonts -name '*.ttf' -o -name '*.woff2')
-	touch build.stamp
+	(for config in sources/config*.yaml; do . venv/bin/activate; gftools builder $$config; done)  && touch build.stamp
 
 venv/touchfile: requirements.txt
 	test -d venv || python3 -m venv venv

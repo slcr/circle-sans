@@ -41,3 +41,6 @@ sources/build.ninja
 sources/.ninja_log
 *.bak
 sources/*.glyphs.bak
+
+# local preview config
+.claude/

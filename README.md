@@ -1,18 +1,16 @@
 # Circle Sans
 
-**Circle Sans** is a fork of [Albert Sans](https://github.com/usted/Albert-Sans) with three
-deliberate differences. Everything else — outlines, spacing, kerning, the `wght` and `wdth`
-axes, the language coverage — is Albert Sans unchanged.
+**Circle Sans** is a fork of [Albert Sans](https://github.com/usted/Albert-Sans) with two
+deliberate differences. Everything else — outlines, spacing, kerning, figures, the `wght`
+and `wdth` axes, the language coverage — is Albert Sans unchanged.
 
 | Change | What it means |
 |---|---|
 | **New `Q`** | The tail is a diagonal stroke crossing the bowl at the lower right, replacing the centred vertical bar that read as the Quake logo. A fixed `−52°` at every weight and width. |
 | **Frozen alternates** | The long-stem `g` and the open "et" ampersand are now the defaults — no `font-feature-settings` required. |
-| **Tabular figures by default** | Digits are tabular out of the box, so numbers line up in tables and UI without extra CSS. |
 
 Nothing is lost by freezing: the original shapes stay reachable in the slots they used to
-occupy. `ss02` now returns the *original* short-stem `g`, `ss04` the *original* ampersand,
-and `pnum` gives back proportional figures.
+occupy. `ss02` returns the *original* short-stem `g`, and `ss04` the *original* ampersand.
 
 [![][Fontbakery]](https://slcr.github.io/circle-sans/fontbakery/fontbakery-report.html)
 [![][Universal]](https://slcr.github.io/circle-sans/fontbakery/fontbakery-report.html)
@@ -43,13 +41,27 @@ variable font.
 }
 ```
 
-You should not need `font-feature-settings` for the long-stem `g`, the open ampersand or
-tabular figures — those are the defaults now. Reach for a feature only to opt *out*:
+You should not need `font-feature-settings` for the long-stem `g` or the open ampersand —
+those are the defaults now. Reach for a feature only to opt *out*:
 
 ```css
-.proportional-figures { font-feature-settings: "pnum" 1; }  /* proportional digits    */
-.original-g           { font-feature-settings: "ss02" 1; }  /* short-stem g           */
-.original-ampersand   { font-feature-settings: "ss04" 1; }  /* the closed ampersand   */
+.original-g         { font-feature-settings: "ss02" 1; }  /* short-stem g         */
+.original-ampersand { font-feature-settings: "ss04" 1; }  /* the closed ampersand */
+```
+
+### Figures
+
+Figures are **proportional by default**, which is right for running text — tabular digits
+are padded to a uniform width and go visibly gappy in prose.
+
+Switch to tabular only where digits need to line up in a column, or where a number updates
+in place and would otherwise jitter as digits change:
+
+```css
+.price,
+.cart-total,
+.order-table td,
+.qty-stepper { font-variant-numeric: tabular-nums; }
 ```
 
 ## Credits
@@ -79,11 +91,15 @@ The proof files and QA tests are also available automatically via GitHub Actions
 
 ### Circle Sans
 
-**25 Aug 2026 — forked from Albert Sans v1.31**
+**25 Aug 2026 — v1.1**
+- Reverted tabular figures to proportional. Tabular is right for price columns and
+  live-updating numbers, but it goes gappy in running text, and Circle Sans is used for
+  both. Apply `font-variant-numeric: tabular-nums` per component instead.
+
+**25 Aug 2026 — v1.0, forked from Albert Sans v1.31**
 - Renamed the family to Circle Sans
 - Redrew the `Q` tail as a diagonal stroke crossing the bowl, fixed at −52° across the designspace
 - Froze the long-stem `g` and the open ampersand in as defaults
-- Made tabular figures the default, keeping `pnum` as the way back
 
 ### Albert Sans (upstream history)
 

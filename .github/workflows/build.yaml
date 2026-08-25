@@ -54,7 +54,12 @@ jobs:
     - name: proof
       run: make proof
     - name: setup site
-      run: cp scripts/index.html out/index.html
+      run: |
+        cp scripts/index.html out/index.html
+        cp scripts/specimen.html out/specimen.html
+        mkdir -p out/fonts
+        # The specimen loads this one file for every weight and width.
+        cp "fonts/webfonts/CircleSans[wdth,wght].woff2" out/fonts/CircleSans-Variable.woff2
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v4
       if: ${{ github.ref == 'refs/heads/main' }}
