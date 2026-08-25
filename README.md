@@ -16,15 +16,15 @@ and `pnum` gives back proportional figures.
 
 [![][Fontbakery]](https://slcr.github.io/circle-sans/fontbakery/fontbakery-report.html)
 [![][Universal]](https://slcr.github.io/circle-sans/fontbakery/fontbakery-report.html)
-[![][GF Profile]](https://slcr.github.io/circle-sans/fontbakery/fontbakery-report.html)
-[![][Outline Correctness]](https://slcr.github.io/circle-sans/fontbakery/fontbakery-report.html)
+[![][Font File]](https://slcr.github.io/circle-sans/fontbakery/fontbakery-report.html)
+[![][Outline]](https://slcr.github.io/circle-sans/fontbakery/fontbakery-report.html)
 [![][Shaping]](https://slcr.github.io/circle-sans/fontbakery/fontbakery-report.html)
 
 [Fontbakery]: https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fslcr%2Fcircle-sans%2Fgh-pages%2Fbadges%2Foverall.json
-[GF Profile]: https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fslcr%2Fcircle-sans%2Fgh-pages%2Fbadges%2FGoogleFonts.json
-[Outline Correctness]: https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fslcr%2Fcircle-sans%2Fgh-pages%2Fbadges%2FOutlineCorrectnessChecks.json
+[Font File]: https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fslcr%2Fcircle-sans%2Fgh-pages%2Fbadges%2FFontFileChecks.json
+[Outline]: https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fslcr%2Fcircle-sans%2Fgh-pages%2Fbadges%2FOutlineChecks.json
 [Shaping]: https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fslcr%2Fcircle-sans%2Fgh-pages%2Fbadges%2FShapingChecks.json
-[Universal]: https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fslcr%2Fcircle-sans%2Fgh-pages%2Fbadges%2FUniversal.json
+[Universal]: https://img.shields.io/endpoint?url=https%3A%2F%2Fraw.githubusercontent.com%2Fslcr%2Fcircle-sans%2Fgh-pages%2Fbadges%2FUniversalProfileChecks.json
 
 ![Sample Image](documentation/image1.png)
 
@@ -36,7 +36,7 @@ variable font.
 ```css
 @font-face {
   font-family: "Circle Sans";
-  src: url("CircleSans-Roman[wdth,wght].woff2") format("woff2-variations");
+  src: url("CircleSans[wdth,wght].woff2") format("woff2-variations");
   font-weight: 100 900;
   font-stretch: 87.5% 100%;
   font-style: normal;

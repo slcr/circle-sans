@@ -2,6 +2,12 @@ name: Build font and specimen
 
 on: push
 
+# The Deploy step pushes the QA report and proofs to the gh-pages branch.
+# New repositories give GITHUB_TOKEN read-only access by default, which makes that
+# push fail with a 403, so ask for write explicitly.
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build and test

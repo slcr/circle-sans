@@ -1,5 +1,5 @@
+Copyright 2026 The Circle Sans Project Authors (https://github.com/slcr/circle-sans)
 Copyright 2023 The Albert Sans Project Authors (https://github.com/usted/Albert-Sans)
-Copyright 2026 The Circle Sans Project Authors — modified from Albert Sans.
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:

@@ -254207,7 +254207,7 @@ key = copyrights;
 values = (
 {
 language = dflt;
-value = "Copyright 2026 The Circle Sans Project Authors — modified from Albert Sans (https://github.com/usted/Albert-Sans)";
+value = "Copyright 2026 The Circle Sans Project Authors (https://github.com/slcr/circle-sans)";
 }
 );
 },

@@ -113,7 +113,7 @@ jobs:
             echo '```css'
             echo '@font-face {'
             echo '  font-family: "Circle Sans";'
-            echo '  src: url("CircleSans-Roman[wdth,wght].woff2") format("woff2-variations");'
+            echo '  src: url("CircleSans[wdth,wght].woff2") format("woff2-variations");'
             echo '  font-weight: 100 900;'
             echo '  font-stretch: 87.5% 100%;'
             echo '}'
@@ -131,8 +131,20 @@ jobs:
               echo
               echo "**Full diff:** https://github.com/${GITHUB_REPOSITORY}/compare/${PREV}...${V}"
             else
-              git log --no-merges --pretty=format:'- %s'
+              # First release: a commit list would just be the initial commit, which
+              # tells nobody anything. Describe what actually differs from Albert Sans.
+              echo "First release. Circle Sans forks Albert Sans v1.31 and changes three things:"
               echo
+              echo "- **New \`Q\`** — the centred vertical tail read as the Quake logo. It is now a"
+              echo "  diagonal stroke crossing the bowl at the lower right, at a fixed −52° so the"
+              echo "  rotation does not drift with weight."
+              echo "- **Long-stem \`g\` and open ampersand are the defaults** — previously \`ss02\` and"
+              echo "  \`ss04\`, now baked in. The accented g's follow, and the ampersand keeps its own"
+              echo "  width and kerning."
+              echo "- **Tabular figures by default** — digits line up in tables and UI without extra CSS."
+              echo
+              echo "Everything else — outlines, spacing, kerning, language coverage — is Albert Sans"
+              echo "unchanged."
             fi
             echo
             echo
