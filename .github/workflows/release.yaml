@@ -1,0 +1,158 @@
+name: Release
+
+# Builds the fonts and publishes them as a GitHub Release with download links,
+# so nobody has to clone the repo and build a font themselves.
+#
+# Two ways to cut a release:
+#   * push a tag:      git tag v1.0 && git push origin v1.0
+#   * or from the UI:  Actions -> Release -> Run workflow -> type the version
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version to release, e.g. v1.0"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # full history, so the changelog can diff against the previous tag
+
+      - name: Work out the version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            VERSION="${GITHUB_REF#refs/tags/}"
+          fi
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "Releasing $VERSION"
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.10"
+
+      - name: Install sys tools/deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ttfautohint libcairo2-dev python3-cairo-dev pkg-config python3-dev zip
+
+      - uses: actions/cache@v6
+        with:
+          path: ./venv/
+          key: ${{ runner.os }}-py310-venv-v2-${{ hashFiles('requirements*.txt') }}
+
+      - name: Build fonts
+        run: make build
+
+      - name: Package the downloads
+        run: |
+          set -euo pipefail
+          V="${VERSION}"
+          mkdir -p dist
+
+          # The OFL requires the licence to travel with the fonts, so every zip gets one.
+          package () {
+            local name="$1" src="$2"
+            [ -d "$src" ] || { echo "skipping $name, no $src"; return; }
+            local stage="stage/CircleSans-${V}-${name}"
+            mkdir -p "$stage"
+            cp -r "$src"/. "$stage"/
+            cp OFL.txt "$stage"/
+            cp README.md "$stage"/
+            (cd stage && zip -qr "../dist/CircleSans-${V}-${name}.zip" "CircleSans-${V}-${name}")
+            rm -rf "$stage"
+            echo "packaged $name"
+          }
+
+          package "variable" "fonts/variable"
+          package "webfonts" "fonts/webfonts"
+          package "ttf"      "fonts/ttf"
+          package "otf"      "fonts/otf"
+
+          # one archive with the lot, for anyone who just wants everything
+          mkdir -p "stage/CircleSans-${V}"
+          cp -r fonts/. "stage/CircleSans-${V}"/
+          cp OFL.txt README.md documentation/DESCRIPTION.en_us.html "stage/CircleSans-${V}"/
+          (cd stage && zip -qr "../dist/CircleSans-${V}-all.zip" "CircleSans-${V}")
+
+          ls -lh dist/
+
+      - name: Write the release notes
+        run: |
+          set -euo pipefail
+          V="${VERSION}"
+          PREV=$(git tag --sort=-v:refname | grep -v "^${V}$" | head -1 || true)
+
+          {
+            echo "## Downloads"
+            echo
+            echo "| File | Use it for |"
+            echo "|---|---|"
+            echo "| \`CircleSans-${V}-webfonts.zip\` | **Web.** WOFF2, smallest files — start here for a website. |"
+            echo "| \`CircleSans-${V}-variable.zip\` | **Web or design tools.** One file, every weight and width, via \`font-variation-settings\`. |"
+            echo "| \`CircleSans-${V}-ttf.zip\` | **Desktop.** Install these on macOS/Windows for Figma, Office, etc. |"
+            echo "| \`CircleSans-${V}-otf.zip\` | **Print / desktop publishing.** |"
+            echo "| \`CircleSans-${V}-all.zip\` | Everything above in one archive. |"
+            echo
+            echo "Nine weights (Thin to Black) in two widths (Normal and Narrow), roman and italic."
+            echo
+            echo "### Using the variable font on the web"
+            echo
+            echo '```css'
+            echo '@font-face {'
+            echo '  font-family: "Circle Sans";'
+            echo '  src: url("CircleSans-Roman[wdth,wght].woff2") format("woff2-variations");'
+            echo '  font-weight: 100 900;'
+            echo '  font-stretch: 87.5% 100%;'
+            echo '}'
+            echo '```'
+            echo
+            echo "The long-stem \`g\`, the open ampersand and tabular figures are the defaults —"
+            echo "no \`font-feature-settings\` needed. Use \`pnum\` for proportional figures,"
+            echo "\`ss02\` for the original \`g\`, \`ss04\` for the original ampersand."
+            echo
+            echo "## Changes"
+            echo
+            if [ -n "$PREV" ]; then
+              git log --no-merges --pretty=format:'- %s' "${PREV}..HEAD"
+              echo
+              echo
+              echo "**Full diff:** https://github.com/${GITHUB_REPOSITORY}/compare/${PREV}...${V}"
+            else
+              git log --no-merges --pretty=format:'- %s'
+              echo
+            fi
+            echo
+            echo
+            echo "---"
+            echo "Circle Sans is a fork of [Albert Sans](https://github.com/usted/Albert-Sans) by Andreas Rasmussen (a.Foundry), licensed under the SIL Open Font License 1.1."
+          } > release-notes.md
+
+          cat release-notes.md
+
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          V="${VERSION}"
+          if gh release view "$V" >/dev/null 2>&1; then
+            gh release edit "$V" --notes-file release-notes.md --title "Circle Sans $V"
+          else
+            gh release create "$V" --title "Circle Sans $V" --notes-file release-notes.md --target "$GITHUB_SHA"
+          fi
+          gh release upload "$V" dist/*.zip --clobber
+          gh release edit "$V" --draft=false
+          echo "Released: https://github.com/${GITHUB_REPOSITORY}/releases/tag/${V}"

@@ -1,0 +1,3 @@
+# See the note in requirements.txt about why these are pinned.
+fontbakery[googlefonts]==1.1.0
+gftools[qa]==0.9.996
