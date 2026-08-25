@@ -53,6 +53,25 @@ jobs:
           path: ./venv/
           key: ${{ runner.os }}-py310-venv-v2-${{ hashFiles('requirements*.txt') }}
 
+      # Keep the font's internal version in step with the release tag. Without this the
+      # sources' version ships unchanged on every release, so two different builds both
+      # report the same version and font caches may not replace one with the other.
+      #   v1.1 -> 1.100,  v1.12 -> 1.120,  v2.0 -> 2.000
+      - name: Stamp the font version from the tag
+        run: |
+          set -euo pipefail
+          RAW="${VERSION#v}"
+          MAJ="${RAW%%.*}"
+          REST="${RAW#*.}"
+          FRAC=$(printf '%s000' "$REST" | cut -c1-3)
+          FONT_VERSION="${MAJ}.${FRAC}"
+          echo "Tag ${VERSION} -> font version ${FONT_VERSION}"
+          make venv
+          . venv/bin/activate
+          for src in sources/*.glyphs; do
+            bumpfontversion "$src" --new-version "$FONT_VERSION"
+          done
+
       - name: Build fonts
         run: make build
 

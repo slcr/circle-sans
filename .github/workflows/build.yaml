@@ -55,8 +55,8 @@ jobs:
       run: make proof
     - name: setup site
       run: |
-        cp scripts/index.html out/index.html
-        cp scripts/specimen.html out/specimen.html
+        # The specimen is the landing page; it links on to the QA report and proofs.
+        cp scripts/specimen.html out/index.html
         mkdir -p out/fonts
         # The specimen loads this one file for every weight and width.
         cp "fonts/webfonts/CircleSans[wdth,wght].woff2" out/fonts/CircleSans-Variable.woff2

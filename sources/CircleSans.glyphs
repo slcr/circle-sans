@@ -1143,6 +1143,7 @@ over = -7;
 pos = -200;
 },
 {
+over = 0;
 }
 );
 name = Thin;
@@ -1351,6 +1352,7 @@ over = -7;
 pos = -200;
 },
 {
+over = 0;
 }
 );
 name = Medium;
@@ -1561,6 +1563,7 @@ over = -7;
 pos = -200;
 },
 {
+over = 0;
 }
 );
 name = Black;
@@ -1775,6 +1778,7 @@ over = -7;
 pos = -200;
 },
 {
+over = 0;
 }
 );
 name = "Narrow Thin";
@@ -1962,6 +1966,7 @@ over = -7;
 pos = -200;
 },
 {
+over = 0;
 }
 );
 name = "Narrow Medium";
@@ -2154,6 +2159,7 @@ over = -7;
 pos = -200;
 },
 {
+over = 0;
 }
 );
 name = "Narrow Black";
@@ -165423,7 +165429,7 @@ R = math;
 },
 {
 color = 10;
-glyphname = infinity;
+glyphname = "infinity";
 lastChange = "2025-04-23 18:34:52 +0000";
 layers = (
 {
@@ -189521,6 +189527,7 @@ layers = (
 anchors = (
 {
 name = _left;
+pos = (0,0);
 }
 );
 layerId = m005;
@@ -189558,6 +189565,7 @@ width = 21;
 anchors = (
 {
 name = _left;
+pos = (0,0);
 }
 );
 layerId = m008;
@@ -189712,6 +189720,7 @@ width = 148.09091;
 anchors = (
 {
 name = _left;
+pos = (0,0);
 }
 );
 layerId = "1458D1BF-5CC5-4794-B60B-1E4EBB5AAB71";
@@ -189749,6 +189758,7 @@ width = 91;
 anchors = (
 {
 name = _left;
+pos = (0,0);
 }
 );
 layerId = "4F6B2F0C-3760-4036-AE58-68A1B75FEF4B";
@@ -189786,6 +189796,7 @@ width = 91;
 anchors = (
 {
 name = _left;
+pos = (0,0);
 }
 );
 layerId = "37E7CDDA-CEC6-40F9-AC4F-410C0BC0DDCF";
@@ -189823,6 +189834,7 @@ width = 21;
 anchors = (
 {
 name = _left;
+pos = (0,0);
 }
 );
 layerId = "E035AF15-4D47-4C1B-8EB8-9E5E18B6D87B";
@@ -201535,7 +201547,7 @@ dollar = -17;
 equal = -49;
 fi = -11;
 idotaccent = -19;
-infinity = -36;
+"infinity" = -36;
 jcircumflex = 24;
 less = -20;
 numbersign = -31;
@@ -202276,7 +202288,7 @@ period = -58;
 six = -58;
 slash = -60;
 };
-infinity = {
+"infinity" = {
 bracketright = -36;
 parenright = -116;
 quotedblleft = -56;
@@ -202916,7 +202928,7 @@ icircumflex = -12;
 idotaccent = -40;
 increment = -22;
 indianrupee = -35;
-infinity = -116;
+"infinity" = -116;
 integral = 63;
 iogonek = 103;
 less = -94;
@@ -203178,7 +203190,7 @@ hbar = 72;
 icircumflex = 69;
 idotaccent = -12;
 imacron = 57;
-infinity = -80;
+"infinity" = -80;
 jcircumflex = 68;
 less = -91;
 mu = -49;
@@ -203201,7 +203213,7 @@ gcircumflex = -75;
 hbar = 90;
 icircumflex = 56;
 imacron = 72;
-infinity = -113;
+"infinity" = -113;
 jcircumflex = 55;
 less = -118;
 mu = -59;
@@ -203758,7 +203770,7 @@ idieresis = 67;
 igrave = 92;
 imacron = 73;
 increment = -69;
-infinity = -34;
+"infinity" = -34;
 integral = -25;
 itilde = 84;
 jcircumflex = 85;
@@ -211529,7 +211541,7 @@ dollar = -44;
 equal = -62;
 fi = -26;
 idotaccent = -32;
-infinity = -59;
+"infinity" = -59;
 jcircumflex = 20;
 less = -50;
 numbersign = -44;
@@ -212270,7 +212282,7 @@ period = -77;
 six = -60;
 slash = -63;
 };
-infinity = {
+"infinity" = {
 bracketright = -60;
 parenright = -136;
 quotedblleft = -46;
@@ -212910,7 +212922,7 @@ icircumflex = -25;
 idotaccent = -69;
 increment = -54;
 indianrupee = -57;
-infinity = -136;
+"infinity" = -136;
 integral = 23;
 iogonek = 29;
 less = -126;
@@ -213172,7 +213184,7 @@ hbar = 39;
 icircumflex = 38;
 idotaccent = -21;
 imacron = 54;
-infinity = -83;
+"infinity" = -83;
 jcircumflex = 40;
 less = -97;
 mu = -59;
@@ -213195,7 +213207,7 @@ gcircumflex = -72;
 hbar = 42;
 icircumflex = 27;
 imacron = 51;
-infinity = -95;
+"infinity" = -95;
 jcircumflex = 29;
 less = -91;
 mu = -49;
@@ -213752,7 +213764,7 @@ idieresis = 44;
 igrave = 42;
 imacron = 69;
 increment = -82;
-infinity = -38;
+"infinity" = -38;
 integral = -39;
 itilde = 53;
 jcircumflex = 60;
@@ -221523,7 +221535,7 @@ dollar = -44;
 equal = -100;
 fi = -32;
 idotaccent = -13;
-infinity = -101;
+"infinity" = -101;
 jcircumflex = 66;
 less = -93;
 numbersign = -84;
@@ -222264,7 +222276,7 @@ period = -57;
 six = -40;
 slash = -63;
 };
-infinity = {
+"infinity" = {
 bracketright = -101;
 parenright = -140;
 quotedblleft = -21;
@@ -222904,7 +222916,7 @@ icircumflex = -31;
 idotaccent = -64;
 increment = -57;
 indianrupee = -66;
-infinity = -140;
+"infinity" = -140;
 integral = -2;
 iogonek = 37;
 less = -134;
@@ -223166,7 +223178,7 @@ hbar = 57;
 icircumflex = 45;
 idotaccent = -22;
 imacron = 93;
-infinity = -49;
+"infinity" = -49;
 jcircumflex = 52;
 less = -68;
 mu = -32;
@@ -223189,7 +223201,7 @@ gcircumflex = -39;
 hbar = 52;
 icircumflex = 37;
 imacron = 70;
-infinity = -32;
+"infinity" = -32;
 jcircumflex = 40;
 less = -51;
 mu = -11;
@@ -223746,7 +223758,7 @@ idieresis = 71;
 igrave = 40;
 imacron = 92;
 increment = -92;
-infinity = -45;
+"infinity" = -45;
 integral = -88;
 itilde = 83;
 jcircumflex = 59;
@@ -231517,7 +231529,7 @@ dollar = -12;
 equal = -33;
 fi = -8;
 idotaccent = -11;
-infinity = -22;
+"infinity" = -22;
 jcircumflex = 21;
 less = -13;
 numbersign = -21;
@@ -232258,7 +232270,7 @@ period = -52;
 six = -50;
 slash = -47;
 };
-infinity = {
+"infinity" = {
 bracketright = -23;
 parenright = -91;
 quotedblleft = -39;
@@ -232898,7 +232910,7 @@ icircumflex = -12;
 idotaccent = -31;
 increment = -20;
 indianrupee = -29;
-infinity = -91;
+"infinity" = -91;
 integral = 64;
 iogonek = 115;
 less = -76;
@@ -233160,7 +233172,7 @@ hbar = 70;
 icircumflex = 54;
 idotaccent = -6;
 imacron = 59;
-infinity = -67;
+"infinity" = -67;
 jcircumflex = 53;
 less = -75;
 mu = -42;
@@ -233183,7 +233195,7 @@ gcircumflex = -57;
 hbar = 81;
 icircumflex = 66;
 imacron = 69;
-infinity = -81;
+"infinity" = -81;
 jcircumflex = 66;
 less = -89;
 mu = -44;
@@ -233740,7 +233752,7 @@ idieresis = 71;
 igrave = 75;
 imacron = 73;
 increment = -57;
-infinity = -21;
+"infinity" = -21;
 integral = -17;
 itilde = 66;
 jcircumflex = 69;
@@ -241511,7 +241523,7 @@ dollar = -29;
 equal = -47;
 fi = -20;
 idotaccent = -24;
-infinity = -43;
+"infinity" = -43;
 jcircumflex = 17;
 less = -33;
 numbersign = -37;
@@ -242252,7 +242264,7 @@ period = -61;
 six = -41;
 slash = -40;
 };
-infinity = {
+"infinity" = {
 bracketright = -43;
 parenright = -105;
 quotedblleft = -46;
@@ -242892,7 +242904,7 @@ icircumflex = -24;
 idotaccent = -43;
 increment = -34;
 indianrupee = -50;
-infinity = -104;
+"infinity" = -104;
 integral = 19;
 iogonek = 38;
 less = -94;
@@ -243154,7 +243166,7 @@ hbar = 19;
 icircumflex = 25;
 idotaccent = -12;
 imacron = 28;
-infinity = -76;
+"infinity" = -76;
 jcircumflex = 27;
 less = -73;
 mu = -52;
@@ -243177,7 +243189,7 @@ gcircumflex = -53;
 hbar = 29;
 icircumflex = 28;
 imacron = 37;
-infinity = -85;
+"infinity" = -85;
 jcircumflex = 30;
 less = -75;
 mu = -45;
@@ -243734,7 +243746,7 @@ idieresis = 46;
 igrave = 28;
 imacron = 42;
 increment = -57;
-infinity = -23;
+"infinity" = -23;
 integral = -23;
 itilde = 42;
 jcircumflex = 45;
@@ -251505,7 +251517,7 @@ dollar = -31;
 equal = -74;
 fi = -21;
 idotaccent = -5;
-infinity = -82;
+"infinity" = -82;
 jcircumflex = 47;
 less = -74;
 numbersign = -50;
@@ -252246,7 +252258,7 @@ period = -45;
 six = -26;
 slash = -32;
 };
-infinity = {
+"infinity" = {
 bracketright = -82;
 parenright = -103;
 quotedblleft = -19;
@@ -252886,7 +252898,7 @@ icircumflex = -27;
 idotaccent = -36;
 increment = -43;
 indianrupee = -48;
-infinity = -103;
+"infinity" = -103;
 integral = 0;
 iogonek = 25;
 less = -98;
@@ -253148,7 +253160,7 @@ hbar = 11;
 icircumflex = 8;
 idotaccent = -14;
 imacron = 38;
-infinity = -49;
+"infinity" = -49;
 jcircumflex = 4;
 less = -53;
 mu = -37;
@@ -253171,7 +253183,7 @@ gcircumflex = -34;
 hbar = 18;
 icircumflex = 17;
 imacron = 34;
-infinity = -27;
+"infinity" = -27;
 jcircumflex = 18;
 less = -36;
 mu = -16;
@@ -253728,7 +253740,7 @@ idieresis = 46;
 igrave = 7;
 imacron = 47;
 increment = -60;
-infinity = -29;
+"infinity" = -29;
 integral = -48;
 itilde = 40;
 jcircumflex = 25;
@@ -256730,7 +256742,7 @@ igrave = None;
 imacron = None;
 increment = None;
 indianrupee = None;
-infinity = None;
+"infinity" = None;
 integral = None;
 iogonek = None;
 itilde = None;
@@ -257139,7 +257151,7 @@ igrave = None;
 imacron = None;
 increment = None;
 indianrupee = None;
-infinity = None;
+"infinity" = None;
 integral = None;
 iogonek = None;
 itilde = None;
@@ -257548,7 +257560,7 @@ igrave = None;
 imacron = None;
 increment = None;
 indianrupee = None;
-infinity = None;
+"infinity" = None;
 integral = None;
 iogonek = None;
 itilde = None;
@@ -257957,7 +257969,7 @@ igrave = None;
 imacron = None;
 increment = None;
 indianrupee = None;
-infinity = None;
+"infinity" = None;
 integral = None;
 iogonek = None;
 itilde = None;
@@ -258366,7 +258378,7 @@ igrave = None;
 imacron = None;
 increment = None;
 indianrupee = None;
-infinity = None;
+"infinity" = None;
 integral = None;
 iogonek = None;
 itilde = None;
@@ -258775,7 +258787,7 @@ igrave = None;
 imacron = None;
 increment = None;
 indianrupee = None;
-infinity = None;
+"infinity" = None;
 integral = None;
 iogonek = None;
 itilde = None;
@@ -259294,5 +259306,5 @@ KernOnModels = (
 };
 };
 versionMajor = 1;
-versionMinor = 310;
+versionMinor = 100;
 }
