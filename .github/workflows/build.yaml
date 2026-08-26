@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v7
+      with:
+        fetch-depth: 0 # full history, so the last tag is reachable for the version stamp
     - name: Set up Python 3.10
       uses: actions/setup-python@v7
       with:
@@ -22,7 +24,6 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install ttfautohint libcairo2-dev python3-cairo-dev pkg-config python3-dev
-        sudo snap install yq
     - uses: actions/cache@v6
       with:
         path: ./venv/
@@ -33,18 +34,37 @@ jobs:
       # Set the archive name to repo name + "-assets" e.g "MavenPro-assets"
       run: echo "ZIP_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')-fonts" >> $GITHUB_ENV
 
-    # If a new release is cut, use the release tag to auto-bump the source files
-    # - name: Bump release
-    #   if: github.event_name == 'release'
-    #   run: |
-    #     . venv/bin/activate
-    #     SRCS=$(yq e ".sources[]" sources/config.yaml)
-    #     TAG_NAME=${GITHUB_REF/refs\/tags\//}
-    #     echo "Bumping $SRCS to $TAG_NAME"
-    #     for src in $SRCS
-    #     do
-    #       bumpfontversion sources/$src --new-version $TAG_NAME;
-    #     done
+    # Give every build a version of its own. release.yaml stamps the tag verbatim
+    # (v1.2 -> 1.200, v1.31 -> 1.310), so a release always leaves the last digit of
+    # the three-digit fraction at zero. Dev builds spend that digit on the number of
+    # commits since the last tag: three commits past v1.2 becomes 1.203, which sorts
+    # after v1.2 and before any future v1.21. Without this the specimen ships
+    # whatever the sources happen to say - the same number for every build, which is
+    # the bug that had v1.0 and v1.1 both reporting 1.310.
+    - name: Stamp a dev font version
+      run: |
+        set -euo pipefail
+        TAG=$(git describe --tags --abbrev=0 --match 'v*' 2>/dev/null || true)
+        if [ -z "$TAG" ]; then
+          echo "No v* tag reachable - leaving the sources' version alone."
+          exit 0
+        fi
+        DIST=$(git rev-list --count "$TAG..HEAD")
+        # Clamp so the counter cannot carry into the next release's fraction.
+        # Builds 10+ commits past a tag all report the same version.
+        if [ "$DIST" -gt 9 ]; then DIST=9; fi
+        RAW="${TAG#v}"
+        MAJ="${RAW%%.*}"
+        REST="${RAW#*.}"
+        FRAC=$(printf '%s000' "$REST" | cut -c1-3)
+        # 10# forces base 10; a fraction like 000 would otherwise be read as octal.
+        FONT_VERSION="${MAJ}.$(printf '%03d' $(( 10#$FRAC + DIST )))"
+        echo "$TAG +$DIST commits -> font version $FONT_VERSION"
+        make venv
+        . venv/bin/activate
+        for src in sources/*.glyphs; do
+          bumpfontversion "$src" --new-version "$FONT_VERSION"
+        done
 
     - name: Build font
       run: make build

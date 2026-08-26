@@ -5,6 +5,7 @@ build.stamp
 *.zip
 dist
 proof
+out
 fonts
 node_modules
 package-lock.json
