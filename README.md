@@ -91,6 +91,25 @@ The proof files and QA tests are also available automatically via GitHub Actions
 
 ### Circle Sans
 
+**26 Aug 2026 — v1.3**
+- Manufacturer, vendor URL and OS/2 vendor ID now read Coffee Circle,
+  `https://www.coffeecircle.com` and `CCIR`. They previously read a.Foundry,
+  `a-foundry.com` and `AFOU` - a.Foundry's registered vendor ID - which credited them
+  for a binary they never produced and sent support questions to their site.
+- The designer fields are unchanged and still name Andreas Rasmussen. The design is
+  his; only the publisher changed.
+- `CCIR` is pending registration with Microsoft, so FontBakery's `vendor_id` check
+  reports it as unrecognised until the registry catches up. See `fontbakery.yaml`.
+- Builds off `main` now carry their own version (`1.20N`, counting commits since the
+  last tag), so a development build can no longer be mistaken for a release.
+- No outline changes since v1.2.
+
+**25 Aug 2026 — v1.2**
+- The font version now tracks the release tag, so two builds can no longer claim the
+  same version. v1.0 and v1.1 both reported 1.310, inherited from Albert Sans 1.31.
+- The specimen is now the GitHub Pages landing page.
+- No outline changes since v1.1.
+
 **25 Aug 2026 — v1.1**
 - Reverted tabular figures to proportional. Tabular is right for price columns and
   live-updating numbers, but it goes gappy in running text, and Circle Sans is used for
