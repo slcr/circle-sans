@@ -2,11 +2,14 @@
 #
 # googlefonts/vendor_id warns "unknown" because our vendor ID (CCIR) is not in
 # the Microsoft vendor registry, of which FontBakery ships a cached copy. CCIR
-# is pending registration with Microsoft (mstwsite@microsoft.com); the warning
-# will persist until the entry is published AND a later FontBakery release
-# refreshes its cache, so it says nothing about the fonts themselves.
+# was submitted to mstwsite@microsoft.com on 2026-08-26 and is awaiting
+# publication. The warning will persist until the entry appears at
+# https://learn.microsoft.com/en-us/typography/vendors/ AND a later FontBakery
+# release refreshes its cache, so it says nothing about the fonts themselves.
 #
-# Remove this override once the registration lands.
+# Remove this override once the registration lands. If it is still pending well
+# after the submission date, that mailbox is known to go quiet - chasing it via
+# an issue on MicrosoftDocs/typography-issues has worked for other foundries.
 #
 # Only the "unknown" message is downgraded. "not-set" and "bad" (a font-editor
 # default such as UKWN or PfEd) still report at full severity, so a genuinely
