@@ -2,6 +2,15 @@ name: Build font and specimen
 
 on: push
 
+# Only the newest push to a given ref is worth building: an older run's fonts are
+# already stale, and both runs deploy to the same gh-pages branch, so whichever
+# finishes last wins regardless of which commit is newer. Cancel the superseded
+# run instead of racing it. Including github.ref in the group means a tag push
+# gets its own group and cannot be cancelled by a later push to main.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 # The Deploy step pushes the QA report and proofs to the gh-pages branch.
 # New repositories give GITHUB_TOKEN read-only access by default, which makes that
 # push fail with a 403, so ask for write explicitly.
