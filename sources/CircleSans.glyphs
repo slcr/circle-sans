@@ -254225,17 +254225,17 @@ key = manufacturers;
 values = (
 {
 language = dflt;
-value = a.Foundry;
+value = "Coffee Circle";
 }
 );
 },
 {
 key = manufacturerURL;
-value = "https://www.a-foundry.com";
+value = "https://www.coffeecircle.com";
 },
 {
 key = vendorID;
-value = AFOU;
+value = CCIR;
 }
 );
 stems = (

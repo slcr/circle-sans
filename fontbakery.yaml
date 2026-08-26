@@ -1,0 +1,16 @@
+# FontBakery configuration for Circle Sans.
+#
+# googlefonts/vendor_id warns "unknown" because our vendor ID (CCIR) is not in
+# the Microsoft vendor registry, of which FontBakery ships a cached copy. CCIR
+# is pending registration with Microsoft (mstwsite@microsoft.com); the warning
+# will persist until the entry is published AND a later FontBakery release
+# refreshes its cache, so it says nothing about the fonts themselves.
+#
+# Remove this override once the registration lands.
+#
+# Only the "unknown" message is downgraded. "not-set" and "bad" (a font-editor
+# default such as UKWN or PfEd) still report at full severity, so a genuinely
+# broken vendor ID is not hidden by this.
+overrides:
+  googlefonts/vendor_id:
+    unknown: SKIP
