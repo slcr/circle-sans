@@ -1,13 +1,16 @@
 # Circle Sans
 
-**Circle Sans** is a fork of [Albert Sans](https://github.com/usted/Albert-Sans) with two
-deliberate differences. Everything else — outlines, spacing, kerning, figures, the `wght`
-and `wdth` axes, the language coverage — is Albert Sans unchanged.
+**Circle Sans** is a fork of [Albert Sans](https://github.com/usted/Albert-Sans) with four
+deliberate differences — two redraws and two additions. Everything else — outlines, spacing,
+kerning, figures, the `wght` and `wdth` axes, the language coverage — is Albert Sans
+unchanged.
 
 | Change | What it means |
 |---|---|
 | **New `Q`** | The tail is a diagonal stroke crossing the bowl at the lower right, replacing the centred vertical bar that read as the Quake logo. A fixed `−52°` at every weight and width. |
 | **Frozen alternates** | The long-stem `g` and the open "et" ampersand are now the defaults — no `font-feature-settings` required. |
+| **New `ff` ligature** | Albert Sans draws an `fi` but no `ff`, so *Kaffee*, *Koffein* and *Coffee* collided two crossbars and were kerned apart to hide it. The new one follows the `fi`'s own logic and is on by default. |
+| **The drip mark** | The Coffee Circle logo as a glyph. Type `[drip]`, or use `U+E000`. Drawn once and identical in all twelve masters, so it never gains weight, narrows or slants. |
 
 Nothing is lost by freezing: the original shapes stay reachable in the slots they used to
 occupy. `ss02` returns the *original* short-stem `g`, and `ss04` the *original* ampersand.
@@ -49,6 +52,46 @@ those are the defaults now. Reach for a feature only to opt *out*:
 .original-ampersand { font-feature-settings: "ss04" 1; }  /* the closed ampersand */
 ```
 
+### Ligatures
+
+`fi` and `ff` are standard ligatures, so every browser and app applies them with no CSS at
+all. There is one trap worth knowing about, and it is a rendering-engine rule rather than
+anything in the font: **WebKit drops ligatures on letter-spaced text**, and no declaration
+brings them back. A tracked headline shows two loose `f` in Safari while looking correct in
+Chrome. Keep styles that can carry an `ff` or `fi` untracked:
+
+```css
+h1, .hero { letter-spacing: 0; }  /* tracking here costs the ff in Safari */
+```
+
+Blink keeps ligatures under tracking only when they are asked for explicitly, so it is worth
+declaring them once for the whole page:
+
+```css
+body { font-variant-ligatures: common-ligatures; }
+```
+
+### The drip mark
+
+Typing `[drip]` resolves to the logo. Only the exact sequence does — `[dripping]` and an
+unclosed `[drip` are left alone:
+
+```html
+<p>Coffee Circle [drip]</p>
+```
+
+Since that substitution is itself a ligature, it falls back to a literal `[drip]` under
+letter-spacing in Safari. Wherever a style carries tracking, use the codepoint instead,
+which is never subject to the tracking rule:
+
+```html
+<p>Coffee Circle &#xE000;</p>
+```
+
+The mark sits on the baseline like a descending letter: the drip tip rests on the descender,
+the ring meets cap height, 744 units wide. It takes `currentColor` and scales with
+`font-size`, so it needs no SVG to place or recolour.
+
 ### Figures
 
 Figures are **proportional by default**, which is right for running text — tabular digits
@@ -69,9 +112,12 @@ in place and would otherwise jitter as digits change:
 Circle Sans is a fork of **Albert Sans**, a modern geometric sans serif inspired by the
 type-characteristics of Scandinavian architects and designers in the early 20th century,
 designed by the Danish type designer **Andreas Rasmussen** of a.Foundry. All of the original
-design work is his; this fork only redraws the `Q` and changes which alternates are default.
+design work is his; this fork redraws the `Q`, changes which alternates are default, and adds
+an `ff` ligature and the Coffee Circle mark.
 
-Albert Sans is licensed under the SIL Open Font License 1.1, and so is Circle Sans.
+Albert Sans is licensed under the SIL Open Font License 1.1, and so is Circle Sans. The drip
+outlines ship inside an OFL font and travel under that licence like every other glyph;
+trademark is what protects the mark itself.
 
 ## Building
 
