@@ -84,11 +84,21 @@
   .glyphs div + div { margin-top: .06em; }
 
   /* ---- variable weight ramp ---- */
-  .ramp { font-size: clamp(46px, 13.5vw, 172px); line-height: 1; letter-spacing: -.03em; white-space: nowrap; }
+  .ramp {
+    font-size: clamp(46px, 13.5vw, 172px); line-height: 1; letter-spacing: -.03em; white-space: nowrap;
+    cursor: pointer; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;
+  }
+  .ramp:focus-visible { outline: 2px solid var(--explorer); outline-offset: 8px; }
   .axis { display: flex; align-items: center; gap: 12px; margin-top: 18px; font-family: var(--mono); font-size: 10px; letter-spacing: .1em; opacity: .65; }
   .axis::before, .axis::after { content: ""; }
   .axis-line { flex: 1; height: 1px; background: currentColor; opacity: .45; }
-  .ramp-wrap { overflow-x: auto; padding-bottom: 4px; }
+  /* A fixed stage, so short and long names swap without moving the page below.
+     Nothing scrolls here - the name is fitted to the box - so hide the overflow
+     rather than let a stray scrollbar eat into the width just measured against. */
+  .ramp-wrap {
+    overflow: hidden; padding-bottom: 4px;
+    display: grid; place-items: center; height: clamp(140px, 24vw, 300px);
+  }
 
   /* ---- what changed ---- */
   .changes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: clamp(20px,3vw,40px); }
@@ -183,17 +193,17 @@
 
 <!-- the variable axis, in the guidelines' own idiom -->
 <section class="section">
-  <div class="section-head"><span class="label">The typeface is variable</span><span class="label">03</span></div>
+  <div class="section-head"><span class="label">The typeface is variable — click for another coffee</span><span class="label">03</span></div>
   <div class="ramp-wrap">
-    <div class="ramp" id="ramp-a">Dark Roast</div>
-    <div class="axis"><span>100</span><span class="axis-line"></span><span>900</span></div>
+    <div class="ramp" id="ramp-a" role="button" tabindex="0">Limu</div>
   </div>
+  <div class="axis"><span>wght 100</span><span class="axis-line"></span><span>900</span></div>
 </section>
 <section class="section section--ink">
   <div class="ramp-wrap">
-    <div class="ramp" id="ramp-b">Flat White</div>
-    <div class="axis"><span>900</span><span class="axis-line"></span><span>100</span></div>
+    <div class="ramp" id="ramp-b" role="button" tabindex="0">Yirgacheffe</div>
   </div>
+  <div class="axis"><span>wght 100</span><span class="axis-line"></span><span>900</span></div>
 </section>
 
 <!-- what actually changed in this fork -->
@@ -324,20 +334,98 @@
 </footer>
 
 <script>
-  // Per-letter weight ramp across the word, the way the brand guidelines show the axis.
-  function ramp(el, from, to) {
-    const chars = [...el.textContent];
-    // spaces are not worth a step of the axis, so only letters get one
-    const stops = chars.filter(c => c.trim()).length - 1;
-    let i = 0;
-    el.innerHTML = chars.map(c => {
-      if (!c.trim()) return " ";
-      const w = Math.round(from + (to - from) * (stops ? i++ / stops : 0));
-      return `<span style="font-variation-settings:'wght' ${w}">${c}</span>`;
-    }).join("");
+  // The axes in motion, the way the Google Fonts catalog animates "Variable":
+  // a bold hotspot travels through the name, and weight and width fall away
+  // around it. Click a name to pour the next coffee.
+  const COFFEES = ["Limu", "Yirgacheffe", "Sidamo", "Buna Dimaa", "Yirga Santos",
+                   "Cerrado", "Daterra", "Iloma", "San José", "Rungeto", "Arara", "Apas"];
+  const SIGMA = 1.4;      // letters on each side that feel the hotspot
+  const SPEED = 5;        // hotspot travel, letters per second
+  const PAD = 3 * SIGMA;  // lead-in and -out, so the wave clears the word before re-entering
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const showing = new Set(); // the two ramps must never pour the same coffee
+
+  function coffeeWave(el) {
+    let letters = [];
+    let start = performance.now();
+
+    function setName(name) {
+      showing.delete(el.dataset.coffee);
+      showing.add(name);
+      el.dataset.coffee = name;
+      el.setAttribute("aria-label", name + " — show another coffee");
+      // spaces are not part of the wave, so only letters get a span
+      el.innerHTML = [...name].map(c => c.trim() ? `<span aria-hidden="true">${c}</span>` : " ").join("");
+      letters = [...el.children];
+      start = performance.now(); // the wave greets a new name from its first letter
+      fitName();
+    }
+
+    // Size the name to its stage, measured with every letter at the wave's
+    // peak so the line can never outgrow the container mid-sweep. Height is
+    // the other bound, so short names don't become a poster.
+    function fitName() {
+      const wrap = el.parentElement;
+      el.style.fontSize = "100px";
+      letters.forEach(s => { s.style.fontVariationSettings = '"wght" 900, "wdth" 100'; });
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const w = range.getBoundingClientRect().width;
+      // 0.8 keeps ascenders, descenders and accents inside a line-height:1 box.
+      if (w > 0) el.style.fontSize = Math.min(wrap.clientHeight * 0.8, 100 * wrap.clientWidth / w) + "px";
+      if (reduceMotion.matches) paintStatic(); else paint(performance.now());
+    }
+
+    // Without motion, fall back to the old still ramp, light into heavy.
+    function paintStatic() {
+      const stops = letters.length - 1;
+      letters.forEach((s, i) => {
+        s.style.fontVariationSettings = `"wght" ${Math.round(100 + 800 * (stops ? i / stops : 0))}`;
+      });
+    }
+
+    function paint(now) {
+      const span = letters.length - 1 + 2 * PAD;
+      const p = -PAD + ((now - start) / 1000 * SPEED) % span;
+      letters.forEach((s, i) => {
+        const g = Math.exp(-((i - p) * (i - p)) / (2 * SIGMA * SIGMA));
+        s.style.fontVariationSettings =
+          `"wght" ${Math.round(100 + 800 * g)}, "wdth" ${(90 + 10 * g).toFixed(1)}`;
+      });
+    }
+
+    function next() {
+      const pool = COFFEES.filter(n => !showing.has(n));
+      setName(pool[Math.floor(Math.random() * pool.length)]);
+    }
+
+    el.addEventListener("click", next);
+    el.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); next(); }
+    });
+
+    setName(el.textContent.trim());
+    return { paint, paintStatic, fitName };
   }
-  ramp(document.getElementById("ramp-a"), 100, 900);
-  ramp(document.getElementById("ramp-b"), 900, 100);
+
+  const waves = [document.getElementById("ramp-a"), document.getElementById("ramp-b")].map(coffeeWave);
+
+  // The first fit ran against the fallback font's metrics; measure again for real.
+  document.fonts.ready.then(() => waves.forEach(w => w.fitName()));
+  window.addEventListener("resize", () => waves.forEach(w => w.fitName()));
+
+  let rafId = null;
+  function tick(now) { waves.forEach(w => w.paint(now)); rafId = requestAnimationFrame(tick); }
+  function applyMotionPreference() {
+    if (reduceMotion.matches) {
+      cancelAnimationFrame(rafId); rafId = null;
+      waves.forEach(w => w.paintStatic());
+    } else if (!rafId) {
+      rafId = requestAnimationFrame(tick);
+    }
+  }
+  reduceMotion.addEventListener("change", applyMotionPreference);
+  applyMotionPreference();
 
   // Live controls
   const pg = document.getElementById("playground");
@@ -358,6 +446,8 @@
   pg.addEventListener("input", fit);
   [wght, wdth, size].forEach(i => i.addEventListener("input", fit));
   document.fonts.ready.then(fit);
+  // A height measured at one window width is stale at any other.
+  window.addEventListener("resize", fit);
   fit();
 </script>
 </body>
