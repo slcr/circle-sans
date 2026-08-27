@@ -91,6 +91,23 @@ The proof files and QA tests are also available automatically via GitHub Actions
 
 ### Circle Sans
 
+**27 Aug 2026 — v1.5**
+- The Coffee Circle mark is now a glyph. Type `[drip]` — a `liga` rule sitting after the
+  ff rule — or reach it directly at `U+E000`. The logo now travels wherever the font
+  does, at text size, on the baseline, in `currentColor`, with no SVG to place or recolour.
+- Sized so the drip tip rests on the descender and the ring meets the cap height, so it
+  sits in a line the way a descending letter does rather than a pasted-in image. 744 units
+  wide, 56 a side. The ring is a little smaller than a cap `O` as a result.
+- Drawn once and identical in all twelve masters on purpose — the mark must not gain
+  weight along `wght`, narrow along `wdth`, or slant in the italic. It compiles with no
+  variation deltas at all.
+- `[dripping]` and an unclosed `[drip` are left alone; only the exact sequence resolves.
+- Safari's tracking rule from v1.4 applies here too: a letter-spaced headline shows a
+  literal `[drip]`. That reads as a tag rather than as damage, but it isn't the mark —
+  use `U+E000` wherever the style carries tracking.
+- The outlines ship inside an OFL font and travel under that licence. Trademark still
+  protects the mark itself, which is what actually matters for a logo.
+
 **27 Aug 2026 — v1.4**
 - New `f_f` ligature, on by default through `liga`. Drawn after the fi's own logic:
   first arm trimmed the way fi trims it, one fused crossbar, the second stem planted
