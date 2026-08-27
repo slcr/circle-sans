@@ -1002,6 +1002,7 @@ tag = tnum;
 automatic = 1;
 code = "lookupflag IgnoreMarks;
 sub f i by fi;
+sub f f by f_f;
 ";
 tag = liga;
 },
@@ -193645,6 +193646,343 @@ width = 117;
 );
 metricLeft = "=0";
 metricRight = "=0";
+},
+{
+glyphname = f_f;
+kernLeft = KO_t;
+kernRight = KO_f;
+layers = (
+{
+layerId = "768fc93d-039f-4c5a-9da9-2ac2bd2430c4";
+shapes = (
+{
+closed = 1;
+nodes = (
+(82,0,l),
+(162,480,l),
+(403,480,l),
+(323,0,l),
+(345,0,l),
+(425,480,l),
+(585,480,l),
+(589,500,l),
+(429,500,l),
+(440,566,ls),
+(456,664,o),
+(508,703,o),
+(584,703,cs),
+(595,703,o),
+(611,701,o),
+(622,698,c),
+(625,717,l),
+(612,721,o),
+(594,723,o),
+(580,723,cs),
+(500,723,o),
+(436,676,o),
+(418,566,cs),
+(407,500,l),
+(166,500,l),
+(177,569,ls),
+(191,651,o),
+(227,699,o),
+(319,699,cs),
+(326,699,o),
+(333,699,o),
+(341,698,c),
+(345,720,l),
+(336,721,o),
+(328,721,o),
+(320,721,cs),
+(216,721,o),
+(171,660,o),
+(155,569,cs),
+(144,500,l),
+(58,500,l),
+(54,480,l),
+(140,480,l),
+(60,0,l)
+);
+}
+);
+width = 562;
+},
+{
+layerId = "e29fcb03-4775-440c-9843-4f808bda7ac3";
+shapes = (
+{
+closed = 1;
+nodes = (
+(136,0,l),
+(207,425,l),
+(387,425,l),
+(316,0,l),
+(410,0,l),
+(481,425,l),
+(611,425,l),
+(624,500,l),
+(494,500,l),
+(497,521,ls),
+(516,630,o),
+(547,643,o),
+(605,643,cs),
+(617,643,o),
+(634,641,o),
+(647,638,c),
+(660,715,l),
+(645,720,o),
+(621,723,o),
+(599,723,cs),
+(511,723,o),
+(429,675,o),
+(408,551,cs),
+(400,500,l),
+(220,500,l),
+(229,556,ls),
+(238,610,o),
+(262,640,o),
+(320,640,cs),
+(325,640,o),
+(331,640,o),
+(338,639,c),
+(352,720,l),
+(340,721,o),
+(329,722,o),
+(318,722,cs),
+(208,722,o),
+(153,659,o),
+(136,556,cs),
+(127,500,l),
+(61,500,l),
+(48,425,l),
+(114,425,l),
+(43,0,l)
+);
+}
+);
+width = 601;
+},
+{
+layerId = "e8d6cb93-808f-43bd-b359-394263a25603";
+shapes = (
+{
+closed = 1;
+nodes = (
+(193,0,l),
+(258,386,l),
+(369,386,l),
+(304,0,l),
+(471,0,l),
+(536,386,l),
+(637,386,l),
+(656,500,l),
+(555,500,l),
+(559,524,ls),
+(565,559,o),
+(594,575,o),
+(626,575,cs),
+(638,575,o),
+(656,573,o),
+(668,570,c),
+(691,709,l),
+(675,716,o),
+(645,723,o),
+(611,723,cs),
+(501,723,o),
+(415,664,o),
+(393,529,cs),
+(388,500,l),
+(277,500,l),
+(279,513,ls),
+(286,553,o),
+(308,575,o),
+(346,575,cs),
+(352,575,o),
+(358,574,o),
+(365,573,c),
+(390,720,l),
+(373,722,o),
+(357,723,o),
+(341,723,cs),
+(222,723,o),
+(140,664,o),
+(118,529,cs),
+(113,500,l),
+(57,500,l),
+(38,386,l),
+(94,386,l),
+(29,0,l)
+);
+}
+);
+width = 629;
+},
+{
+layerId = "a42d2149-63db-4b93-95ef-d4acb2956d75";
+shapes = (
+{
+closed = 1;
+nodes = (
+(62,0,l),
+(142,480,l),
+(355,480,l),
+(275,0,l),
+(297,0,l),
+(377,480,l),
+(509,480,l),
+(513,500,l),
+(381,500,l),
+(393,572,ls),
+(409,671,o),
+(450,703,o),
+(514,703,cs),
+(523,703,o),
+(538,702,o),
+(546,699,c),
+(549,717,l),
+(539,721,o),
+(522,723,o),
+(511,723,cs),
+(442,723,o),
+(390,684,o),
+(371,572,cs),
+(359,500,l),
+(146,500,l),
+(157,569,ls),
+(171,651,o),
+(201,699,o),
+(277,699,cs),
+(283,699,o),
+(288,699,o),
+(295,698,c),
+(298,719,l),
+(292,720,o),
+(285,720,o),
+(278,720,cs),
+(192,720,o),
+(151,660,o),
+(135,569,cs),
+(124,500,l),
+(54,500,l),
+(50,480,l),
+(120,480,l),
+(40,0,l)
+);
+}
+);
+width = 483;
+},
+{
+layerId = "64242c31-6960-4ba7-af76-b0fcd60c7af8";
+shapes = (
+{
+closed = 1;
+nodes = (
+(123,0,l),
+(194,425,l),
+(353,425,l),
+(282,0,l),
+(375,0,l),
+(446,425,l),
+(549,425,l),
+(562,500,l),
+(459,500,l),
+(465,539,ls),
+(481,631,o),
+(503,642,o),
+(552,642,cs),
+(561,642,o),
+(575,640,o),
+(585,638,c),
+(598,715,l),
+(585,719,o),
+(565,723,o),
+(543,723,cs),
+(463,723,o),
+(395,676,o),
+(375,557,cs),
+(366,500,l),
+(207,500,l),
+(216,556,ls),
+(226,612,o),
+(246,640,o),
+(291,640,cs),
+(296,640,o),
+(300,640,o),
+(306,639,c),
+(320,720,l),
+(310,721,o),
+(301,722,o),
+(291,722,cs),
+(197,722,o),
+(140,659,o),
+(123,556,cs),
+(114,500,l),
+(63,500,l),
+(50,425,l),
+(101,425,l),
+(30,0,l)
+);
+}
+);
+width = 535;
+},
+{
+layerId = "cabd1bed-87ec-4419-a70b-3d4deca29657";
+shapes = (
+{
+closed = 1;
+nodes = (
+(181,0,l),
+(246,386,l),
+(348,386,l),
+(283,0,l),
+(449,0,l),
+(514,386,l),
+(590,386,l),
+(609,500,l),
+(533,500,l),
+(537,524,ls),
+(543,558,o),
+(564,575,o),
+(591,575,cs),
+(600,575,o),
+(612,573,o),
+(621,570,c),
+(644,709,l),
+(631,715,o),
+(602,723,o),
+(569,723,cs),
+(468,723,o),
+(395,666,o),
+(373,537,cs),
+(367,500,l),
+(265,500,l),
+(267,513,ls),
+(274,553,o),
+(293,575,o),
+(319,575,cs),
+(323,575,o),
+(328,574,o),
+(332,573,c),
+(357,720,l),
+(343,722,o),
+(328,723,o),
+(314,723,cs),
+(210,723,o),
+(128,664,o),
+(106,529,cs),
+(101,500,l),
+(59,500,l),
+(40,386,l),
+(82,386,l),
+(17,0,l)
+);
+}
+);
+width = 582;
+}
+);
 }
 );
 instances = (
@@ -200623,31 +200961,39 @@ registered = -48;
 registered.ss06 = -106;
 six = -2;
 zero = -22;
+f_f = -11;
 };
 Aacute = {
 f = -11;
 registered = -48;
 registered.ss06 = -105;
+f_f = -11;
 };
 Abreve = {
 f = -11;
+f_f = -11;
 };
 Acaron = {
 f = -11;
+f_f = -11;
 };
 Acircumflex = {
 f = -11;
+f_f = -11;
 };
 Adieresis = {
 f = -11;
 registered = -48;
 registered.ss06 = -105;
+f_f = -11;
 };
 Agrave = {
 f = -11;
+f_f = -11;
 };
 Amacron = {
 f = -11;
+f_f = -11;
 };
 Aogonek = {
 comma = 57;
@@ -200655,10 +201001,12 @@ semicolon = 56;
 };
 Aring = {
 f = -11;
+f_f = -11;
 };
 Atilde = {
 f = -11;
 ordfeminine = -106;
+f_f = -11;
 };
 B = {
 H = 0;
@@ -200980,6 +201328,7 @@ six = -24;
 three = -4;
 u = -44;
 zero = -25;
+f_f = -12;
 };
 Kcommaaccent = {
 emacron = -43;
@@ -201009,6 +201358,7 @@ registered.ss06 = -230;
 six = -45;
 three = -37;
 zero = -63;
+f_f = -42;
 };
 Ldot = {
 O = -58;
@@ -202242,6 +202592,7 @@ v = -47;
 w = -26;
 y = -47;
 z = 23;
+f_f = 0;
 };
 greater = {
 Delta = -41;
@@ -203152,6 +203503,7 @@ mu = 12;
 ordfeminine = -58;
 ordmasculine = -58;
 parenleft = -52;
+f_f = -15;
 };
 perthousand = {
 parenright = -43;
@@ -203933,6 +204285,7 @@ f = 31;
 i = 0;
 iogonek = 12;
 six = -32;
+f_f = 31;
 };
 tcaron = {
 bracketright = 0;
@@ -204160,6 +204513,7 @@ colon = 0;
 f = 0;
 period = 0;
 t = 0;
+f_f = 0;
 };
 udieresis = {
 T = -107;
@@ -204209,6 +204563,7 @@ iacute = 4;
 iogonek = 23;
 less = -13;
 six = -10;
+f_f = 32;
 };
 y = {
 at = -32;
@@ -204239,6 +204594,7 @@ f = 22;
 foursuperior = -52;
 iogonek = 9;
 n = 0;
+f_f = 22;
 };
 zcaron = {
 T = -36;
@@ -204299,6 +204655,11 @@ zerosuperior = 19;
 };
 zerothird = {
 degree = -73;
+};
+f_f = {
+at = -49;
+nine = 10;
+six = -26;
 };
 };
 "e29fcb03-4775-440c-9843-4f808bda7ac3" = {
@@ -210600,31 +210961,39 @@ registered = -51;
 registered.ss06 = -106;
 six = -10;
 zero = -28;
+f_f = -20;
 };
 Aacute = {
 f = -20;
 registered = -51;
 registered.ss06 = -106;
+f_f = -20;
 };
 Abreve = {
 f = -20;
+f_f = -20;
 };
 Acaron = {
 f = -20;
+f_f = -20;
 };
 Acircumflex = {
 f = -20;
+f_f = -20;
 };
 Adieresis = {
 f = -20;
 registered = -51;
 registered.ss06 = -106;
+f_f = -20;
 };
 Agrave = {
 f = -20;
+f_f = -20;
 };
 Amacron = {
 f = -20;
+f_f = -20;
 };
 Aogonek = {
 comma = 47;
@@ -210632,10 +211001,12 @@ semicolon = 32;
 };
 Aring = {
 f = -20;
+f_f = -20;
 };
 Atilde = {
 f = -20;
 ordfeminine = -109;
+f_f = -20;
 };
 B = {
 H = 0;
@@ -210957,6 +211328,7 @@ six = -44;
 three = -12;
 u = -53;
 zero = -45;
+f_f = -20;
 };
 Kcommaaccent = {
 emacron = -39;
@@ -210986,6 +211358,7 @@ registered.ss06 = -213;
 six = -36;
 three = -24;
 zero = -53;
+f_f = -31;
 };
 Ldot = {
 O = -39;
@@ -212219,6 +212592,7 @@ v = -45;
 w = -31;
 y = -43;
 z = 2;
+f_f = -11;
 };
 greater = {
 Delta = -53;
@@ -213129,6 +213503,7 @@ mu = 10;
 ordfeminine = -97;
 ordmasculine = -97;
 parenleft = -30;
+f_f = -17;
 };
 perthousand = {
 parenright = -77;
@@ -213910,6 +214285,7 @@ f = 22;
 i = 0;
 iogonek = 18;
 six = -16;
+f_f = 22;
 };
 tcaron = {
 bracketright = 20;
@@ -214137,6 +214513,7 @@ colon = 0;
 f = 1;
 period = 0;
 t = 0;
+f_f = 1;
 };
 udieresis = {
 T = -83;
@@ -214186,6 +214563,7 @@ iacute = 2;
 iogonek = 14;
 less = -24;
 six = -26;
+f_f = 21;
 };
 y = {
 at = -36;
@@ -214216,6 +214594,7 @@ f = 22;
 foursuperior = -106;
 iogonek = 18;
 n = 0;
+f_f = 22;
 };
 zcaron = {
 T = -31;
@@ -214276,6 +214655,11 @@ zerosuperior = 17;
 };
 zerothird = {
 degree = -95;
+};
+f_f = {
+at = -48;
+nine = 14;
+six = -22;
 };
 };
 "e8d6cb93-808f-43bd-b359-394263a25603" = {
@@ -220577,31 +220961,39 @@ registered = -66;
 registered.ss06 = -105;
 six = -21;
 zero = -38;
+f_f = -36;
 };
 Aacute = {
 f = -36;
 registered = -66;
 registered.ss06 = -105;
+f_f = -36;
 };
 Abreve = {
 f = -36;
+f_f = -36;
 };
 Acaron = {
 f = -36;
+f_f = -36;
 };
 Acircumflex = {
 f = -36;
+f_f = -36;
 };
 Adieresis = {
 f = -36;
 registered = -66;
 registered.ss06 = -105;
+f_f = -36;
 };
 Agrave = {
 f = -36;
+f_f = -36;
 };
 Amacron = {
 f = -36;
+f_f = -36;
 };
 Aogonek = {
 comma = 39;
@@ -220609,10 +221001,12 @@ semicolon = 29;
 };
 Aring = {
 f = -36;
+f_f = -36;
 };
 Atilde = {
 f = -36;
 ordfeminine = -112;
+f_f = -36;
 };
 B = {
 H = 0;
@@ -220934,6 +221328,7 @@ six = -56;
 three = -35;
 u = -55;
 zero = -64;
+f_f = -38;
 };
 Kcommaaccent = {
 emacron = -34;
@@ -220963,6 +221358,7 @@ registered.ss06 = -199;
 six = -6;
 three = 0;
 zero = -24;
+f_f = -27;
 };
 Ldot = {
 O = -17;
@@ -222196,6 +222592,7 @@ v = -55;
 w = -35;
 y = -62;
 z = 8;
+f_f = -27;
 };
 greater = {
 Delta = -54;
@@ -223106,6 +223503,7 @@ mu = 9;
 ordfeminine = -126;
 ordmasculine = -126;
 parenleft = -25;
+f_f = -31;
 };
 perthousand = {
 parenright = -88;
@@ -223887,6 +224285,7 @@ f = 17;
 i = 0;
 iogonek = 5;
 six = -9;
+f_f = 17;
 };
 tcaron = {
 bracketright = 117;
@@ -224114,6 +224513,7 @@ colon = 0;
 f = 0;
 period = 0;
 t = 0;
+f_f = 0;
 };
 udieresis = {
 T = -42;
@@ -224163,6 +224563,7 @@ iacute = 2;
 iogonek = 11;
 less = -33;
 six = -42;
+f_f = 7;
 };
 y = {
 at = -56;
@@ -224193,6 +224594,7 @@ f = 13;
 foursuperior = -105;
 iogonek = 6;
 n = 0;
+f_f = 13;
 };
 zcaron = {
 T = -28;
@@ -224253,6 +224655,11 @@ zerosuperior = 20;
 };
 zerothird = {
 degree = -95;
+};
+f_f = {
+at = -32;
+nine = 18;
+six = -16;
 };
 };
 "a42d2149-63db-4b93-95ef-d4acb2956d75" = {
@@ -230554,31 +230961,39 @@ registered = -40;
 registered.ss06 = -89;
 six = -2;
 zero = -22;
+f_f = -11;
 };
 Aacute = {
 f = -11;
 registered = -40;
 registered.ss06 = -89;
+f_f = -11;
 };
 Abreve = {
 f = -11;
+f_f = -11;
 };
 Acaron = {
 f = -11;
+f_f = -11;
 };
 Acircumflex = {
 f = -11;
+f_f = -11;
 };
 Adieresis = {
 f = -11;
 registered = -40;
 registered.ss06 = -89;
+f_f = -11;
 };
 Agrave = {
 f = -11;
+f_f = -11;
 };
 Amacron = {
 f = -11;
+f_f = -11;
 };
 Aogonek = {
 comma = 51;
@@ -230586,10 +231001,12 @@ semicolon = 50;
 };
 Aring = {
 f = -11;
+f_f = -11;
 };
 Atilde = {
 f = -11;
 ordfeminine = -91;
+f_f = -11;
 };
 B = {
 H = 0;
@@ -230911,6 +231328,7 @@ six = -23;
 three = -2;
 u = -38;
 zero = -23;
+f_f = -10;
 };
 Kcommaaccent = {
 emacron = -37;
@@ -230940,6 +231358,7 @@ registered.ss06 = -190;
 six = -20;
 three = -10;
 zero = -38;
+f_f = -16;
 };
 Ldot = {
 O = -45;
@@ -232173,6 +232592,7 @@ v = -28;
 w = -13;
 y = -29;
 z = 17;
+f_f = 0;
 };
 greater = {
 Delta = -35;
@@ -233083,6 +233503,7 @@ mu = 10;
 ordfeminine = -52;
 ordmasculine = -52;
 parenleft = -34;
+f_f = -6;
 };
 perthousand = {
 parenright = -40;
@@ -233864,6 +234285,7 @@ f = 29;
 i = 0;
 iogonek = 44;
 six = -22;
+f_f = 29;
 };
 tcaron = {
 bracketright = -3;
@@ -234091,6 +234513,7 @@ colon = 0;
 f = 0;
 period = 0;
 t = 0;
+f_f = 0;
 };
 udieresis = {
 T = -73;
@@ -234140,6 +234563,7 @@ iacute = 5;
 iogonek = 46;
 less = -10;
 six = -16;
+f_f = 36;
 };
 y = {
 at = -20;
@@ -234170,6 +234594,7 @@ f = 36;
 foursuperior = -45;
 iogonek = 39;
 n = 0;
+f_f = 36;
 };
 zcaron = {
 T = -18;
@@ -234230,6 +234655,11 @@ zerosuperior = 17;
 };
 zerothird = {
 degree = -60;
+};
+f_f = {
+at = -37;
+nine = 26;
+six = -22;
 };
 };
 "64242c31-6960-4ba7-af76-b0fcd60c7af8" = {
@@ -240531,31 +240961,39 @@ registered = -39;
 registered.ss06 = -79;
 six = -6;
 zero = -22;
+f_f = -14;
 };
 Aacute = {
 f = -14;
 registered = -39;
 registered.ss06 = -79;
+f_f = -14;
 };
 Abreve = {
 f = -14;
+f_f = -14;
 };
 Acaron = {
 f = -14;
+f_f = -14;
 };
 Acircumflex = {
 f = -14;
+f_f = -14;
 };
 Adieresis = {
 f = -14;
 registered = -39;
 registered.ss06 = -79;
+f_f = -14;
 };
 Agrave = {
 f = -14;
+f_f = -14;
 };
 Amacron = {
 f = -14;
+f_f = -14;
 };
 Aogonek = {
 comma = 43;
@@ -240563,10 +241001,12 @@ semicolon = 38;
 };
 Aring = {
 f = -14;
+f_f = -14;
 };
 Atilde = {
 f = -14;
 ordfeminine = -83;
+f_f = -14;
 };
 B = {
 H = 0;
@@ -240888,6 +241328,7 @@ six = -29;
 three = -11;
 u = -40;
 zero = -28;
+f_f = -15;
 };
 Kcommaaccent = {
 emacron = -30;
@@ -240917,6 +241358,7 @@ registered.ss06 = -163;
 six = -32;
 three = -23;
 zero = -48;
+f_f = -17;
 };
 Ldot = {
 O = -23;
@@ -242150,6 +242592,7 @@ v = -28;
 w = -18;
 y = -31;
 z = 11;
+f_f = -2;
 };
 greater = {
 Delta = -36;
@@ -243060,6 +243503,7 @@ mu = 8;
 ordfeminine = -91;
 ordmasculine = -91;
 parenleft = -27;
+f_f = -9;
 };
 perthousand = {
 parenright = -59;
@@ -243841,6 +244285,7 @@ f = 34;
 i = 0;
 iogonek = 12;
 six = -16;
+f_f = 34;
 };
 tcaron = {
 bracketright = 28;
@@ -244068,6 +244513,7 @@ colon = 0;
 f = 0;
 period = 0;
 t = 0;
+f_f = 0;
 };
 udieresis = {
 T = -49;
@@ -244117,6 +244563,7 @@ iacute = 3;
 iogonek = 16;
 less = -12;
 six = -16;
+f_f = 16;
 };
 y = {
 at = -27;
@@ -244147,6 +244594,7 @@ f = 30;
 foursuperior = -106;
 iogonek = 11;
 n = 0;
+f_f = 30;
 };
 zcaron = {
 T = -16;
@@ -244207,6 +244655,11 @@ zerosuperior = 23;
 };
 zerothird = {
 degree = -73;
+};
+f_f = {
+at = -28;
+nine = 22;
+six = -10;
 };
 };
 "cabd1bed-87ec-4419-a70b-3d4deca29657" = {
@@ -250508,31 +250961,39 @@ registered = -41;
 registered.ss06 = -79;
 six = -14;
 zero = -27;
+f_f = -22;
 };
 Aacute = {
 f = -22;
 registered = -41;
 registered.ss06 = -79;
+f_f = -22;
 };
 Abreve = {
 f = -22;
+f_f = -22;
 };
 Acaron = {
 f = -22;
+f_f = -22;
 };
 Acircumflex = {
 f = -22;
+f_f = -22;
 };
 Adieresis = {
 f = -22;
 registered = -41;
 registered.ss06 = -79;
+f_f = -22;
 };
 Agrave = {
 f = -22;
+f_f = -22;
 };
 Amacron = {
 f = -22;
+f_f = -22;
 };
 Aogonek = {
 comma = 17;
@@ -250540,10 +251001,12 @@ semicolon = 5;
 };
 Aring = {
 f = -22;
+f_f = -22;
 };
 Atilde = {
 f = -22;
 ordfeminine = -86;
+f_f = -22;
 };
 B = {
 H = 0;
@@ -250865,6 +251328,7 @@ six = -34;
 three = -20;
 u = -35;
 zero = -39;
+f_f = -23;
 };
 Kcommaaccent = {
 emacron = -23;
@@ -250894,6 +251358,7 @@ registered.ss06 = -153;
 six = -9;
 three = 0;
 zero = -25;
+f_f = -24;
 };
 Ldot = {
 O = 0;
@@ -252127,6 +252592,7 @@ v = -30;
 w = -19;
 y = -38;
 z = 5;
+f_f = -11;
 };
 greater = {
 Delta = -35;
@@ -253037,6 +253503,7 @@ mu = 8;
 ordfeminine = -126;
 ordmasculine = -126;
 parenleft = -23;
+f_f = -18;
 };
 perthousand = {
 parenright = -64;
@@ -253818,6 +254285,7 @@ f = 17;
 i = 0;
 iogonek = 0;
 six = -5;
+f_f = 17;
 };
 tcaron = {
 bracketright = 107;
@@ -254045,6 +254513,7 @@ colon = 0;
 f = 0;
 period = 0;
 t = 0;
+f_f = 0;
 };
 udieresis = {
 T = -35;
@@ -254094,6 +254563,7 @@ iacute = 4;
 iogonek = 10;
 less = -19;
 six = -24;
+f_f = 9;
 };
 y = {
 at = -31;
@@ -254124,6 +254594,7 @@ f = 13;
 foursuperior = -103;
 iogonek = 2;
 n = 0;
+f_f = 13;
 };
 zcaron = {
 T = -33;
@@ -254184,6 +254655,11 @@ zerosuperior = 21;
 };
 zerothird = {
 degree = -66;
+};
+f_f = {
+at = -22;
+nine = 17;
+six = -6;
 };
 };
 };
