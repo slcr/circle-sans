@@ -91,6 +91,20 @@ The proof files and QA tests are also available automatically via GitHub Actions
 
 ### Circle Sans
 
+**27 Aug 2026 — v1.4**
+- New `f_f` ligature, on by default through `liga`. Drawn after the fi's own logic:
+  first arm trimmed the way fi trims it, one fused crossbar, the second stem planted
+  where fi plants its dotted stem. Until now the two f were kerned +34 units apart to
+  soften the crossbar clash. Drawn in all twelve masters — roman, italic and Narrow —
+  with kerning mirrored from `f` on both flanks. First outline addition since the fork.
+- `ffi` still resolves as f + fi: the ff rule sits after the fi rule on purpose.
+- The specimen shows the complete character set (grouped, one section open at a time)
+  and embeds its own webfont, so it renders correctly opened straight from disk, without
+  falling back to whatever Circle Sans is installed.
+- Ligatures and `letter-spacing` don't mix in Safari: WebKit drops them on any tracked
+  text and no CSS re-enables them. Keep styles that can carry ff or fi untracked — the
+  specimen's own display styles lost their tracking for exactly this reason.
+
 **26 Aug 2026 — v1.3**
 - Manufacturer, vendor URL and OS/2 vendor ID now read Coffee Circle,
   `https://www.coffeecircle.com` and `CCIR`. They previously read a.Foundry,
