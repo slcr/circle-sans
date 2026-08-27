@@ -29,6 +29,24 @@ occupy. `ss02` returns the *original* short-stem `g`, and `ss04` the *original* 
 
 ![Sample Image](documentation/image1.png)
 
+## Installing it
+
+**Install Circle Sans.app** fetches the newest release and installs it, so nobody has to
+work out which zip is current — the point being that a stale Circle Sans looks exactly like
+a fresh one until a glyph is missing. Build it with `scripts/build-installer-app.sh`, or run
+`scripts/install-circle-sans.sh` from a terminal to do the same thing without the app.
+
+Either way it sets aside every Circle Sans already installed before copying the new files
+in, since two families of the same name leave macOS to pick between them. What it replaces
+is kept in `~/Library/Application Support/Circle Sans/`. Fonts in `~/Library/Fonts` are
+active as soon as they land, but apps hold their own copy in memory — Figma and browsers
+need a full quit and reopen, not just a reload.
+
+The app is unsigned, because signing needs a paid Apple Developer account. A Mac that
+downloaded it through a browser or Slack will refuse the first double-click; right-click it,
+choose **Open**, and macOS remembers from then on. Passing it around on a mounted drive
+avoids the warning altogether.
+
 ## Using it
 
 Nine weights (Thin to Black) in two widths (Normal and Narrow), roman and italic, as a
