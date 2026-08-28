@@ -1377,12 +1377,21 @@ fn _vgsl_c10bc925__index_of(p: vec2i, size: vec2u) -> u32 {
     if (!canvas || !masthead || !window.OilSlick) { if (canvas) canvas.remove(); return; }
     var drop = function () { canvas.remove(); masthead.classList.remove('masthead--film'); };
     masthead.classList.add('masthead--film');
-    window.OilSlick.mountOilSlick({
+    var film = window.OilSlick.mountOilSlick({
       canvas: canvas,
       maxDpr: 1.5,
       // Slower and broader than the standalone piece; the grade is left alone.
       settings: { maxSpeed: 0.22, diffusion: 0.06 },
       onUnsupported: drop
+    });
+    // R re-pours the film. Modifiers are left alone so cmd/ctrl-R still
+    // reloads, and it stays out of the way of the sliders further down.
+    document.addEventListener('keydown', function (e) {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key !== 'r' && e.key !== 'R') return;
+      var el = document.activeElement;
+      if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.isContentEditable)) return;
+      film.reseed();
     });
   })();
 </script>
