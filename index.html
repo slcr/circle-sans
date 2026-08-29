@@ -197,6 +197,21 @@
         font-variation-settings: "wght" 350;
         text-wrap: balance;
       }
+      /* On a touch screen the canvas eats the gesture (touch-action: none), so an
+     85vh masthead leaves almost no page to start a scroll from. Cut it back to
+     well under a screen and measure in svh, so the browser chrome cannot take
+     the remainder back when it retracts. */
+      @media (max-width: 780px) {
+        .masthead.masthead--film {
+          min-height: 58vh;
+          min-height: 58svh;
+        }
+        /* The floor on the h1 gap scales with the shorter block; the auto margin
+       still takes any slack above it. */
+        .masthead.masthead--film h1 {
+          padding-top: clamp(16px, 4vh, 40px);
+        }
+      }
 
       /* ---- metadata table ---- */
       .meta {
