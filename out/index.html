@@ -1,22 +1,454 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Circle Sans — development</title>
-	</head>
-	<body>
-		<h1>Circle Sans — testing pages</h1>
-		<ul>
-			<li>
-				<a href="specimen.html"><strong>Specimen</strong> — the typeface in use</a>
-			</li>
-			<li>
-				<a href="fontbakery/fontbakery-report.html">FontBakery Report</a>
-			</li>
-			<li>
-				<a href="proof/diffenator2-report.html">Diffenator2 Report</a>
-			</li>
-		</ul>
-	</body>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Circle Sans — Specimen</title>
+<style>
+  @font-face {
+    font-family: "Circle Sans";
+    src: url("fonts/CircleSans-Variable.woff2") format("woff2-variations");
+    font-weight: 100 900;
+    font-stretch: 87.5% 100%;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --rainforest: #224737;
+    --rainforest-dark: #1A2A22;
+    --explorer: #F4B02C;
+    --french: #1A1A1A;
+    --paper: #FFFFFF;
+    --rule: rgba(26, 26, 26, .18);
+    --rule-light: rgba(255, 255, 255, .28);
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --sans: "Circle Sans", system-ui, -apple-system, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--french);
+    font-family: var(--sans);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- shared furniture, borrowed from the brand guidelines ---- */
+  .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    opacity: .55;
+  }
+  .section { padding: clamp(40px, 7vw, 104px) clamp(20px, 5vw, 88px); }
+  .section--dark { background: var(--rainforest); color: #fff; }
+  .section--ink  { background: var(--rainforest-dark); color: #fff; }
+  .section--dark .label, .section--ink .label { opacity: .6; }
+  .section-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 24px; margin-bottom: clamp(24px, 4vw, 52px);
+    border-bottom: 1px solid var(--rule); padding-bottom: 12px;
+  }
+  .section--dark .section-head, .section--ink .section-head { border-color: var(--rule-light); }
+  .pill {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; border: 1px solid currentColor;
+    padding: 5px 11px; border-radius: 2px; white-space: nowrap;
+  }
+
+  /* ---- masthead ---- */
+  .masthead { background: var(--rainforest); color: #fff; padding: clamp(28px,4vw,44px) clamp(20px,5vw,88px) clamp(44px,6vw,80px); }
+  .masthead-top { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .wordmark { font-family: var(--mono); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; }
+  .masthead h1 {
+    font-size: clamp(58px, 15vw, 210px); line-height: .92; margin: clamp(28px,5vw,60px) 0 0;
+    font-weight: 600; letter-spacing: -.025em; font-variation-settings: "wght" 600;
+  }
+  .masthead h1 em { font-style: normal; font-variation-settings: "wght" 200; }
+  .tagline { max-width: 62ch; margin: 22px 0 0; font-size: clamp(15px,1.5vw,19px); line-height: 1.55; opacity: .88; font-variation-settings: "wght" 350; }
+
+  /* ---- metadata table ---- */
+  .meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 0 clamp(28px,5vw,72px); }
+  .meta dl { margin: 0; }
+  .meta div { display: flex; justify-content: space-between; gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--rule); }
+  .meta dt { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; opacity: .6; }
+  .meta dd { margin: 0; font-family: var(--mono); font-size: 12px; text-align: right; }
+
+  /* ---- glyph showcase ---- */
+  .glyphs { font-size: clamp(34px, 8.5vw, 118px); line-height: 1.1; letter-spacing: -.02em; font-variation-settings: "wght" 600; word-break: break-word; }
+  .glyphs div + div { margin-top: .06em; }
+
+  /* ---- variable weight ramp ---- */
+  .ramp {
+    font-size: clamp(46px, 13.5vw, 172px); line-height: 1; letter-spacing: -.03em; white-space: nowrap;
+    cursor: pointer; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;
+  }
+  .ramp:focus-visible { outline: 2px solid var(--explorer); outline-offset: 8px; }
+  .axis { display: flex; align-items: center; gap: 12px; margin-top: 18px; font-family: var(--mono); font-size: 10px; letter-spacing: .1em; opacity: .65; }
+  .axis::before, .axis::after { content: ""; }
+  .axis-line { flex: 1; height: 1px; background: currentColor; opacity: .45; }
+  /* A fixed stage, so short and long names swap without moving the page below.
+     Nothing scrolls here - the name is fitted to the box - so hide the overflow
+     rather than let a stray scrollbar eat into the width just measured against. */
+  .ramp-wrap {
+    overflow: hidden; padding-bottom: 4px;
+    display: grid; place-items: center; height: clamp(140px, 24vw, 300px);
+  }
+
+  /* ---- what changed ---- */
+  .changes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: clamp(20px,3vw,40px); }
+  .change { border-top: 2px solid var(--explorer); padding-top: 18px; }
+  .change .demo { font-size: clamp(64px, 9vw, 108px); line-height: 1; font-variation-settings: "wght" 500; letter-spacing: -.02em; }
+  .change h3 { font-size: 15px; margin: 14px 0 6px; font-variation-settings: "wght" 600; letter-spacing: .01em; }
+  .change p { margin: 0; font-size: 14px; line-height: 1.6; opacity: .75; font-variation-settings: "wght" 350; }
+
+  /* ---- interactive ---- */
+  .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: clamp(18px,3vw,40px); margin-bottom: 40px; }
+  .control label { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; opacity: .7; }
+  .control output { font-variant-numeric: tabular-nums; opacity: 1; }
+  input[type=range] { width: 100%; accent-color: var(--explorer); height: 22px; }
+  #playground {
+    font-size: 64px; line-height: 1.15; letter-spacing: -.02em; margin: 0;
+    font-variation-settings: "wght" 400, "wdth" 100;
+    border: 0; outline: 0; width: 100%; resize: vertical; min-height: 2.6em;
+    font-family: var(--sans); background: transparent; color: inherit; padding: 0;
+  }
+  #playground:focus-visible { outline: 2px solid var(--explorer); outline-offset: 8px; }
+
+  /* ---- reading sizes ---- */
+  .sizes > article { padding: clamp(22px,3vw,34px) 0; border-bottom: 1px solid var(--rule); }
+  .sizes > article:last-child { border-bottom: 0; }
+  .sizes .meta-line { display: flex; gap: 18px; margin-bottom: 14px; }
+  .sizes p { margin: 0; max-width: 46ch; }
+  .s-display { font-size: clamp(34px,5.4vw,68px); line-height: 1.08; letter-spacing: -.028em; font-variation-settings: "wght" 600; max-width: 20ch; }
+  .s-head    { font-size: clamp(24px,3vw,36px); line-height: 1.2;  letter-spacing: -.018em; font-variation-settings: "wght" 550; max-width: 26ch; }
+  .s-sub     { font-size: 21px; line-height: 1.42; letter-spacing: -.008em; font-variation-settings: "wght" 450; max-width: 40ch; }
+  .s-body    { font-size: 17px; line-height: 1.65; font-variation-settings: "wght" 400; }
+  .s-small   { font-size: 14px; line-height: 1.6;  font-variation-settings: "wght" 400; opacity: .8; }
+  .s-caption { font-size: 12px; line-height: 1.55; font-variation-settings: "wght" 450; letter-spacing: .01em; opacity: .68; }
+
+  /* ---- figures ---- */
+  .figures { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: clamp(20px,3vw,40px); }
+  .figure .n { font-size: clamp(44px,6vw,76px); line-height: 1; font-variation-settings: "wght" 600; letter-spacing: -.02em; }
+  .figure .t { font-family: var(--mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; opacity: .6; margin-top: 10px; }
+  .tabular-demo { margin-top: clamp(34px,5vw,56px); }
+  .tabular-demo table { border-collapse: collapse; font-size: 17px; width: 100%; max-width: 460px; }
+  .tabular-demo td { padding: 9px 0; border-bottom: 1px solid var(--rule-light); }
+  .tabular-demo td:last-child { text-align: right; font-variation-settings: "wght" 550; }
+  .tabular-demo table.tab { font-variant-numeric: tabular-nums; }
+
+  footer { padding: clamp(34px,5vw,64px) clamp(20px,5vw,88px); background: var(--french); color: #fff; }
+  footer a { color: var(--explorer); }
+  .foot-grid { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; align-items: baseline; }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-top">
+    <span class="wordmark">Coffee Circle · Brand</span>
+    <span class="pill">Type — Primary Typeface</span>
+  </div>
+  <h1>Circle<br /><em>Sans</em></h1>
+  <p class="tagline">
+    A geometric sans serif in nine weights and two widths, drawn as one variable font.
+    Forked from Albert Sans, with a redrawn <strong>Q</strong>, and the long-stem
+    <strong>g</strong> and open ampersand set as defaults.
+  </p>
+</header>
+
+<!-- metadata, same shape as the guidelines page -->
+<section class="section">
+  <div class="section-head"><span class="label">Family</span><span class="label">01</span></div>
+  <div class="meta">
+    <dl>
+      <div><dt>Family name</dt><dd>Circle Sans</dd></div>
+      <div><dt>Classification</dt><dd>Geometric Sans</dd></div>
+      <div><dt>Weights</dt><dd>Thin 100 → Black 900</dd></div>
+      <div><dt>Widths</dt><dd>Narrow 87.5 → Normal 100</dd></div>
+    </dl>
+    <dl>
+      <div><dt>Based on</dt><dd>Albert Sans</dd></div>
+      <div><dt>Original designer</dt><dd>Andreas Rasmussen</dd></div>
+      <div><dt>Licence</dt><dd>SIL Open Font License 1.1</dd></div>
+      <div><dt>Defaults</dt><dd>long-stem g · open &amp;</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- character set -->
+<section class="section section--dark">
+  <div class="section-head"><span class="label">Character set</span><span class="label">02</span></div>
+  <div class="glyphs">
+    <div>AaBbCcDdEeFf</div>
+    <div>1234567890</div>
+    <div>äöüÄÖÜß&amp;!?€$%</div>
+  </div>
+</section>
+
+<!-- the variable axis, in the guidelines' own idiom -->
+<section class="section">
+  <div class="section-head"><span class="label">The typeface is variable — click for another coffee</span><span class="label">03</span></div>
+  <div class="ramp-wrap">
+    <div class="ramp" id="ramp-a" role="button" tabindex="0">Limu</div>
+  </div>
+  <div class="axis"><span>wght 100</span><span class="axis-line"></span><span>900</span></div>
+</section>
+<section class="section section--ink">
+  <div class="ramp-wrap">
+    <div class="ramp" id="ramp-b" role="button" tabindex="0">Yirgacheffe</div>
+  </div>
+  <div class="axis"><span>wght 100</span><span class="axis-line"></span><span>900</span></div>
+</section>
+
+<!-- what actually changed in this fork -->
+<section class="section">
+  <div class="section-head"><span class="label">What changed</span><span class="label">04</span></div>
+  <div class="changes">
+    <div class="change">
+      <div class="demo">Q</div>
+      <h3>A new tail</h3>
+      <p>The centred vertical bar read as the Quake logo. It is now a diagonal stroke crossing the bowl, held at a fixed −52° so the angle never drifts with weight.</p>
+    </div>
+    <div class="change">
+      <div class="demo">g</div>
+      <h3>Long stem by default</h3>
+      <p>Previously tucked away in <code>ss02</code>. The accented forms — ğ ĝ ġ ģ — follow automatically.</p>
+    </div>
+    <div class="change">
+      <div class="demo">&amp;</div>
+      <h3>Open ampersand</h3>
+      <p>The “et” form, previously <code>ss04</code>, is now the default and keeps its own width and kerning.</p>
+    </div>
+    <div class="change">
+      <div class="demo">1234</div>
+      <h3>Figures left alone</h3>
+      <p>Proportional, as drawn. Tabular was tried as a default and reverted — it goes gappy in running text. Switch it on per component instead.</p>
+    </div>
+  </div>
+</section>
+
+<!-- interactive -->
+<section class="section section--dark">
+  <div class="section-head"><span class="label">Try it</span><span class="label">05</span></div>
+  <div class="controls">
+    <div class="control">
+      <label for="wght">Weight <output id="wght-v">400</output></label>
+      <input type="range" id="wght" min="100" max="900" step="1" value="400" />
+    </div>
+    <div class="control">
+      <label for="wdth">Width <output id="wdth-v">100</output></label>
+      <input type="range" id="wdth" min="87.5" max="100" step="0.5" value="100" />
+    </div>
+    <div class="control">
+      <label for="size">Size <output id="size-v">64</output></label>
+      <input type="range" id="size" min="14" max="140" step="1" value="64" />
+    </div>
+  </div>
+  <textarea id="playground" spellcheck="false" aria-label="Editable specimen text">We stand for respect, transparency and genuine fairness in the value chain.</textarea>
+</section>
+
+<!-- real copy at real sizes -->
+<section class="section sizes">
+  <div class="section-head"><span class="label">In use — coffeecircle.com/about-us</span><span class="label">06</span></div>
+
+  <article>
+    <div class="meta-line"><span class="label">Display</span><span class="label">600</span></div>
+    <p class="s-display">We stand for respect, transparency and genuine fairness.</p>
+  </article>
+
+  <article>
+    <div class="meta-line"><span class="label">Heading</span><span class="label">550</span></div>
+    <p class="s-head">Our Direct Trade Principles</p>
+  </article>
+
+  <article>
+    <div class="meta-line"><span class="label">Subhead</span><span class="label">450</span></div>
+    <p class="s-sub">We make the big world of specialty coffee easy for you.</p>
+  </article>
+
+  <article>
+    <div class="meta-line"><span class="label">Body</span><span class="label">400</span></div>
+    <p class="s-body">At Coffee Circle, we offer the world’s finest coffee and equipment. We roast all coffees to perfection and serve and ship them freshly. We always aim to deliver the best flavor experience for our customers. We source directly from coffee growers and pay high prices for high-quality coffee. We treat people how we want to be treated, and respect all humans as they are.</p>
+  </article>
+
+  <article>
+    <div class="meta-line"><span class="label">Small</span><span class="label">400</span></div>
+    <p class="s-small">We promote positive social change in coffee-growing regions, support research to make coffee farming more climate-smart and secure the income of coffee farmers and their families for generations to come.</p>
+  </article>
+
+  <article>
+    <div class="meta-line"><span class="label">Caption</span><span class="label">450</span></div>
+    <p class="s-caption">Coffee Circle was founded in 2010 in the spirit of discovery and change. Our own roastery followed in 2016, and the first café in Berlin in 2019.</p>
+  </article>
+</section>
+
+<!-- figures -->
+<section class="section section--ink">
+  <div class="section-head"><span class="label">Figures</span><span class="label">07</span></div>
+  <div class="figures">
+    <div class="figure"><div class="n">2010</div><div class="t">Founded</div></div>
+    <div class="figure"><div class="n">2016</div><div class="t">Own roastery</div></div>
+    <div class="figure"><div class="n">2019</div><div class="t">First café</div></div>
+    <div class="figure"><div class="n">100+</div><div class="t">Employees</div></div>
+    <div class="figure"><div class="n">25</div><div class="t">Countries</div></div>
+  </div>
+  <div class="tabular-demo">
+    <div class="label" style="margin-bottom:6px">Proportional — the default, right for prose, ragged in a column</div>
+    <table class="prop">
+      <tr><td>Ethiopia Limu</td><td>11,90 €</td></tr>
+      <tr><td>Kenya AA</td><td>14,50 €</td></tr>
+      <tr><td>Brazil Cerrado</td><td>9,90 €</td></tr>
+      <tr><td>Total</td><td>46,30 €</td></tr>
+    </table>
+    <div class="label" style="margin:34px 0 6px">
+      <code style="text-transform:none;letter-spacing:0">font-variant-numeric: tabular-nums</code> — for price columns and numbers that update in place
+    </div>
+    <table class="tab">
+      <tr><td>Ethiopia Limu</td><td>11,90 €</td></tr>
+      <tr><td>Kenya AA</td><td>14,50 €</td></tr>
+      <tr><td>Brazil Cerrado</td><td>9,90 €</td></tr>
+      <tr><td>Total</td><td>46,30 €</td></tr>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div>
+      <div class="label" style="opacity:.7">Circle Sans — a fork of
+        <a href="https://github.com/usted/Albert-Sans">Albert Sans</a> by Andreas Rasmussen (a.Foundry)</div>
+      <div class="label" style="opacity:.5; margin-top:8px">SIL Open Font License 1.1</div>
+    </div>
+    <div class="label" style="opacity:.7">
+      <a href="https://github.com/slcr/circle-sans/releases/latest">Download</a> ·
+      <a href="fontbakery/fontbakery-report.html">QA report</a> ·
+      <a href="proof/diffenator2-report.html">Proofs</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // The axes in motion, the way the Google Fonts catalog animates "Variable":
+  // a bold hotspot travels through the name, and weight and width fall away
+  // around it. Click a name to pour the next coffee.
+  const COFFEES = ["Limu", "Yirgacheffe", "Sidamo", "Buna Dimaa", "Yirga Santos",
+                   "Cerrado", "Daterra", "Iloma", "San José", "Rungeto", "Arara", "Apas"];
+  const SIGMA = 1.4;      // letters on each side that feel the hotspot
+  const SPEED = 5;        // hotspot travel, letters per second
+  const PAD = 3 * SIGMA;  // lead-in and -out, so the wave clears the word before re-entering
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const showing = new Set(); // the two ramps must never pour the same coffee
+
+  function coffeeWave(el) {
+    let letters = [];
+    let start = performance.now();
+
+    function setName(name) {
+      showing.delete(el.dataset.coffee);
+      showing.add(name);
+      el.dataset.coffee = name;
+      el.setAttribute("aria-label", name + " — show another coffee");
+      // spaces are not part of the wave, so only letters get a span
+      el.innerHTML = [...name].map(c => c.trim() ? `<span aria-hidden="true">${c}</span>` : " ").join("");
+      letters = [...el.children];
+      start = performance.now(); // the wave greets a new name from its first letter
+      fitName();
+    }
+
+    // Size the name to its stage, measured with every letter at the wave's
+    // peak so the line can never outgrow the container mid-sweep. Height is
+    // the other bound, so short names don't become a poster.
+    function fitName() {
+      const wrap = el.parentElement;
+      el.style.fontSize = "100px";
+      letters.forEach(s => { s.style.fontVariationSettings = '"wght" 900, "wdth" 100'; });
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const w = range.getBoundingClientRect().width;
+      // 0.8 keeps ascenders, descenders and accents inside a line-height:1 box.
+      if (w > 0) el.style.fontSize = Math.min(wrap.clientHeight * 0.8, 100 * wrap.clientWidth / w) + "px";
+      if (reduceMotion.matches) paintStatic(); else paint(performance.now());
+    }
+
+    // Without motion, fall back to the old still ramp, light into heavy.
+    function paintStatic() {
+      const stops = letters.length - 1;
+      letters.forEach((s, i) => {
+        s.style.fontVariationSettings = `"wght" ${Math.round(100 + 800 * (stops ? i / stops : 0))}`;
+      });
+    }
+
+    function paint(now) {
+      const span = letters.length - 1 + 2 * PAD;
+      const p = -PAD + ((now - start) / 1000 * SPEED) % span;
+      letters.forEach((s, i) => {
+        const g = Math.exp(-((i - p) * (i - p)) / (2 * SIGMA * SIGMA));
+        s.style.fontVariationSettings =
+          `"wght" ${Math.round(100 + 800 * g)}, "wdth" ${(90 + 10 * g).toFixed(1)}`;
+      });
+    }
+
+    function next() {
+      const pool = COFFEES.filter(n => !showing.has(n));
+      setName(pool[Math.floor(Math.random() * pool.length)]);
+    }
+
+    el.addEventListener("click", next);
+    el.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); next(); }
+    });
+
+    setName(el.textContent.trim());
+    return { paint, paintStatic, fitName };
+  }
+
+  const waves = [document.getElementById("ramp-a"), document.getElementById("ramp-b")].map(coffeeWave);
+
+  // The first fit ran against the fallback font's metrics; measure again for real.
+  document.fonts.ready.then(() => waves.forEach(w => w.fitName()));
+  window.addEventListener("resize", () => waves.forEach(w => w.fitName()));
+
+  let rafId = null;
+  function tick(now) { waves.forEach(w => w.paint(now)); rafId = requestAnimationFrame(tick); }
+  function applyMotionPreference() {
+    if (reduceMotion.matches) {
+      cancelAnimationFrame(rafId); rafId = null;
+      waves.forEach(w => w.paintStatic());
+    } else if (!rafId) {
+      rafId = requestAnimationFrame(tick);
+    }
+  }
+  reduceMotion.addEventListener("change", applyMotionPreference);
+  applyMotionPreference();
+
+  // Live controls
+  const pg = document.getElementById("playground");
+  const wght = document.getElementById("wght"), wdth = document.getElementById("wdth"), size = document.getElementById("size");
+  const wghtV = document.getElementById("wght-v"), wdthV = document.getElementById("wdth-v"), sizeV = document.getElementById("size-v");
+  function sync() {
+    pg.style.fontVariationSettings = `"wght" ${wght.value}, "wdth" ${wdth.value}`;
+    pg.style.fontSize = size.value + "px";
+    wghtV.textContent = wght.value;
+    wdthV.textContent = wdth.value;
+    sizeV.textContent = size.value;
+  }
+  [wght, wdth, size].forEach(i => i.addEventListener("input", sync));
+  sync();
+
+  // Grow the textarea to fit its content instead of scrolling.
+  function fit() { pg.style.height = "auto"; pg.style.height = pg.scrollHeight + "px"; }
+  pg.addEventListener("input", fit);
+  [wght, wdth, size].forEach(i => i.addEventListener("input", fit));
+  document.fonts.ready.then(fit);
+  // A height measured at one window width is stale at any other.
+  window.addEventListener("resize", fit);
+  fit();
+</script>
+</body>
 </html>
