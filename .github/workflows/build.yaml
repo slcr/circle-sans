@@ -43,6 +43,15 @@ jobs:
       # Set the archive name to repo name + "-assets" e.g "MavenPro-assets"
       run: echo "ZIP_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')-fonts" >> $GITHUB_ENV
 
+    - name: Cache built fonts
+      id: cache-fonts
+      uses: actions/cache@v4
+      with:
+        path: |
+          fonts
+          out
+        key: ${{ runner.os }}-fonts-${{ hashFiles('sources/**', 'Makefile', 'requirements*.txt', 'scripts/*.py') }}
+
     # Give every build a version of its own. release.yaml stamps the tag verbatim
     # (v1.2 -> 1.200, v1.31 -> 1.310), so a release always leaves the last digit of
     # the three-digit fraction at zero. Dev builds spend that digit on the number of
@@ -51,6 +60,7 @@ jobs:
     # whatever the sources happen to say - the same number for every build, which is
     # the bug that had v1.0 and v1.1 both reporting 1.310.
     - name: Stamp a dev font version
+      if: steps.cache-fonts.outputs.cache-hit != 'true'
       run: |
         set -euo pipefail
         TAG=$(git describe --tags --abbrev=0 --match 'v*' 2>/dev/null || true)
@@ -76,11 +86,14 @@ jobs:
         done
 
     - name: Build font
+      if: steps.cache-fonts.outputs.cache-hit != 'true'
       run: make build
     - name: Check with fontbakery
+      if: steps.cache-fonts.outputs.cache-hit != 'true'
       run: make test
       continue-on-error: true
     - name: proof
+      if: steps.cache-fonts.outputs.cache-hit != 'true'
       run: make proof
     - name: setup site
       run: |
