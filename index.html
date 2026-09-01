@@ -126,7 +126,7 @@
      above the h1 takes all of it, dropping the h1, the tagline and the hint to
      the foot of the block while the top row stays put. */
       .masthead.masthead--film {
-        min-height: 85vh;
+        min-height: 75vh;
         display: flex;
         flex-direction: column;
         /* Tighter than the section default: the type is anchored to the foot, so a
@@ -8903,12 +8903,10 @@ ${e}`;
               if (!r) continue;
               const i = Me(r.identity);
               (t.has(i) || t.set(i, []),
-                t
-                  .get(i)
-                  .push({
-                    identity: r.identity,
-                    writable: n.access !== "read",
-                  }));
+                t.get(i).push({
+                  identity: r.identity,
+                  writable: n.access !== "read",
+                }));
             }
             for (const n of t.values())
               if (!(n.length < 2) && n.some((r) => r.writable))
