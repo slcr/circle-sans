@@ -33,8 +33,12 @@ GREEN = (0x22, 0x47, 0x37, 255)  # --rainforest, as on the specimen
 SCALE = 4  # render big and downsample, so the corners and the type stay smooth
 
 MONO = "/System/Library/Fonts/Menlo.ttc"  # the eyebrow, as on the specimen
-DMG_SIZE = (640, 420)  # points; installer-dmg.py opens the window at this size
-DMG_BAND = 296  # where the white band starts
+# The image is taller than any Finder window will show: Finder anchors it at the
+# top and crops the bottom, and how much of the window is content varies with the
+# title bar and the path bar, which are the viewer's settings. Everything that
+# matters sits above 380 points; the band simply runs on below.
+DMG_SIZE = (640, 520)  # points; installer-dmg.py opens the window 640 x 480
+DMG_BAND = 300  # where the white band starts
 
 SIZES = [
     ("icon_16x16.png", 16),
@@ -129,8 +133,8 @@ def render_dmg_background(font_path, scale):
     # The instruction, in the band, left of where the app's own label lands.
     lead = circle_sans(font_path, pt(16), 520)
     rest = circle_sans(font_path, pt(13), 380)
-    draw.text((pt(40), pt(320)), "Double-click the app to install the typeface.", font=lead, fill=GREEN)
-    draw.text((pt(40), pt(346)), "Then quit and reopen the apps you want to use it in.", font=rest, fill=(0x1a, 0x1a, 0x1a, 190))
+    draw.text((pt(40), pt(322)), "Double-click the app to install the typeface.", font=lead, fill=GREEN)
+    draw.text((pt(40), pt(348)), "Then quit and reopen the apps you want to use it in.", font=rest, fill=(0x1a, 0x1a, 0x1a, 190))
     return image
 
 
