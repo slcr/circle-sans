@@ -6,8 +6,10 @@ they always show the font the app installs:
 
   * the app icon: an "Aa" in Circle Sans, white on the brand's rainforest green,
     on the standard macOS icon tile;
-  * the disk-image background: the wordmark on dark green with a white band
-    below, where Finder's black icon label can be read (see installer-dmg.py).
+  * the disk-image background: the wordmark over a still of the specimen's
+    oil-slick film, with a white band below where Finder's black icon label can
+    be read (see installer-dmg.py). The film is procedural and seeded, so every
+    release gets the same picture, and the dark green icon stands out against it.
 
     render-installer-art.py --font "fonts/variable/CircleSans[wdth,wght].ttf" \
                             --out build/installer-icon.icns \
@@ -24,7 +26,8 @@ import subprocess
 import sys
 import tempfile
 
-from PIL import Image, ImageDraw, ImageFont
+import numpy as np
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 CANVAS = 1024  # the master; every other size is scaled down from it
 TILE = 824  # Apple's template: the tile sits inset on the 1024 canvas
@@ -39,6 +42,18 @@ MONO = "/System/Library/Fonts/Menlo.ttc"  # the eyebrow, as on the specimen
 # matters sits above 380 points; the band simply runs on below.
 DMG_SIZE = (640, 520)  # points; installer-dmg.py opens the window 640 x 480
 DMG_BAND = 300  # where the white band starts
+
+# The specimen's film, as colour stops from warm to cool: amber through orange and
+# magenta into violet and indigo, with cyan where the field peaks.
+FILM = [
+    (0.00, (0xF6, 0xB3, 0x2E)),
+    (0.22, (0xF2, 0x8C, 0x1F)),
+    (0.42, (0xE0, 0x3A, 0x6E)),
+    (0.60, (0x8E, 0x2C, 0xB4)),
+    (0.78, (0x3A, 0x2C, 0x8C)),
+    (0.90, (0x24, 0x52, 0x9E)),
+    (1.00, (0x3C, 0xE8, 0xC8)),
+]
 
 SIZES = [
     ("icon_16x16.png", 16),
@@ -104,10 +119,41 @@ def circle_sans(font_path, size, wght, wdth=100):
     return font
 
 
+def oil_slick(w, h, seed=11):
+    """A still of the film: layered smooth noise, warped by more of itself so it
+    folds and streams, then coloured through FILM. Warm on the left, where the
+    wordmark sits, cooler towards the icon on the right."""
+    rng = np.random.default_rng(seed)
+
+    def field(cells_x, cells_y):
+        small = Image.fromarray((rng.random((cells_y, cells_x)) * 255).astype("uint8"), "L")
+        return np.asarray(small.resize((w, h), Image.BICUBIC), dtype=np.float32) / 255
+
+    base = 0.55 * field(5, 4) + 0.30 * field(9, 7) + 0.15 * field(18, 14)
+    ys, xs = np.mgrid[0:h, 0:w].astype(np.float32)
+    t = base
+    for amplitude in (0.32, 0.14):  # two passes: broad folds, then finer streams
+        dx, dy = field(4, 3) - 0.5, field(4, 3) - 0.5
+        sx = np.clip(xs + dx * amplitude * w, 0, w - 1).astype(np.int32)
+        sy = np.clip(ys + dy * amplitude * w, 0, h - 1).astype(np.int32)
+        t = t[sy, sx]
+    t = 0.72 * t + 0.34 * (xs / w) - 0.06  # the warm-to-cool drift across the width
+    t = (t - t.min()) / (t.max() - t.min())
+    t = t * t * (3 - 2 * t)  # steeper mid-tones: sharper seams between the colours
+
+    positions = np.array([p for p, _ in FILM], dtype=np.float32)
+    colours = np.array([c for _, c in FILM], dtype=np.float32)
+    rgb = np.stack([np.interp(t, positions, colours[:, i]) for i in range(3)], axis=-1)
+    image = Image.fromarray(rgb.clip(0, 255).astype("uint8"), "RGB")
+    return image.filter(ImageFilter.GaussianBlur(radius=max(1, w * 0.003))).convert("RGBA")
+
+
 def render_dmg_background(font_path, scale):
     """The Finder window's backdrop at 1x or 2x. Coordinates below are in points."""
     w, h = DMG_SIZE[0] * scale, DMG_SIZE[1] * scale
-    image = Image.new("RGBA", (w, h), GREEN)
+    # Render the film once at 2x and scale for 1x, so both sizes show the same picture.
+    film = oil_slick(DMG_SIZE[0] * 2, DMG_SIZE[1] * 2)
+    image = film if scale == 2 else film.resize((w, h), Image.LANCZOS)
     draw = ImageDraw.Draw(image)
     pt = lambda v: int(round(v * scale))
 
@@ -121,7 +167,7 @@ def render_dmg_background(font_path, scale):
         eyebrow = ImageFont.load_default()
     x = pt(40)
     for ch in "COFFEE CIRCLE \u00b7 BRAND":
-        draw.text((x, pt(40)), ch, font=eyebrow, fill=(255, 255, 255, 180))
+        draw.text((x, pt(40)), ch, font=eyebrow, fill=(255, 255, 255, 215))
         x += eyebrow.getlength(ch) + pt(2)
 
     # The wordmark: "Circle" heavy over "Sans" light, as on the specimen masthead.

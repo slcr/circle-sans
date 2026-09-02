@@ -244,7 +244,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m venv build/venv
-          build/venv/bin/pip install --quiet pillow dmgbuild
+          build/venv/bin/pip install --quiet pillow numpy dmgbuild
           build/venv/bin/python scripts/render-installer-art.py \
             --font "fonts/variable/CircleSans[wdth,wght].ttf" \
             --out build/installer-icon.icns \
