@@ -56,37 +56,75 @@ func label(_ text: String, font: NSFont, color: NSColor, kern: CGFloat = 0, line
         .font: font, .foregroundColor: color, .kern: kern, .paragraphStyle: paragraph,
     ])
     let field = NSTextField(labelWithAttributedString: attributed)
-    field.isSelectable = true
+    field.isSelectable = false
     field.lineBreakMode = .byWordWrapping
     field.maximumNumberOfLines = 0
     field.translatesAutoresizingMaskIntoConstraints = false
     return field
 }
 
-/// The specimen's solid button: white, 2pt corners, tracked mono caps.
-final class SolidButton: NSButton {
-    override init(frame: NSRect) {
-        super.init(frame: frame)
+/// The specimen's buttons: 2pt corners, tracked mono caps. Solid is white with dark
+/// text, ghost is a white hairline. Drawn by hand so the shape, the hit area and the
+/// focus ring are the same rectangle - a stock button only paints its small bezel.
+final class BrandButton: NSButton {
+    enum Style { case solid, ghost }
+    private let style: Style
+    private var pressed = false
+    private var titleText = NSAttributedString()
+
+    init(style: Style) {
+        self.style = style
+        super.init(frame: .zero)
         isBordered = false
-        wantsLayer = true
-        layer?.backgroundColor = paper.cgColor
-        layer?.cornerRadius = 2
         setButtonType(.momentaryChange)
         translatesAutoresizingMaskIntoConstraints = false
     }
     required init?(coder: NSCoder) { fatalError() }
+
     func setLabel(_ text: String) {
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.alignment = .center
-        attributedTitle = NSAttributedString(string: text.uppercased(), attributes: [
-            .font: mono(11), .foregroundColor: ink, .kern: 2, .paragraphStyle: paragraph,
+        titleText = NSAttributedString(string: text.uppercased(), attributes: [
+            .font: mono(11), .foregroundColor: style == .solid ? ink : paper, .kern: 2,
         ])
+        title = text // for accessibility
+        invalidateIntrinsicContentSize()
+        needsDisplay = true
     }
-    override var intrinsicContentSize: NSSize { NSSize(width: max(120, super.intrinsicContentSize.width + 44), height: 40) }
+
+    override var intrinsicContentSize: NSSize {
+        NSSize(width: max(120, ceil(titleText.size().width) + 44), height: 40)
+    }
+
+    private var shape: NSBezierPath { NSBezierPath(roundedRect: bounds, xRadius: 2, yRadius: 2) }
+
+    override func draw(_ dirtyRect: NSRect) {
+        switch style {
+        case .solid:
+            (pressed ? paper.withAlphaComponent(0.86) : paper).setFill()
+            shape.fill()
+        case .ghost:
+            if pressed {
+                paper.withAlphaComponent(0.12).setFill()
+                shape.fill()
+            }
+            paper.withAlphaComponent(0.7).setStroke()
+            let outline = NSBezierPath(roundedRect: bounds.insetBy(dx: 0.5, dy: 0.5), xRadius: 2, yRadius: 2)
+            outline.lineWidth = 1
+            outline.stroke()
+        }
+        let size = titleText.size()
+        // The kern trails the last glyph too, so nudge by half of it to centre the ink.
+        titleText.draw(at: NSPoint(x: (bounds.width - size.width) / 2 + 1, y: (bounds.height - size.height) / 2))
+    }
+
+    override func drawFocusRingMask() { shape.fill() }
+    override var focusRingMaskBounds: NSRect { bounds }
+
     override func mouseDown(with event: NSEvent) {
-        layer?.backgroundColor = paper.withAlphaComponent(0.86).cgColor
-        super.mouseDown(with: event)
-        layer?.backgroundColor = paper.cgColor
+        pressed = true
+        needsDisplay = true
+        super.mouseDown(with: event) // tracks the press and fires the action on release
+        pressed = false
+        needsDisplay = true
     }
 }
 
@@ -94,7 +132,10 @@ struct Outcome {
     let headline: String
     let body: String
     let failed: Bool
+    var backupPath: String? = nil
 }
+
+let backupLead = "The version you had before was moved to:"
 
 /// Runs the install script and reports its stdout (summary) or stderr (the reason).
 func runInstaller(completion: @escaping (Outcome) -> Void) {
@@ -128,9 +169,18 @@ func runInstaller(completion: @escaping (Outcome) -> Void) {
         let errors = String(decoding: stderr, as: UTF8.self).trimmingCharacters(in: .whitespacesAndNewlines)
         let outcome: Outcome
         if process.terminationStatus == 0, !summary.isEmpty {
-            let paragraphs = summary.components(separatedBy: "\n\n")
+            var paragraphs = summary.components(separatedBy: "\n\n")
+            let headline = paragraphs.removeFirst()
+            // The script names the folder it set the old fonts aside in; the window
+            // offers to open it instead of spelling out the path.
+            var backupPath: String?
+            if let index = paragraphs.firstIndex(where: { $0.hasPrefix(backupLead) }) {
+                let lines = paragraphs[index].components(separatedBy: "\n")
+                backupPath = lines.dropFirst().joined(separator: "\n").trimmingCharacters(in: .whitespacesAndNewlines)
+                paragraphs[index] = "The version you had before was set aside, in case you need it."
+            }
             // One newline per paragraph; the paragraph spacing in the view makes the gaps.
-            outcome = Outcome(headline: paragraphs[0], body: paragraphs.dropFirst().joined(separator: "\n"), failed: false)
+            outcome = Outcome(headline: headline, body: paragraphs.joined(separator: "\n"), failed: false, backupPath: backupPath)
         } else {
             // The script's last stderr line is its own explanation of what went wrong.
             let reason = errors.components(separatedBy: "\n").last ?? ""
@@ -144,7 +194,9 @@ final class InstallerWindow: NSWindow {
     private let headline: NSTextField
     private let body: NSTextField
     private let spinner = NSProgressIndicator()
-    private let done = SolidButton(frame: .zero)
+    private let done = BrandButton(style: .solid)
+    private let reveal = BrandButton(style: .ghost)
+    private var backupPath: String?
 
     init() {
         headline = label("Installing Circle Sans\u{2026}", font: circleSans(20, weight: 500), color: paper)
@@ -194,7 +246,12 @@ final class InstallerWindow: NSWindow {
         done.action = #selector(NSApplication.terminate(_:))
         done.isHidden = true
 
-        for view in [eyebrow, mark, headline, body, spinner, done] { content.addSubview(view) }
+        reveal.setLabel("Show previous version")
+        reveal.target = self
+        reveal.action = #selector(revealBackup)
+        reveal.isHidden = true
+
+        for view in [eyebrow, mark, headline, body, spinner, done, reveal] { content.addSubview(view) }
         NSLayoutConstraint.activate([
             eyebrow.leadingAnchor.constraint(equalTo: content.leadingAnchor, constant: m),
             eyebrow.topAnchor.constraint(equalTo: content.topAnchor, constant: 44),
@@ -211,6 +268,8 @@ final class InstallerWindow: NSWindow {
             done.trailingAnchor.constraint(equalTo: content.trailingAnchor, constant: -m),
             done.bottomAnchor.constraint(equalTo: content.bottomAnchor, constant: -m + 6),
             done.topAnchor.constraint(greaterThanOrEqualTo: body.bottomAnchor, constant: 28),
+            reveal.trailingAnchor.constraint(equalTo: done.leadingAnchor, constant: -10),
+            reveal.centerYAnchor.constraint(equalTo: done.centerYAnchor),
         ])
         // The headline hugs its text so the spinner can sit right after it.
         headline.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -231,7 +290,13 @@ final class InstallerWindow: NSWindow {
         ])
         done.setLabel(outcome.failed ? "Close" : "Done")
         done.isHidden = false
-        makeFirstResponder(done)
+        backupPath = outcome.backupPath
+        reveal.isHidden = outcome.backupPath == nil
+    }
+
+    @objc private func revealBackup() {
+        guard let path = backupPath else { return }
+        NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: path)])
     }
 
     func snapshot(to path: String) {
