@@ -13,9 +13,12 @@ they always show the font the app installs:
 
     render-installer-art.py --font "fonts/variable/CircleSans[wdth,wght].ttf" \
                             --out build/installer-icon.icns \
-                            --dmg-background build/dmg-background.png
+                            --dmg-background build/dmg-background.png \
+                            --dmg-background-fonts build/dmg-background-fonts.png
 
-The background is written twice, as NAME.png and NAME@2x.png. Needs Pillow;
+Each background is written twice, as NAME.png and NAME@2x.png. The fonts-only
+variant is for the image shipped while the app cannot be signed: it holds the
+font files themselves, which Font Book installs without any Gatekeeper prompt. Needs Pillow;
 iconutil ships with macOS. --keep-iconset keeps the icon PNGs around, which is
 handy for looking at the result.
 """
@@ -41,7 +44,21 @@ MONO = "/System/Library/Fonts/Menlo.ttc"  # the eyebrow, as on the specimen
 # title bar and the path bar, which are the viewer's settings. Everything that
 # matters sits above 380 points; the band simply runs on below.
 DMG_SIZE = (640, 520)  # points; installer-dmg.py opens the window 640 x 480
-DMG_BAND = 300  # where the white band starts
+DMG_BAND = 292  # where the white band starts
+
+# What the band says, per kind of image. The app installs itself; the fonts-only
+# image (shipped while the app cannot be signed) goes through Font Book.
+DMG_TEXT = {
+    "app": [
+        (16, 520, "Double-click the app to install the typeface."),
+        (13, 380, "Then quit and reopen the apps you want to use it in."),
+    ],
+    "fonts": [
+        (16, 520, "Select both fonts and double-click them."),
+        (13, 380, "Font Book opens: click Install."),
+        (13, 380, "Then quit and reopen the apps you want to use it in."),
+    ],
+}
 
 # The specimen's film, as colour stops from warm to cool: amber through orange and
 # magenta into violet and indigo, with cyan where the field peaks.
@@ -148,7 +165,7 @@ def oil_slick(w, h, seed=11):
     return image.filter(ImageFilter.GaussianBlur(radius=max(1, w * 0.003))).convert("RGBA")
 
 
-def render_dmg_background(font_path, scale):
+def render_dmg_background(font_path, scale, variant="app"):
     """The Finder window's backdrop at 1x or 2x. Coordinates below are in points."""
     w, h = DMG_SIZE[0] * scale, DMG_SIZE[1] * scale
     # Render the film once at 2x and scale for 1x, so both sizes show the same picture.
@@ -176,12 +193,21 @@ def render_dmg_background(font_path, scale):
     draw.text((pt(36), pt(62)), "Circle", font=heavy, fill=(255, 255, 255, 255))
     draw.text((pt(36), pt(146)), "Sans", font=light, fill=(255, 255, 255, 255))
 
-    # The instruction, in the band, left of where the app's own label lands.
-    lead = circle_sans(font_path, pt(16), 520)
-    rest = circle_sans(font_path, pt(13), 380)
-    draw.text((pt(40), pt(322)), "Double-click the app to install the typeface.", font=lead, fill=GREEN)
-    draw.text((pt(40), pt(348)), "Then quit and reopen the apps you want to use it in.", font=rest, fill=(0x1a, 0x1a, 0x1a, 190))
+    # The instruction, in the band, left of where the Finder labels land.
+    y = 312
+    for size, weight, line in DMG_TEXT[variant]:
+        fill = GREEN if size == 16 else (0x1A, 0x1A, 0x1A, 190)
+        draw.text((pt(40), pt(y)), line, font=circle_sans(font_path, pt(size), weight), fill=fill)
+        y += 26 if size == 16 else 20
     return image
+
+
+def write_dmg_background(font_path, path, variant):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    stem = path.with_suffix("")
+    render_dmg_background(font_path, 1, variant).save(stem.with_suffix(".png"), dpi=(72, 72))
+    render_dmg_background(font_path, 2, variant).save(pathlib.Path(str(stem) + "@2x.png"), dpi=(144, 144))
+    print(f"wrote {stem}.png and {stem}@2x.png ({variant})")
 
 
 def main():
@@ -189,15 +215,14 @@ def main():
     parser.add_argument("--font", required=True, type=pathlib.Path)
     parser.add_argument("--out", required=True, type=pathlib.Path, help="the .icns to write")
     parser.add_argument("--keep-iconset", type=pathlib.Path, help="also keep the PNGs here")
-    parser.add_argument("--dmg-background", type=pathlib.Path, help="write NAME.png and NAME@2x.png here")
+    parser.add_argument("--dmg-background", type=pathlib.Path, help="background for the app image: NAME.png and NAME@2x.png")
+    parser.add_argument("--dmg-background-fonts", type=pathlib.Path, help="background for the fonts-only image")
     args = parser.parse_args()
 
     if args.dmg_background:
-        args.dmg_background.parent.mkdir(parents=True, exist_ok=True)
-        stem = args.dmg_background.with_suffix("")
-        render_dmg_background(args.font, 1).save(stem.with_suffix(".png"), dpi=(72, 72))
-        render_dmg_background(args.font, 2).save(pathlib.Path(str(stem) + "@2x.png"), dpi=(144, 144))
-        print(f"wrote {stem}.png and {stem}@2x.png")
+        write_dmg_background(args.font, args.dmg_background, "app")
+    if args.dmg_background_fonts:
+        write_dmg_background(args.font, args.dmg_background_fonts, "fonts")
 
     master = render_master(args.font)
 

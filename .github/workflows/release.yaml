@@ -205,9 +205,12 @@ jobs:
           gh release edit "$V" --draft=false
           echo "Released: https://github.com/${GITHUB_REPOSITORY}/releases/tag/${V}"
 
-  # The Mac installer: "Install Circle Sans.app" with the variable fonts inside it,
-  # so it installs offline and always installs exactly this release, shipped as a
-  # disk image with the brand background.
+  # The Mac installer: a disk image with the brand background. Signed, it holds
+  # "Install Circle Sans.app" with the variable fonts inside it, so it installs
+  # offline and always installs exactly this release. Unsigned, it holds the font
+  # files themselves instead - fonts are data, so Font Book opens them without any
+  # Gatekeeper prompt, whereas an unsigned app makes macOS refuse the first
+  # double-click. The unsigned app is still built and kept as a workflow artifact.
   #
   # Signing and notarization need five repository secrets:
   #   MACOS_CERTIFICATE_P12       a "Developer ID Application" certificate with its
@@ -221,9 +224,8 @@ jobs:
   #   NOTARY_KEY_ID               its Key ID
   #   NOTARY_ISSUER_ID            the Issuer ID shown on the same page
   #
-  # Without them the app is still built and signed ad hoc, and kept as a workflow
-  # artifact for inspection, but not attached to the release: an unsigned download
-  # makes macOS refuse the first double-click, which is worse than no installer.
+  # Without them the release gets the fonts-only image, and the ad-hoc-signed app
+  # image is kept as a workflow artifact for inspection only.
   installer:
     name: Mac installer
     needs: release
@@ -248,7 +250,8 @@ jobs:
           build/venv/bin/python scripts/render-installer-art.py \
             --font "fonts/variable/CircleSans[wdth,wght].ttf" \
             --out build/installer-icon.icns \
-            --dmg-background build/dmg-background.png
+            --dmg-background build/dmg-background.png \
+            --dmg-background-fonts build/dmg-background-fonts.png
 
       - name: Check for the signing secrets
         id: signing
@@ -260,7 +263,7 @@ jobs:
             echo "signed=true" >> "$GITHUB_OUTPUT"
           else
             echo "signed=false" >> "$GITHUB_OUTPUT"
-            echo "::warning title=Installer not signed::The Mac installer was built but not attached to the release. Add the MACOS_CERTIFICATE_* and NOTARY_* secrets (see release.yaml) to sign, notarize and publish it."
+            echo "::warning title=Installer not signed::The release got the fonts-only disk image; the installer app was built but not signed. Add the MACOS_CERTIFICATE_* and NOTARY_* secrets (see release.yaml) to ship the app."
           fi
 
       - name: Import the signing certificate
@@ -318,11 +321,22 @@ jobs:
       - name: Build the disk image
         run: |
           set -euo pipefail
-          ARGS=(--app "$APP" --out "$DMG"
-                --background build/dmg-background.png --background-2x build/dmg-background@2x.png
-                --icon build/installer-icon.icns --dmgbuild build/venv/bin/dmgbuild)
-          if [ -n "${SIGN_IDENTITY:-}" ]; then ARGS+=(--sign "$SIGN_IDENTITY"); fi
-          scripts/build-installer-dmg.sh "${ARGS[@]}"
+          COMMON=(--icon build/installer-icon.icns --dmgbuild build/venv/bin/dmgbuild)
+          if [ -n "${SIGN_IDENTITY:-}" ]; then
+            scripts/build-installer-dmg.sh --app "$APP" --out "$DMG" \
+              --background build/dmg-background.png --background-2x build/dmg-background@2x.png \
+              "${COMMON[@]}" --sign "$SIGN_IDENTITY"
+          else
+            # No certificate: ship the font files, which Font Book installs without a
+            # Gatekeeper prompt. The unsigned app goes into a second image, for looking at.
+            scripts/build-installer-dmg.sh --fonts fonts/variable --out "$DMG" \
+              --background build/dmg-background-fonts.png --background-2x build/dmg-background-fonts@2x.png \
+              "${COMMON[@]}"
+            mkdir -p build/unsigned
+            scripts/build-installer-dmg.sh --app "$APP" --out "build/unsigned/Install-Circle-Sans-${VERSION}-app-unsigned.dmg" \
+              --background build/dmg-background.png --background-2x build/dmg-background@2x.png \
+              "${COMMON[@]}"
+          fi
 
       - name: Notarize the disk image
         if: steps.signing.outputs.signed == 'true'
@@ -336,31 +350,35 @@ jobs:
           rm -f "$NOTARY_KEY"
 
       - name: Attach the installer to the release
-        if: steps.signing.outputs.signed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
+          SIGNED: ${{ steps.signing.outputs.signed }}
         run: |
           set -euo pipefail
           gh release upload "$VERSION" "$DMG" --clobber
           NAME="$(basename "$DMG")"
-          BODY="$(gh release view "$VERSION" --json body -q .body)"
-          if ! grep -qF "$NAME" <<<"$BODY"; then
-            NOTE="**Mac:** download [\`$NAME\`](https://github.com/${GITHUB_REPOSITORY}/releases/download/${VERSION}/${NAME}), open it and double-click the app - the fonts install themselves. Then quit and reopen the apps you want to use them in."
-            if grep -q '^## Downloads$' <<<"$BODY"; then
-              BODY="$(awk -v note="$NOTE" '{ print } /^## Downloads$/ { print ""; print note }' <<<"$BODY")"
-            else
-              BODY="$(printf '%s\n\n%s' "$NOTE" "$BODY")"
-            fi
-            gh release edit "$VERSION" --notes "$BODY"
+          LINK="[\`$NAME\`](https://github.com/${GITHUB_REPOSITORY}/releases/download/${VERSION}/${NAME})"
+          if [ "$SIGNED" = "true" ]; then
+            NOTE="**Mac:** download $LINK, open it and double-click the app - the fonts install themselves. Then quit and reopen the apps you want to use them in."
+          else
+            NOTE="**Mac:** download $LINK, open it, select both fonts and double-click them. Font Book opens - click Install, then quit and reopen the apps you want to use them in."
           fi
+          # Replace any earlier Mac line (a re-run may switch between the two kinds of image).
+          BODY="$(gh release view "$VERSION" --json body -q .body | grep -v '^\*\*Mac:\*\*' || true)"
+          if grep -q '^## Downloads$' <<<"$BODY"; then
+            BODY="$(awk -v note="$NOTE" '{ print } /^## Downloads$/ { print ""; print note }' <<<"$BODY" | cat -s)"
+          else
+            BODY="$(printf '%s\n\n%s' "$NOTE" "$BODY")"
+          fi
+          gh release edit "$VERSION" --notes "$BODY"
           echo "Attached: https://github.com/${GITHUB_REPOSITORY}/releases/download/${VERSION}/${NAME}"
 
-      - name: Keep the unsigned build for inspection
+      - name: Keep the unsigned app image for inspection
         if: steps.signing.outputs.signed != 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: Install-Circle-Sans-${{ env.VERSION }}-unsigned
-          path: build/Install-Circle-Sans-*.dmg
+          name: Install-Circle-Sans-${{ env.VERSION }}-app-unsigned
+          path: build/unsigned/*.dmg
 
       - name: Remove the signing keychain
         if: always() && env.KEYCHAIN != ''
