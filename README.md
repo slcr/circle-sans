@@ -2,8 +2,7 @@
 
 **Circle Sans** is a fork of [Albert Sans](https://github.com/usted/Albert-Sans) with four
 deliberate differences — two redraws and two additions. Everything else — outlines, spacing,
-kerning, figures, the `wght` and `wdth` axes, the language coverage — is Albert Sans
-unchanged.
+figures, the `wght` and `wdth` axes, the language coverage — is Albert Sans unchanged.
 
 | Change | What it means |
 |---|---|
@@ -154,6 +153,23 @@ The proof files and QA tests are also available automatically via GitHub Actions
 [Font Versioning](https://github.com/googlefonts/gf-docs/tree/main/Spec#font-versioning) follows semver.
 
 ### Circle Sans
+
+**2 Sep 2026 — v1.6**
+- Digits no longer kern against the comma and the period. Albert Sans 1.3 rebuilt its
+  kerning and tucked both separators under the overhang of a `7` or `9` — `9,` is −102 and
+  `7.` −111 at Bold, −125 at Black — and pulled the following `1` in under the comma. In a
+  price at 18 px the comma sat 2.6 px from the 9's tail instead of 5.4, and *9,90 €* read as
+  one shape.
+  The 57 group pairs per master between the ten digit classes and `comma`, `comma.ss01` and
+  `period` are gone, in all twelve masters, roman and italic, both comma styles. 342 entries
+  per source, nothing else touched.
+- Only pairs where a digit meets a separator change. `e,` `r,` `y,` and every other
+  letter-to-comma pair keep their values, as do digit-to-digit pairs, so a sentence is spaced
+  as before and only its numbers open up.
+- The comma itself is untouched. Its bounding box shows a negative left sidebearing, but that
+  is the tail tip below the baseline, where no digit has ink; shifting it would only open
+  every letter-to-comma pair by the same amount.
+- First spacing change since the fork; all earlier changes were to outlines or features.
 
 **27 Aug 2026 — v1.5**
 - The Coffee Circle mark is now a glyph. Type `[drip]` — a `liga` rule sitting after the
