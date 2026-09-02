@@ -108,7 +108,7 @@ jobs:
         run: make build
 
       - name: Hand the variable fonts to the installer job
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: variable-fonts
           path: fonts/variable/*.ttf
@@ -244,7 +244,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: variable-fonts
           path: fonts/variable
@@ -382,7 +382,7 @@ jobs:
 
       - name: Keep the unsigned app image for inspection
         if: steps.signing.outputs.signed != 'true'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Install-Circle-Sans-${{ env.VERSION }}-app-unsigned
           path: build/unsigned/*.dmg
