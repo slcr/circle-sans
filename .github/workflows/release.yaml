@@ -1,7 +1,9 @@
 name: Release
 
 # Builds the fonts and publishes them as a GitHub Release with download links,
-# so nobody has to clone the repo and build a font themselves.
+# so nobody has to clone the repo and build a font themselves. A second job then
+# wraps the variable fonts into a double-clickable Mac installer and, when the
+# signing secrets are set, signs and notarizes it and attaches it to the release.
 #
 # Two ways to cut a release:
 #   * push a tag:      git tag v1.0 && git push origin v1.0
@@ -23,12 +25,15 @@ jobs:
   release:
     name: Build and publish
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     steps:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0 # full history, so the changelog can diff against the previous tag
 
       - name: Work out the version
+        id: version
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             VERSION="${{ github.event.inputs.version }}"
@@ -36,6 +41,7 @@ jobs:
             VERSION="${GITHUB_REF#refs/tags/}"
           fi
           echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "Releasing $VERSION"
 
       - name: Set up Python 3.10
@@ -75,6 +81,13 @@ jobs:
       - name: Build fonts
         run: make build
 
+      - name: Hand the variable fonts to the installer job
+        uses: actions/upload-artifact@v4
+        with:
+          name: variable-fonts
+          path: fonts/variable/*.ttf
+          if-no-files-found: error
+
       - name: Package the downloads
         run: |
           set -euo pipefail
@@ -113,6 +126,10 @@ jobs:
           set -euo pipefail
           V="${VERSION}"
           PREV=$(git tag --sort=-v:refname | grep -v "^${V}$" | head -1 || true)
+          # A re-run from the Actions UI for a tag that already exists must describe
+          # that tag, not whatever main has moved on to since.
+          END="HEAD"
+          git rev-parse -q --verify "refs/tags/${V}" >/dev/null && END="${V}"
 
           {
             echo "## Downloads"
@@ -146,7 +163,7 @@ jobs:
             echo "## Changes"
             echo
             if [ -n "$PREV" ]; then
-              git log --no-merges --pretty=format:'- %s' "${PREV}..HEAD"
+              git log --no-merges --pretty=format:'- %s' "${PREV}..${END}"
               echo
               echo
               echo "**Full diff:** https://github.com/${GITHUB_REPOSITORY}/compare/${PREV}...${V}"
@@ -187,3 +204,152 @@ jobs:
           gh release upload "$V" dist/*.zip --clobber
           gh release edit "$V" --draft=false
           echo "Released: https://github.com/${GITHUB_REPOSITORY}/releases/tag/${V}"
+
+  # The Mac installer: "Install Circle Sans.app" with the variable fonts inside it,
+  # so it installs offline and always installs exactly this release.
+  #
+  # Signing and notarization need five repository secrets:
+  #   MACOS_CERTIFICATE_P12       a "Developer ID Application" certificate with its
+  #                               private key, exported from Keychain Access as .p12
+  #                               and base64-encoded (base64 -i cert.p12 | pbcopy).
+  #                               Only the team's Account Holder can create one.
+  #   MACOS_CERTIFICATE_PASSWORD  the password given when exporting the .p12
+  #   NOTARY_KEY_P8               an App Store Connect API key (Users and Access ->
+  #                               Integrations -> Team Keys, role Developer), the .p8
+  #                               file base64-encoded. It can only be downloaded once.
+  #   NOTARY_KEY_ID               its Key ID
+  #   NOTARY_ISSUER_ID            the Issuer ID shown on the same page
+  #
+  # Without them the app is still built and signed ad hoc, and kept as a workflow
+  # artifact for inspection, but not attached to the release: an unsigned download
+  # makes macOS refuse the first double-click, which is worse than no installer.
+  installer:
+    name: Mac installer
+    needs: release
+    runs-on: macos-15
+    env:
+      VERSION: ${{ needs.release.outputs.version }}
+      APP: build/Install Circle Sans.app
+      ZIP: build/Install-Circle-Sans-${{ needs.release.outputs.version }}.zip
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: variable-fonts
+          path: fonts/variable
+
+      - name: Render the icon
+        run: |
+          set -euo pipefail
+          python3 -m venv build/venv
+          build/venv/bin/pip install --quiet pillow
+          build/venv/bin/python scripts/render-installer-icon.py \
+            --font "fonts/variable/CircleSans[wdth,wght].ttf" \
+            --out build/installer-icon.icns
+
+      - name: Check for the signing secrets
+        id: signing
+        env:
+          HAVE_CERT: ${{ secrets.MACOS_CERTIFICATE_P12 != '' && secrets.MACOS_CERTIFICATE_PASSWORD != '' }}
+          HAVE_KEY: ${{ secrets.NOTARY_KEY_P8 != '' && secrets.NOTARY_KEY_ID != '' && secrets.NOTARY_ISSUER_ID != '' }}
+        run: |
+          if [ "$HAVE_CERT" = "true" ] && [ "$HAVE_KEY" = "true" ]; then
+            echo "signed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "signed=false" >> "$GITHUB_OUTPUT"
+            echo "::warning title=Installer not signed::The Mac installer was built but not attached to the release. Add the MACOS_CERTIFICATE_* and NOTARY_* secrets (see release.yaml) to sign, notarize and publish it."
+          fi
+
+      - name: Import the signing certificate
+        if: steps.signing.outputs.signed == 'true'
+        env:
+          P12_BASE64: ${{ secrets.MACOS_CERTIFICATE_P12 }}
+          P12_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_PASSWORD }}
+        run: |
+          set -euo pipefail
+          KEYCHAIN="$RUNNER_TEMP/signing.keychain-db"
+          KEYCHAIN_PASSWORD="$(openssl rand -hex 16)"
+          echo "$P12_BASE64" | base64 --decode > "$RUNNER_TEMP/certificate.p12"
+          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security set-keychain-settings -lut 21600 "$KEYCHAIN"
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN"
+          security import "$RUNNER_TEMP/certificate.p12" -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k "$KEYCHAIN"
+          # A .p12 exported from Keychain Access holds only the certificate and its key;
+          # codesign also needs Apple's intermediate to build the chain. Fetch it, in case
+          # the runner image does not carry it.
+          curl -fsSL --max-time 30 -o "$RUNNER_TEMP/DeveloperIDG2CA.cer" https://www.apple.com/certificateauthority/DeveloperIDG2CA.cer &&
+            security import "$RUNNER_TEMP/DeveloperIDG2CA.cer" -k "$KEYCHAIN" -t cert || echo "::notice::Could not add Apple's Developer ID intermediate; relying on the runner's own copy"
+          security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN" >/dev/null
+          security list-keychains -d user -s "$KEYCHAIN" login.keychain-db
+          rm "$RUNNER_TEMP/certificate.p12"
+          IDENTITY="$(security find-identity -v -p codesigning "$KEYCHAIN" | sed -n 's/.*"\(Developer ID Application: [^"]*\)".*/\1/p' | head -1)"
+          [ -n "$IDENTITY" ] || { echo "::error::The certificate in MACOS_CERTIFICATE_P12 is not a Developer ID Application certificate"; exit 1; }
+          echo "SIGN_IDENTITY=$IDENTITY" >> "$GITHUB_ENV"
+          echo "KEYCHAIN=$KEYCHAIN" >> "$GITHUB_ENV"
+          echo "Signing as: $IDENTITY"
+
+      - name: Build the app
+        run: |
+          set -euo pipefail
+          ARGS=(--out build --fonts fonts/variable --version "$VERSION" --icon build/installer-icon.icns)
+          if [ -n "${SIGN_IDENTITY:-}" ]; then ARGS+=(--sign "$SIGN_IDENTITY"); fi
+          scripts/build-installer-app.sh "${ARGS[@]}"
+          ditto -c -k --keepParent "$APP" "$ZIP"
+
+      - name: Notarize and staple
+        if: steps.signing.outputs.signed == 'true'
+        env:
+          KEY_BASE64: ${{ secrets.NOTARY_KEY_P8 }}
+          KEY_ID: ${{ secrets.NOTARY_KEY_ID }}
+          ISSUER_ID: ${{ secrets.NOTARY_ISSUER_ID }}
+        run: |
+          set -euo pipefail
+          KEY="$RUNNER_TEMP/AuthKey.p8"
+          echo "$KEY_BASE64" | base64 --decode > "$KEY"
+          RESULT="$(xcrun notarytool submit "$ZIP" --key "$KEY" --key-id "$KEY_ID" --issuer "$ISSUER_ID" --wait --timeout 30m --output-format json)"
+          echo "$RESULT"
+          ID="$(echo "$RESULT" | jq -r .id)"
+          STATUS="$(echo "$RESULT" | jq -r .status)"
+          if [ "$STATUS" != "Accepted" ]; then
+            xcrun notarytool log "$ID" --key "$KEY" --key-id "$KEY_ID" --issuer "$ISSUER_ID" || true
+            echo "::error::Notarization ended with status $STATUS - the log above says why"
+            exit 1
+          fi
+          rm "$KEY"
+          # The ticket goes into the bundle, so the zip is made again around the stapled app.
+          xcrun stapler staple "$APP"
+          rm "$ZIP"
+          ditto -c -k --keepParent "$APP" "$ZIP"
+          spctl -a -t exec -vv "$APP"
+
+      - name: Attach the installer to the release
+        if: steps.signing.outputs.signed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release upload "$VERSION" "$ZIP" --clobber
+          NAME="$(basename "$ZIP")"
+          BODY="$(gh release view "$VERSION" --json body -q .body)"
+          if ! grep -qF "$NAME" <<<"$BODY"; then
+            NOTE="**Mac:** download [\`$NAME\`](https://github.com/${GITHUB_REPOSITORY}/releases/download/${VERSION}/${NAME}) and double-click it - the fonts install themselves. Then quit and reopen the apps you want to use them in."
+            if grep -q '^## Downloads$' <<<"$BODY"; then
+              BODY="$(awk -v note="$NOTE" '{ print } /^## Downloads$/ { print ""; print note }' <<<"$BODY")"
+            else
+              BODY="$(printf '%s\n\n%s' "$NOTE" "$BODY")"
+            fi
+            gh release edit "$VERSION" --notes "$BODY"
+          fi
+          echo "Attached: https://github.com/${GITHUB_REPOSITORY}/releases/download/${VERSION}/${NAME}"
+
+      - name: Keep the unsigned build for inspection
+        if: steps.signing.outputs.signed != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: Install-Circle-Sans-${{ env.VERSION }}-unsigned
+          path: build/Install-Circle-Sans-*.zip
+
+      - name: Remove the signing keychain
+        if: always() && env.KEYCHAIN != ''
+        run: security delete-keychain "$KEYCHAIN"
