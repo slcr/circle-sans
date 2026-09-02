@@ -152,6 +152,9 @@ The proof files and QA tests are also available automatically via GitHub Actions
 
 [Font Versioning](https://github.com/googlefonts/gf-docs/tree/main/Spec#font-versioning) follows semver.
 
+The entry for a version becomes the Changes section of its GitHub release, so it is
+written before the tag is pushed. The release workflow stops if the entry is missing.
+
 ### Circle Sans
 
 **2 Sep 2026 — v1.6**

@@ -8,6 +8,9 @@ name: Release
 # Two ways to cut a release:
 #   * push a tag:      git tag v1.0 && git push origin v1.0
 #   * or from the UI:  Actions -> Release -> Run workflow -> type the version
+#
+# Either way, README.md needs a changelog entry for the version first. It becomes the
+# release's Changes section, and the workflow stops before building if it is missing.
 on:
   push:
     tags:
@@ -30,7 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          fetch-depth: 0 # full history, so the changelog can diff against the previous tag
+          fetch-depth: 0 # full history, so the notes can link the diff against the previous tag
 
       - name: Work out the version
         id: version
@@ -43,6 +46,29 @@ jobs:
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "Releasing $VERSION"
+
+      # The README's changelog is the single source for what changed; the raw commit
+      # list used to go here and read as one job repeated six times. An entry is the
+      # block under a "**<date> — vX.Y**" line in the "### Circle Sans" section, up to
+      # the next bold line or heading. Read it now, before spending eight minutes on a
+      # build that cannot be published without it.
+      - name: Take the changelog entry from the README
+        run: |
+          set -euo pipefail
+          awk -v v="$VERSION" '
+            /^### /     { if (found) exit; in_section = ($0 == "### Circle Sans"); next }
+            !in_section { next }
+            /^\*\*/     { if (found) exit
+                          h = $0; sub(/\*\*$/, "", h); sub(/,.*$/, "", h)
+                          k = split(h, w, " "); if (w[k] == v) found = 1; next }
+            found       { line[++n] = $0; if ($0 ~ /[^[:space:]]/) last = n }
+            END         { if (!last) exit 1; for (i = 1; i <= last; i++) print line[i] }
+          ' README.md > release-changes.md || {
+            echo "::error file=README.md,title=No changelog entry for ${VERSION}::Add a '**<date> — ${VERSION}**' entry under '### Circle Sans' in the README's changelog, then re-run the release."
+            exit 1
+          }
+          echo "Changes for ${VERSION}:"
+          cat release-changes.md
 
       - name: Set up Python 3.10
         uses: actions/setup-python@v7
@@ -126,10 +152,6 @@ jobs:
           set -euo pipefail
           V="${VERSION}"
           PREV=$(git tag --sort=-v:refname | grep -v "^${V}$" | head -1 || true)
-          # A re-run from the Actions UI for a tag that already exists must describe
-          # that tag, not whatever main has moved on to since.
-          END="HEAD"
-          git rev-parse -q --verify "refs/tags/${V}" >/dev/null && END="${V}"
 
           {
             echo "## Downloads"
@@ -162,25 +184,10 @@ jobs:
             echo
             echo "## Changes"
             echo
+            cat release-changes.md
             if [ -n "$PREV" ]; then
-              git log --no-merges --pretty=format:'- %s' "${PREV}..${END}"
-              echo
               echo
               echo "**Full diff:** https://github.com/${GITHUB_REPOSITORY}/compare/${PREV}...${V}"
-            else
-              # First release: a commit list would just be the initial commit, which
-              # tells nobody anything. Describe what actually differs from Albert Sans.
-              echo "First release. Circle Sans forks Albert Sans v1.31 and changes three things:"
-              echo
-              echo "- **New \`Q\`** — the centred vertical tail read as the Quake logo. It is now a"
-              echo "  diagonal stroke crossing the bowl at the lower right, at a fixed −52° so the"
-              echo "  rotation does not drift with weight."
-              echo "- **Long-stem \`g\` and open ampersand are the defaults** — previously \`ss02\` and"
-              echo "  \`ss04\`, now baked in. The accented g's follow, and the ampersand keeps its own"
-              echo "  width and kerning."
-              echo
-              echo "Everything else — outlines, spacing, kerning, language coverage — is Albert Sans"
-              echo "unchanged."
             fi
             echo
             echo
