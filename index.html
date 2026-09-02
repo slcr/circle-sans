@@ -129,9 +129,10 @@
         min-height: 75vh;
         display: flex;
         flex-direction: column;
-        /* Tighter than the section default: the type is anchored to the foot, so a
-       large bottom padding just lifts the whole group away from it. */
-        padding-bottom: clamp(22px, 2.6vw, 34px);
+        /* The type is anchored to the foot, so this is the gap between the buttons
+       and the bottom edge. Same as the side padding, so the foot row sits as far
+       inside the film from below as it does from the left. */
+        padding-bottom: var(--masthead-inline);
       }
       /* The auto margin only bites when the block is taller than its content, and
      past ~1400px the h1 hits its 210px cap and fills it. The padding is a floor
@@ -157,9 +158,10 @@
         color: rgba(255, 255, 255, 0.75);
       }
       .masthead {
+        --masthead-inline: clamp(20px, 5vw, 88px);
         background: var(--rainforest);
         color: #fff;
-        padding: clamp(28px, 4vw, 44px) clamp(20px, 5vw, 88px)
+        padding: clamp(28px, 4vw, 44px) var(--masthead-inline)
           clamp(44px, 6vw, 80px);
       }
       .masthead-top {
