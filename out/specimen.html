@@ -11027,7 +11027,7 @@ fn _vgsl_c10bc925__index_of(p: vec2i, size: vec2u) -> u32 {
             })[0];
           };
           var all = find(/-all\.zip$/);
-          var installer = find(/^Install-Circle-Sans-.*\.zip$/);
+          var installer = find(/^Install-Circle-Sans-.*\.(dmg|zip)$/);
           if (all) download.href = all.browser_download_url;
           if (installer && isMac) {
             install.href = installer.browser_download_url;

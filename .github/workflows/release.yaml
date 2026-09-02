@@ -206,7 +206,8 @@ jobs:
           echo "Released: https://github.com/${GITHUB_REPOSITORY}/releases/tag/${V}"
 
   # The Mac installer: "Install Circle Sans.app" with the variable fonts inside it,
-  # so it installs offline and always installs exactly this release.
+  # so it installs offline and always installs exactly this release, shipped as a
+  # disk image with the brand background.
   #
   # Signing and notarization need five repository secrets:
   #   MACOS_CERTIFICATE_P12       a "Developer ID Application" certificate with its
@@ -230,7 +231,7 @@ jobs:
     env:
       VERSION: ${{ needs.release.outputs.version }}
       APP: build/Install Circle Sans.app
-      ZIP: build/Install-Circle-Sans-${{ needs.release.outputs.version }}.zip
+      DMG: build/Install-Circle-Sans-${{ needs.release.outputs.version }}.dmg
     steps:
       - uses: actions/checkout@v7
 
@@ -239,14 +240,15 @@ jobs:
           name: variable-fonts
           path: fonts/variable
 
-      - name: Render the icon
+      - name: Render the icon and the disk-image background
         run: |
           set -euo pipefail
           python3 -m venv build/venv
-          build/venv/bin/pip install --quiet pillow
-          build/venv/bin/python scripts/render-installer-icon.py \
+          build/venv/bin/pip install --quiet pillow dmgbuild
+          build/venv/bin/python scripts/render-installer-art.py \
             --font "fonts/variable/CircleSans[wdth,wght].ttf" \
-            --out build/installer-icon.icns
+            --out build/installer-icon.icns \
+            --dmg-background build/dmg-background.png
 
       - name: Check for the signing secrets
         id: signing
@@ -295,33 +297,43 @@ jobs:
           ARGS=(--out build --fonts fonts/variable --version "$VERSION" --icon build/installer-icon.icns)
           if [ -n "${SIGN_IDENTITY:-}" ]; then ARGS+=(--sign "$SIGN_IDENTITY"); fi
           scripts/build-installer-app.sh "${ARGS[@]}"
-          ditto -c -k --keepParent "$APP" "$ZIP"
 
-      - name: Notarize and staple
+      # Two rounds: the app first, so its own ticket can be stapled into the bundle
+      # (offline first launches check it), then the disk image around it.
+      - name: Notarize the app
         if: steps.signing.outputs.signed == 'true'
         env:
           KEY_BASE64: ${{ secrets.NOTARY_KEY_P8 }}
-          KEY_ID: ${{ secrets.NOTARY_KEY_ID }}
-          ISSUER_ID: ${{ secrets.NOTARY_ISSUER_ID }}
+          NOTARY_KEY_ID: ${{ secrets.NOTARY_KEY_ID }}
+          NOTARY_ISSUER_ID: ${{ secrets.NOTARY_ISSUER_ID }}
         run: |
           set -euo pipefail
-          KEY="$RUNNER_TEMP/AuthKey.p8"
-          echo "$KEY_BASE64" | base64 --decode > "$KEY"
-          RESULT="$(xcrun notarytool submit "$ZIP" --key "$KEY" --key-id "$KEY_ID" --issuer "$ISSUER_ID" --wait --timeout 30m --output-format json)"
-          echo "$RESULT"
-          ID="$(echo "$RESULT" | jq -r .id)"
-          STATUS="$(echo "$RESULT" | jq -r .status)"
-          if [ "$STATUS" != "Accepted" ]; then
-            xcrun notarytool log "$ID" --key "$KEY" --key-id "$KEY_ID" --issuer "$ISSUER_ID" || true
-            echo "::error::Notarization ended with status $STATUS - the log above says why"
-            exit 1
-          fi
-          rm "$KEY"
-          # The ticket goes into the bundle, so the zip is made again around the stapled app.
-          xcrun stapler staple "$APP"
-          rm "$ZIP"
-          ditto -c -k --keepParent "$APP" "$ZIP"
+          NOTARY_KEY="$RUNNER_TEMP/AuthKey.p8"
+          echo "$KEY_BASE64" | base64 --decode > "$NOTARY_KEY"
+          echo "NOTARY_KEY=$NOTARY_KEY" >> "$GITHUB_ENV"
+          ditto -c -k --keepParent "$APP" "$RUNNER_TEMP/app.zip"
+          NOTARY_KEY="$NOTARY_KEY" scripts/notarize.sh "$RUNNER_TEMP/app.zip" --staple "$APP"
           spctl -a -t exec -vv "$APP"
+
+      - name: Build the disk image
+        run: |
+          set -euo pipefail
+          ARGS=(--app "$APP" --out "$DMG"
+                --background build/dmg-background.png --background-2x build/dmg-background@2x.png
+                --icon build/installer-icon.icns --dmgbuild build/venv/bin/dmgbuild)
+          if [ -n "${SIGN_IDENTITY:-}" ]; then ARGS+=(--sign "$SIGN_IDENTITY"); fi
+          scripts/build-installer-dmg.sh "${ARGS[@]}"
+
+      - name: Notarize the disk image
+        if: steps.signing.outputs.signed == 'true'
+        env:
+          NOTARY_KEY_ID: ${{ secrets.NOTARY_KEY_ID }}
+          NOTARY_ISSUER_ID: ${{ secrets.NOTARY_ISSUER_ID }}
+        run: |
+          set -euo pipefail
+          scripts/notarize.sh "$DMG" --staple "$DMG"
+          spctl -a -t open --context context:primary-signature -vv "$DMG"
+          rm -f "$NOTARY_KEY"
 
       - name: Attach the installer to the release
         if: steps.signing.outputs.signed == 'true'
@@ -329,11 +341,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          gh release upload "$VERSION" "$ZIP" --clobber
-          NAME="$(basename "$ZIP")"
+          gh release upload "$VERSION" "$DMG" --clobber
+          NAME="$(basename "$DMG")"
           BODY="$(gh release view "$VERSION" --json body -q .body)"
           if ! grep -qF "$NAME" <<<"$BODY"; then
-            NOTE="**Mac:** download [\`$NAME\`](https://github.com/${GITHUB_REPOSITORY}/releases/download/${VERSION}/${NAME}) and double-click it - the fonts install themselves. Then quit and reopen the apps you want to use them in."
+            NOTE="**Mac:** download [\`$NAME\`](https://github.com/${GITHUB_REPOSITORY}/releases/download/${VERSION}/${NAME}), open it and double-click the app - the fonts install themselves. Then quit and reopen the apps you want to use them in."
             if grep -q '^## Downloads$' <<<"$BODY"; then
               BODY="$(awk -v note="$NOTE" '{ print } /^## Downloads$/ { print ""; print note }' <<<"$BODY")"
             else
@@ -348,7 +360,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Install-Circle-Sans-${{ env.VERSION }}-unsigned
-          path: build/Install-Circle-Sans-*.zip
+          path: build/Install-Circle-Sans-*.dmg
 
       - name: Remove the signing keychain
         if: always() && env.KEYCHAIN != ''
