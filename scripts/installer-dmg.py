@@ -27,19 +27,20 @@ if "fonts" in defines:
         key=lambda n: ("Italic" in n, n),  # upright first
     )
     files = [os.path.join(fonts_dir, n) for n in names]
-    icon_size = 112
-    text_size = 12
-    grid_spacing = 150  # wide enough that the file names are not truncated
     slots = [(420, 236), (560, 236)]
     icon_locations = {n: slots[i] for i, n in enumerate(names[:2])}
 else:
     files = [defines["app"]]
-    icon_size = 128
-    text_size = 13
-    grid_spacing = 100
     icon_locations = {os.path.basename(defines["app"]): (500, 236)}
 
 symlinks = {}
+
+# Keep every view value inside what Finder itself would write. A grid spacing of
+# 150 - above Finder's own maximum of 100 - made it throw the whole record away,
+# background and icon size included, while still honouring the icon positions.
+icon_size = 128
+text_size = 13
+grid_spacing = 100
 format = "UDZO"
 compression_level = 9
 
