@@ -252,6 +252,23 @@
         outline: 2px solid var(--explorer);
         outline-offset: 2px;
       }
+      /* The author display beats the browser's [hidden] rule, so restate it. */
+      .btn[hidden] {
+        display: none;
+      }
+      /* A plain link in the same voice, for the item that steps back once the
+     installer leads. */
+      .btn--text {
+        padding: 0 6px;
+        color: rgba(255, 255, 255, 0.85);
+        text-decoration: underline;
+        text-decoration-color: rgba(255, 255, 255, 0.45);
+        text-underline-offset: 4px;
+      }
+      .btn--text:hover {
+        color: #fff;
+        text-decoration-color: #fff;
+      }
       /* On a touch screen the canvas eats the gesture (touch-action: none), so an
      85vh masthead leaves almost no page to start a scroll from. Cut it back to
      well under a screen and measure in svh, so the browser chrome cannot take
@@ -637,15 +654,25 @@
         long-stem <strong>g</strong> and open ampersand set as defaults.
       </p>
       <div class="masthead-foot">
-        <nav class="masthead-actions" aria-label="Downloads">
+        <nav class="masthead-actions" aria-label="Downloads" data-repo="slcr/circle-sans">
+          <a
+            class="btn btn--solid"
+            id="install-mac"
+            href="https://github.com/slcr/circle-sans/releases/latest"
+            title="A small app that installs the font. Double-click it once it has downloaded."
+            hidden
+            >Install for Mac</a
+          >
           <a
             class="btn btn--solid"
             id="download-latest"
-            data-repo="slcr/circle-sans"
             href="https://github.com/slcr/circle-sans/releases/latest"
             ><span>Download <span data-version>latest</span> · all formats</span></a
           >
-          <a class="btn btn--ghost" href="https://github.com/slcr/circle-sans/releases"
+          <a
+            class="btn btn--ghost"
+            id="all-releases"
+            href="https://github.com/slcr/circle-sans/releases"
             >All releases</a
           >
         </nav>
@@ -10967,32 +10994,63 @@ fn _vgsl_c10bc925__index_of(p: vec2i, size: vec2u) -> u32 {
       })({});
     </script>
     <script>
-      // The zip names carry the tag (CircleSans-v1.5-all.zip), so there is no
+      // The file names carry the tag (CircleSans-v1.5-all.zip), so there is no
       // fixed URL for "the newest one". Ask GitHub which release is current and
-      // point the button at its -all.zip; until then, and if the lookup fails,
-      // the button opens the latest-release page, where the zips are listed.
+      // point the buttons at its files; until then, and if the lookup fails, the
+      // download button opens the latest-release page, where the zips are listed.
+      // The Mac installer only appears once a release actually carries one (it
+      // needs the signed build), and only on a Mac, where it can run. It then
+      // takes the lead and the zip and the release list step back.
       (function () {
-        var link = document.getElementById("download-latest");
-        if (!link || !window.fetch) return;
-        var version = link.querySelector("[data-version]");
+        var nav = document.querySelector(".masthead-actions");
+        if (!nav || !window.fetch) return;
+        var download = document.getElementById("download-latest");
+        var install = document.getElementById("install-mac");
+        var releases = document.getElementById("all-releases");
+        var version = nav.querySelector("[data-version]");
+        var platform =
+          (navigator.userAgentData && navigator.userAgentData.platform) ||
+          navigator.platform ||
+          "";
+        // An iPad asking for the desktop site says "MacIntel" too; its touch
+        // points give it away.
+        var isMac = /mac/i.test(platform) && navigator.maxTouchPoints <= 1;
+
+        function swap(el, from, to) {
+          el.classList.remove(from);
+          el.classList.add(to);
+        }
+        function apply(release) {
+          var assets = release.assets || [];
+          var find = function (re) {
+            return assets.filter(function (a) {
+              return re.test(a.name);
+            })[0];
+          };
+          var all = find(/-all\.zip$/);
+          var installer = find(/^Install-Circle-Sans-.*\.zip$/);
+          if (all) {
+            download.href = all.browser_download_url;
+            if (version && release.tag_name)
+              version.textContent = release.tag_name;
+          }
+          if (installer && isMac) {
+            install.href = installer.browser_download_url;
+            install.hidden = false;
+            swap(download, "btn--solid", "btn--ghost");
+            swap(releases, "btn--ghost", "btn--text");
+          }
+        }
         fetch(
           "https://api.github.com/repos/" +
-            link.getAttribute("data-repo") +
+            nav.getAttribute("data-repo") +
             "/releases/latest",
           { headers: { Accept: "application/vnd.github+json" } }
         )
           .then(function (r) {
             return r.ok ? r.json() : Promise.reject(r.status);
           })
-          .then(function (release) {
-            var all = (release.assets || []).filter(function (a) {
-              return /-all\.zip$/.test(a.name);
-            })[0];
-            if (!all) return;
-            link.href = all.browser_download_url;
-            if (version && release.tag_name)
-              version.textContent = release.tag_name;
-          })
+          .then(apply)
           .catch(function () {});
       })();
     </script>
