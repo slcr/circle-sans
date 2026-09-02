@@ -667,7 +667,7 @@
             class="btn btn--solid"
             id="download-latest"
             href="https://github.com/slcr/circle-sans/releases/latest"
-            ><span>Download <span data-version>latest</span> · all formats</span></a
+            >Download latest · all formats</a
           >
           <a
             class="btn btn--ghost"
@@ -11007,7 +11007,6 @@ fn _vgsl_c10bc925__index_of(p: vec2i, size: vec2u) -> u32 {
         var download = document.getElementById("download-latest");
         var install = document.getElementById("install-mac");
         var releases = document.getElementById("all-releases");
-        var version = nav.querySelector("[data-version]");
         var platform =
           (navigator.userAgentData && navigator.userAgentData.platform) ||
           navigator.platform ||
@@ -11029,11 +11028,7 @@ fn _vgsl_c10bc925__index_of(p: vec2i, size: vec2u) -> u32 {
           };
           var all = find(/-all\.zip$/);
           var installer = find(/^Install-Circle-Sans-.*\.zip$/);
-          if (all) {
-            download.href = all.browser_download_url;
-            if (version && release.tag_name)
-              version.textContent = release.tag_name;
-          }
+          if (all) download.href = all.browser_download_url;
           if (installer && isMac) {
             install.href = installer.browser_download_url;
             install.hidden = false;
