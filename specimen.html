@@ -126,7 +126,7 @@
      above the h1 takes all of it, dropping the h1, the tagline and the hint to
      the foot of the block while the top row stays put. */
       .masthead.masthead--film {
-        min-height: 75vh;
+        min-height: 80vh;
         display: flex;
         flex-direction: column;
         /* Tighter than the section default: the type is anchored to the foot, so a
@@ -145,11 +145,12 @@
       .film-hint {
         display: none;
       }
-      /* Shares the foot row with the download buttons: pushed to the right edge
-     and centred on them, so it keeps the same distance from the bottom. */
+      /* A flex item rather than absolute, so it sits in the same bottom-aligned
+     stack as the h1 and the tagline rather than floating over them. */
       .masthead--film .film-hint {
         display: block;
-        margin: 0 0 0 auto;
+        align-self: flex-end;
+        margin: clamp(20px, 2.5vw, 32px) 0 0;
         font-family: var(--mono);
         font-size: 11px;
         letter-spacing: 0.2em;
@@ -195,94 +196,6 @@
         opacity: 0.88;
         font-variation-settings: "wght" 350;
         text-wrap: balance;
-      }
-      /* Last row of the bottom-anchored stack: downloads on the left, the film
-     hint on the right. Sits inside the masthead padding, not on its edge. */
-      .masthead-foot {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 16px 24px;
-        margin-top: clamp(28px, 3.5vw, 44px);
-      }
-      .masthead-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      /* Same voice as the pill and the wordmark: mono, tracked, upper case. The
-     masthead content lets the pointer through to the film, so the buttons
-     take it back. */
-      .btn {
-        pointer-events: auto;
-        display: inline-flex;
-        align-items: center;
-        min-height: 44px;
-        padding: 0 22px;
-        font-family: var(--mono);
-        font-size: 11px;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        text-decoration: none;
-        white-space: nowrap;
-        border: 1px solid transparent;
-        border-radius: 2px;
-        transition:
-          background-color 120ms ease,
-          border-color 120ms ease;
-      }
-      .btn--solid {
-        background: #fff;
-        border-color: #fff;
-        color: var(--french);
-      }
-      .btn--solid:hover {
-        background: rgba(255, 255, 255, 0.86);
-        border-color: rgba(255, 255, 255, 0.86);
-      }
-      .btn--ghost {
-        color: #fff;
-        border-color: rgba(255, 255, 255, 0.7);
-      }
-      .btn--ghost:hover {
-        border-color: #fff;
-        background: rgba(255, 255, 255, 0.1);
-      }
-      .btn:focus-visible {
-        outline: 2px solid var(--explorer);
-        outline-offset: 2px;
-      }
-      /* The author display beats the browser's [hidden] rule, so restate it. */
-      .btn[hidden] {
-        display: none;
-      }
-      /* A plain link in the same voice, for the item that steps back once the
-     installer leads. */
-      .btn--text {
-        padding: 0 6px;
-        color: rgba(255, 255, 255, 0.85);
-        text-decoration: underline;
-        text-decoration-color: rgba(255, 255, 255, 0.45);
-        text-underline-offset: 4px;
-      }
-      .btn--text:hover {
-        color: #fff;
-        text-decoration-color: #fff;
-      }
-      /* On a touch screen the canvas eats the gesture (touch-action: none), so an
-     85vh masthead leaves almost no page to start a scroll from. Cut it back to
-     well under a screen and measure in svh, so the browser chrome cannot take
-     the remainder back when it retracts. */
-      @media (max-width: 780px) {
-        .masthead.masthead--film {
-          min-height: 58vh;
-          min-height: 58svh;
-        }
-        /* The floor on the h1 gap scales with the shorter block; the auto margin
-       still takes any slack above it. */
-        .masthead.masthead--film h1 {
-          padding-top: clamp(16px, 4vh, 40px);
-        }
       }
 
       /* ---- metadata table ---- */
@@ -653,31 +566,7 @@
         <strong>Q</strong>, a new <strong>ff</strong> ligature, and the
         long-stem <strong>g</strong> and open ampersand set as defaults.
       </p>
-      <div class="masthead-foot">
-        <nav class="masthead-actions" aria-label="Downloads" data-repo="slcr/circle-sans">
-          <a
-            class="btn btn--solid"
-            id="install-mac"
-            href="https://github.com/slcr/circle-sans/releases/latest"
-            title="A disk image with the font ready to install. Open it and follow the one line inside."
-            hidden
-            >Install for Mac</a
-          >
-          <a
-            class="btn btn--solid"
-            id="download-latest"
-            href="https://github.com/slcr/circle-sans/releases/latest"
-            >Download latest · all formats</a
-          >
-          <a
-            class="btn btn--ghost"
-            id="all-releases"
-            href="https://github.com/slcr/circle-sans/releases"
-            >All releases</a
-          >
-        </nav>
-        <p class="film-hint">R to re-pour</p>
-      </div>
+      <p class="film-hint">R to re-pour</p>
     </header>
 
     <!-- metadata, same shape as the guidelines page -->
@@ -8999,10 +8888,12 @@ ${e}`;
               if (!r) continue;
               const i = Me(r.identity);
               (t.has(i) || t.set(i, []),
-                t.get(i).push({
-                  identity: r.identity,
-                  writable: n.access !== "read",
-                }));
+                t
+                  .get(i)
+                  .push({
+                    identity: r.identity,
+                    writable: n.access !== "read",
+                  }));
             }
             for (const n of t.values())
               if (!(n.length < 2) && n.some((r) => r.writable))
@@ -10992,62 +10883,6 @@ fn _vgsl_c10bc925__index_of(p: vec2i, size: vec2u) -> u32 {
           Ze
         );
       })({});
-    </script>
-    <script>
-      // The file names carry the tag (CircleSans-v1.5-all.zip), so there is no
-      // fixed URL for "the newest one". Ask GitHub which release is current and
-      // point the buttons at its files; until then, and if the lookup fails, the
-      // download button opens the latest-release page, where the zips are listed.
-      // The Mac installer only appears once a release actually carries one (it
-      // needs the signed build), and only on a Mac, where it can run. It then
-      // takes the lead and the zip and the release list step back.
-      (function () {
-        var nav = document.querySelector(".masthead-actions");
-        if (!nav || !window.fetch) return;
-        var download = document.getElementById("download-latest");
-        var install = document.getElementById("install-mac");
-        var releases = document.getElementById("all-releases");
-        var platform =
-          (navigator.userAgentData && navigator.userAgentData.platform) ||
-          navigator.platform ||
-          "";
-        // An iPad asking for the desktop site says "MacIntel" too; its touch
-        // points give it away.
-        var isMac = /mac/i.test(platform) && navigator.maxTouchPoints <= 1;
-
-        function swap(el, from, to) {
-          el.classList.remove(from);
-          el.classList.add(to);
-        }
-        function apply(release) {
-          var assets = release.assets || [];
-          var find = function (re) {
-            return assets.filter(function (a) {
-              return re.test(a.name);
-            })[0];
-          };
-          var all = find(/-all\.zip$/);
-          var installer = find(/^Install-Circle-Sans-.*\.(dmg|zip)$/);
-          if (all) download.href = all.browser_download_url;
-          if (installer && isMac) {
-            install.href = installer.browser_download_url;
-            install.hidden = false;
-            swap(download, "btn--solid", "btn--ghost");
-            swap(releases, "btn--ghost", "btn--text");
-          }
-        }
-        fetch(
-          "https://api.github.com/repos/" +
-            nav.getAttribute("data-repo") +
-            "/releases/latest",
-          { headers: { Accept: "application/vnd.github+json" } }
-        )
-          .then(function (r) {
-            return r.ok ? r.json() : Promise.reject(r.status);
-          })
-          .then(apply)
-          .catch(function () {});
-      })();
     </script>
     <script>
       (function () {
