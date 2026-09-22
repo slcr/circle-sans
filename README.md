@@ -2,14 +2,20 @@
 
 **Circle Sans** is a fork of [Albert Sans](https://github.com/usted/Albert-Sans) with four
 deliberate differences — two redraws and two additions. Everything else — outlines, spacing,
-figures, the `wght` and `wdth` axes, the language coverage — is Albert Sans unchanged.
+kerning, figures, the `wght` axis, the language coverage — is Albert Sans unchanged.
+
+It is built on **Albert Sans 1.25**, the version the team has used since the beginning,
+not on the current upstream release. Albert Sans 1.3 respaced every glyph, rebuilt the
+kerning from about a hundred pairs to nine thousand and added a Narrow width, and text set
+in it reflows against everything the brand has already produced. Circle Sans 1.x was
+forked from that release; v2.0 went back.
 
 | Change | What it means |
 |---|---|
 | **New `Q`** | The tail is a diagonal stroke crossing the bowl at the lower right, replacing the centred vertical bar that read as the Quake logo. A fixed `−52°` at every weight and width. |
 | **Frozen alternates** | The long-stem `g` and the open "et" ampersand are now the defaults — no `font-feature-settings` required. |
 | **New `ff` ligature** | Albert Sans draws an `fi` but no `ff`, so *Kaffee*, *Koffein* and *Coffee* collided two crossbars and were kerned apart to hide it. The new one follows the `fi`'s own logic and is on by default. |
-| **The drip mark** | The Coffee Circle logo as a glyph. Type `[drip]`, or use `U+E000`. Drawn once and identical in all twelve masters, so it never gains weight, narrows or slants. |
+| **The drip mark** | The Coffee Circle logo as a glyph. Type `[drip]`, or use `U+E000`. Drawn once and identical in all eight masters, so it never gains weight or slants. |
 
 Nothing is lost by freezing: the original shapes stay reachable in the slots they used to
 occupy. `ss02` returns the *original* short-stem `g`, and `ss04` the *original* ampersand.
@@ -48,15 +54,13 @@ avoids the warning altogether.
 
 ## Using it
 
-Nine weights (Thin to Black) in two widths (Normal and Narrow), roman and italic, as a
-variable font.
+Nine weights (Thin to Black), roman and italic, as a variable font.
 
 ```css
 @font-face {
   font-family: "Circle Sans";
-  src: url("CircleSans[wdth,wght].woff2") format("woff2-variations");
+  src: url("CircleSans[wght].woff2") format("woff2-variations");
   font-weight: 100 900;
-  font-stretch: 87.5% 100%;
   font-style: normal;
 }
 ```
@@ -111,18 +115,9 @@ the ring meets cap height, 744 units wide. It takes `currentColor` and scales wi
 
 ### Figures
 
-Figures are **proportional by default**, which is right for running text — tabular digits
-are padded to a uniform width and go visibly gappy in prose.
-
-Switch to tabular only where digits need to line up in a column, or where a number updates
-in place and would otherwise jitter as digits change:
-
-```css
-.price,
-.cart-total,
-.order-table td,
-.qty-stepper { font-variant-numeric: tabular-nums; }
-```
+Figures are **proportional**, and there is no tabular set. Albert Sans 1.25 never had one,
+and its digits are close enough in width that a column of prices lines up the way it always
+has for the team. `font-variant-numeric: tabular-nums` is harmless but does nothing.
 
 ## Credits
 
@@ -140,6 +135,19 @@ trademark is what protects the mark itself.
 
 Fonts are built automatically by GitHub Actions - take a look in the "Actions" tab for the latest build.
 
+The sources in `sources/` are not hand-edited. They are generated from the Albert Sans 1.25
+sources by `scripts/derive-from-albert-sans.py`, which applies every change listed at the
+top of this file - the rename, the frozen alternates, the Q tail, the `ff`, the drip mark -
+so the derivation can be repeated, checked, or moved to another base version. To regenerate:
+
+```bash
+git show v1.25:sources/AlbertSans.glyphs > /tmp/AlbertSans.glyphs
+git show v1.25:sources/AlbertSans-Italic.glyphs > /tmp/AlbertSans-Italic.glyphs
+venv/bin/python3 scripts/derive-from-albert-sans.py /tmp/AlbertSans.glyphs /tmp/AlbertSans-Italic.glyphs --out sources
+```
+
+The `v1.25` tag is the upstream tag, fetched from the `upstream` remote.
+
 If you want to build fonts manually on your own computer:
 
 * `make build` will produce font files.
@@ -156,6 +164,34 @@ The entry for a version becomes the Changes section of its GitHub release, so it
 written before the tag is pushed. The release workflow stops if the entry is missing.
 
 ### Circle Sans
+
+**22 Sep 2026 — v2.0, rebased on Albert Sans v1.25**
+- Circle Sans now derives from Albert Sans 1.25 instead of 1.31. The team's documents were
+  set in Albert Sans 1.025 all along, and Albert Sans 1.3 — the base of every Circle Sans
+  1.x — was not a kerning touch-up: it respaced every one of the 405 shared glyphs (a Thin
+  `H` went from 681 to 745 units, a Medium comma from 285 to 207), moved the masters, and
+  grew the kerning from ~107 pairs per master to ~9,200. *Coffee Circle* at Regular ran
+  3.6 % tighter than before, and InDesign documents reflowed. On every glyph this fork does
+  not touch, v2.0 shapes identically to the installed Albert Sans 1.025 - advance for
+  advance, pair for pair - checked by shaping the same text through both.
+- The four changes carry over: the −52° `Q` tail, cut afresh from the 1.25 `O` in all eight
+  masters; the long-stem `g` and the open ampersand as defaults, with the 1.25 originals in
+  `ss02` and `ss04` (now named *Original short-stem g* and *Original ampersand* in the
+  feature menu); the `ff`, assembled again from the 1.25 `fi` and `f`; and the drip mark,
+  unchanged, since it never depended on the base.
+- Gone with the base: the Narrow width and the `wdth` axis, and the 140 glyphs 1.3 added -
+  tabular figures, superiors and inferiors, fraction numerators and denominators, arrows,
+  combining marks and a few letters (`Ħ`, `Ĳ`, `ẞ`). With them go the `tnum`, `pnum`,
+  `subs`, `sinf`, `numr`, `dnom` and `ss06` features. None were in use.
+- The v1.6 digit-to-separator kerning fix is moot: 1.25 never kerned digits against the
+  comma or the period.
+- File names lose the width axis: `CircleSans[wght].ttf`, `CircleSans-Italic[wght].woff2`.
+  The installer, the specimen and the release workflow follow.
+- The sources are now generated by `scripts/derive-from-albert-sans.py` from the upstream
+  1.25 files rather than edited by hand, and stay in Glyphs format 2 like upstream: a
+  glyphsLib round trip of that format rebuilds Albert Sans 1.25 table for table.
+- Circle Sans 1.x installs are replaced by the installer as usual. Documents set in 1.x
+  reflow once more - back to where they were in Albert Sans 1.025.
 
 **2 Sep 2026 — v1.6**
 - Digits no longer kern against the comma and the period. Albert Sans 1.3 rebuilt its

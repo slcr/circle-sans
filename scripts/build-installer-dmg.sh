@@ -54,7 +54,7 @@ else
   mkdir -p "$WORK/fonts"
   for f in "$FONTS"/*.ttf; do
     name="$(basename "$f")"
-    cp "$f" "$WORK/fonts/${name/\[wdth,wght\]/}"  # CircleSans[wdth,wght].ttf -> CircleSans.ttf
+    cp "$f" "$WORK/fonts/${name/\[*\]/}"  # CircleSans[wght].ttf -> CircleSans.ttf
   done
   echo "Fonts in the image: $(ls "$WORK/fonts" | tr '\n' ' ')"
   DEFINES+=(-D "fonts=$WORK/fonts")

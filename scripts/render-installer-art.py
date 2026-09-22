@@ -11,7 +11,7 @@ they always show the font the app installs:
     be read (see installer-dmg.py). The film is procedural and seeded, so every
     release gets the same picture, and the dark green icon stands out against it.
 
-    render-installer-art.py --font "fonts/variable/CircleSans[wdth,wght].ttf" \
+    render-installer-art.py --font "fonts/variable/CircleSans[wght].ttf" \
                             --out build/installer-icon.icns \
                             --dmg-background build/dmg-background.png \
                             --dmg-background-fonts build/dmg-background-fonts.png

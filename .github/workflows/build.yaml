@@ -109,8 +109,8 @@ jobs:
         # The specimen is the landing page; it links on to the QA report and proofs.
         cp scripts/specimen.html out/index.html
         mkdir -p out/fonts
-        # The specimen loads this one file for every weight and width.
-        cp "fonts/webfonts/CircleSans[wdth,wght].woff2" out/fonts/CircleSans-Variable.woff2
+        # The specimen loads this one file for every weight.
+        cp "fonts/webfonts/CircleSans[wght].woff2" out/fonts/CircleSans-Variable.woff2
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v4
       if: ${{ github.ref == 'refs/heads/main' }}
