@@ -12,7 +12,7 @@ fontbakery version: 1.1.0
 
 
 
-<details><summary>[14] CircleSans[wdth,wght].ttf</summary>
+<details><summary>[14] CircleSans[wght].ttf</summary>
 <div>
 <details>
     <summary>🔥 <b>FAIL</b> Ensure the font supports case swapping for all its glyphs. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#case-mapping">case_mapping</a></summary>
@@ -47,7 +47,7 @@ fontbakery version: 1.1.0
 </details>
 
 <details>
-    <summary>🔥 <b>FAIL</b> Combined length of family and style must not exceed 31 characters. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#name-family-and-style-max-length">name/family_and_style_max_length</a></summary>
+    <summary>🔥 <b>FAIL</b> Shapes languages in all GF glyphsets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-glyphsets-shape-languages">googlefonts/glyphsets/shape_languages</a></summary>
     <div>
 
 
@@ -56,266 +56,230 @@ fontbakery version: 1.1.0
 
 
 
-* 🔥 **FAIL** <p>Name ID 16 'Circle Sans' plus STAT table style combination 'ExtraLight SemiCondensed' exceeds 31 characters (the combination is 36 characters).</p>
-<p>This has been found to cause a fallback font to appear for some accented letters, as well as in some scripts such as Thai, in Microsoft Word on Windows 10 and 11. It can also lead to names which are truncated in the Microsoft Word font menu.</p>
- [code: familyname-plus-stat-entries-too-long]
-
-
-
-* 🔥 **FAIL** <p>Name ID 16 'Circle Sans' plus STAT table style combination 'Medium SemiCondensed' exceeds 31 characters (the combination is 32 characters).</p>
-<p>This has been found to cause a fallback font to appear for some accented letters, as well as in some scripts such as Thai, in Microsoft Word on Windows 10 and 11. It can also lead to names which are truncated in the Microsoft Word font menu.</p>
- [code: familyname-plus-stat-entries-too-long]
-
-
-
-* 🔥 **FAIL** <p>Name ID 16 'Circle Sans' plus STAT table style combination 'SemiBold SemiCondensed' exceeds 31 characters (the combination is 34 characters).</p>
-<p>This has been found to cause a fallback font to appear for some accented letters, as well as in some scripts such as Thai, in Microsoft Word on Windows 10 and 11. It can also lead to names which are truncated in the Microsoft Word font menu.</p>
- [code: familyname-plus-stat-entries-too-long]
-
-
-
-* 🔥 **FAIL** <p>Name ID 16 'Circle Sans' plus STAT table style combination 'ExtraBold SemiCondensed' exceeds 31 characters (the combination is 35 characters).</p>
-<p>This has been found to cause a fallback font to appear for some accented letters, as well as in some scripts such as Thai, in Microsoft Word on Windows 10 and 11. It can also lead to names which are truncated in the Microsoft Word font menu.</p>
- [code: familyname-plus-stat-entries-too-long]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Are there caret positions declared for every ligature? <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#ligature-carets">ligature_carets</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>This font lacks caret position values for ligature glyphs on its GDEF table.</p>
- [code: lacks-caret-pos]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Check math signs have the same width. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#math-signs-width">math_signs_width</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>The most common width is 596 among a set of 2 math glyphs.
-The following math glyphs have a different width, though:</p>
-<p>Width = 391:
-less, greater</p>
-<p>Width = 637:
-approxequal, equal</p>
-<p>Width = 665:
-logicalnot</p>
-<p>Width = 623:
-plusminus</p>
-<p>Width = 525:
-multiply</p>
-<p>Width = 491:
-minus</p>
-<p>Width = 645:
-notequal</p>
-<p>Width = 467:
-lessequal, greaterequal</p>
- [code: width-outliers]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Does the font contain a soft hyphen? <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#soft-hyphen">soft_hyphen</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>This font has a 'Soft Hyphen' character.</p>
- [code: softhyphen]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Check font contains no unreachable glyphs <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#unreachable-glyphs">unreachable_glyphs</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>The following glyphs could not be reached by codepoint or substitution rules:</p>
-<pre><code>- uni030C.alt
-</code></pre>
- [code: unreachable-glyphs]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Validate size, and resolution of article images, and ensure article page has minimum length and includes visual assets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-article-images">googlefonts/article/images</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>Family metadata at fonts/variable does not have an article.</p>
- [code: lacks-article]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Check for codepoints not covered by METADATA subsets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-metadata-unreachable-subsetting">googlefonts/metadata/unreachable_subsetting</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>The following codepoints supported by the font are not covered by
-any subsets defined in the font's metadata file, and will never
-be served. You can solve this by either manually adding additional
-subset declarations to METADATA.pb, or by editing the glyphset
-definitions.</p>
-<ul>
-<li>U+02D8 BREVE: try adding one of: canadian-aboriginal, yi</li>
-<li>U+02D9 DOT ABOVE: try adding one of: canadian-aboriginal, yi</li>
-<li>U+02DB OGONEK: try adding one of: canadian-aboriginal, yi</li>
-<li>U+0302 COMBINING CIRCUMFLEX ACCENT: try adding one of: math, tifinagh, cherokee, coptic</li>
-<li>U+0306 COMBINING BREVE: try adding one of: old-permic, tifinagh</li>
-<li>U+0307 COMBINING DOT ABOVE: try adding one of: tai-le, math, syriac, todhri, tifinagh, coptic, hebrew, old-permic, canadian-aboriginal, duployan, malayalam</li>
-<li>U+030A COMBINING RING ABOVE: try adding one of: duployan, syriac</li>
-<li>U+030B COMBINING DOUBLE ACUTE ACCENT: try adding one of: osage, cherokee</li>
-<li>U+030C COMBINING CARON: try adding one of: tai-le, cherokee</li>
-<li>U+0312 COMBINING TURNED COMMA ABOVE: try adding math</li>
-<li>U+0326 COMBINING COMMA BELOW: try adding math</li>
-<li>U+0327 COMBINING CEDILLA: try adding math</li>
-<li>U+0328 COMBINING OGONEK: not included in any glyphset definition</li>
-<li>U+0335 COMBINING SHORT STROKE OVERLAY: not included in any glyphset definition</li>
-<li>U+0336 COMBINING LONG STROKE OVERLAY: not included in any glyphset definition</li>
-<li>U+0394 GREEK CAPITAL LETTER DELTA: try adding one of: elbasan, math, greek</li>
-<li>U+03A9 GREEK CAPITAL LETTER OMEGA: try adding one of: elbasan, math, greek</li>
-<li>U+03BC GREEK SMALL LETTER MU: try adding one of: math, greek</li>
-<li>U+03C0 GREEK SMALL LETTER PI: try adding one of: yi, math, greek</li>
-<li>U+1EBC LATIN CAPITAL LETTER E WITH TILDE: try adding vietnamese</li>
-<li>U+1EBD LATIN SMALL LETTER E WITH TILDE: try adding vietnamese</li>
-<li>U+2000 EN QUAD: try adding symbols2</li>
-<li>U+2001 EM QUAD: try adding symbols2</li>
-<li>U+2003 EM SPACE: try adding nushu</li>
-<li>U+2004 THREE-PER-EM SPACE: try adding symbols2</li>
-<li>U+2005 FOUR-PER-EM SPACE: try adding symbols2</li>
-<li>U+2006 SIX-PER-EM SPACE: try adding symbols2</li>
-<li>U+2007 FIGURE SPACE: try adding symbols2</li>
-<li>U+2008 PUNCTUATION SPACE: try adding symbols2</li>
-<li>U+200A HAIR SPACE: try adding symbols2</li>
-<li>U+2021 DOUBLE DAGGER: try adding adlam</li>
-<li>U+202F NARROW NO-BREAK SPACE: try adding one of: mongolian, phags-pa, yi</li>
-<li>U+2030 PER MILLE SIGN: try adding adlam</li>
-<li>U+205F MEDIUM MATHEMATICAL SPACE: try adding math</li>
-<li>U+2070 SUPERSCRIPT ZERO: try adding math</li>
-<li>U+2074 SUPERSCRIPT FOUR: try adding math</li>
-<li>U+2075 SUPERSCRIPT FIVE: try adding math</li>
-<li>U+2076 SUPERSCRIPT SIX: try adding math</li>
-<li>U+2077 SUPERSCRIPT SEVEN: try adding math</li>
-<li>U+2078 SUPERSCRIPT EIGHT: try adding math</li>
-<li>U+2079 SUPERSCRIPT NINE: try adding math</li>
-<li>U+2080 SUBSCRIPT ZERO: try adding math</li>
-<li>U+2081 SUBSCRIPT ONE: try adding math</li>
-<li>U+2082 SUBSCRIPT TWO: try adding math</li>
-<li>U+2083 SUBSCRIPT THREE: try adding math</li>
-<li>U+2084 SUBSCRIPT FOUR: try adding math</li>
-<li>U+2085 SUBSCRIPT FIVE: try adding math</li>
-<li>U+2086 SUBSCRIPT SIX: try adding math</li>
-<li>U+2087 SUBSCRIPT SEVEN: try adding math</li>
-<li>U+2088 SUBSCRIPT EIGHT: try adding math</li>
-<li>U+2089 SUBSCRIPT NINE: try adding math</li>
-<li>U+2126 OHM SIGN: try adding math</li>
-<li>U+212E ESTIMATED SYMBOL: try adding math</li>
-<li>U+2150 VULGAR FRACTION ONE SEVENTH: try adding symbols</li>
-<li>U+2151 VULGAR FRACTION ONE NINTH: try adding symbols</li>
-<li>U+2152 VULGAR FRACTION ONE TENTH: try adding symbols</li>
-<li>U+2153 VULGAR FRACTION ONE THIRD: try adding symbols</li>
-<li>U+2154 VULGAR FRACTION TWO THIRDS: try adding symbols</li>
-<li>U+2155 VULGAR FRACTION ONE FIFTH: try adding symbols</li>
-<li>U+2156 VULGAR FRACTION TWO FIFTHS: try adding symbols</li>
-<li>U+2157 VULGAR FRACTION THREE FIFTHS: try adding symbols</li>
-<li>U+2158 VULGAR FRACTION FOUR FIFTHS: try adding symbols</li>
-<li>U+2159 VULGAR FRACTION ONE SIXTH: try adding symbols</li>
-<li>U+215A VULGAR FRACTION FIVE SIXTHS: try adding symbols</li>
-<li>U+215B VULGAR FRACTION ONE EIGHTH: try adding symbols</li>
-<li>U+215C VULGAR FRACTION THREE EIGHTHS: try adding symbols</li>
-<li>U+215D VULGAR FRACTION FIVE EIGHTHS: try adding symbols</li>
-<li>U+215E VULGAR FRACTION SEVEN EIGHTHS: try adding symbols</li>
-<li>U+215F FRACTION NUMERATOR ONE: try adding symbols</li>
-<li>U+2189 VULGAR FRACTION ZERO THIRDS: try adding symbols</li>
-<li>U+2190 LEFTWARDS ARROW: try adding one of: symbols, math</li>
-<li>U+2192 RIGHTWARDS ARROW: try adding one of: symbols, math</li>
-<li>U+2194 LEFT RIGHT ARROW: try adding one of: symbols, math</li>
-<li>U+2195 UP DOWN ARROW: try adding one of: symbols, math</li>
-<li>U+2196 NORTH WEST ARROW: try adding one of: symbols, math</li>
-<li>U+2197 NORTH EAST ARROW: try adding one of: symbols, math</li>
-<li>U+2198 SOUTH EAST ARROW: try adding one of: symbols, math</li>
-<li>U+2199 SOUTH WEST ARROW: try adding one of: symbols, math</li>
-<li>U+2202 PARTIAL DIFFERENTIAL: try adding math</li>
-<li>U+2206 INCREMENT: try adding math</li>
-<li>U+220F N-ARY PRODUCT: try adding math</li>
-<li>U+2211 N-ARY SUMMATION: try adding math</li>
-<li>U+221A SQUARE ROOT: try adding math</li>
-<li>U+221E INFINITY: try adding math</li>
-<li>U+222B INTEGRAL: try adding math</li>
-<li>U+2248 ALMOST EQUAL TO: try adding math</li>
-<li>U+2260 NOT EQUAL TO: try adding math</li>
-<li>U+2264 LESS-THAN OR EQUAL TO: try adding math</li>
-<li>U+2265 GREATER-THAN OR EQUAL TO: try adding math</li>
-<li>U+25CA LOZENGE: try adding one of: symbols, math</li>
-<li>U+E000 : not included in any glyphset definition</li>
-<li>U+FB01 LATIN SMALL LIGATURE FI: not included in any glyphset definition</li>
-</ul>
-<p>Or you can add the above codepoints to one of the subsets supported by the font: <code>latin</code>, <code>latin-ext</code></p>
- [code: unreachable-subsetting]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Shapes languages in all GF glyphsets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-glyphsets-shape-languages">googlefonts/glyphsets/shape_languages</a></summary>
-    <div>
-
-
-
-
+* 🔥 **FAIL** <p>GF_Phonetics_SinoExt glyphset:</p>
+<table>
+<thead>
+<tr>
+<th align="left">FAIL messages</th>
+<th align="left">Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ́, ̧, ̀, ̈</td>
+<td align="left">ca_Latn (Catalan)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̌, ̊, ́</td>
+<td align="left">cs_Latn (Czech)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̀, ̂, ́, ̈</td>
+<td align="left">cy_Latn (Welsh)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̊, ́</td>
+<td align="left">da_Latn (Danish)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following base characters are missing from the font: ẞ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̈, ̀, ́</td>
+<td align="left">de_Latn (German)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̈, ̧, ̀, ́, ̂, ̃</td>
+<td align="left">en_Latn (English)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ́, ̃, ̈</td>
+<td align="left">es_Latn (Spanish)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̊, ̃, ̌, ̈</td>
+<td align="left">fi_Latn (Finnish)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̧, ̂, ́, ̀, ̈</td>
+<td align="left">fr_Latn (French)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̌, ́</td>
+<td align="left">hr_Latn (Croatian)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ́, ̈, ̋</td>
+<td align="left">hu_Latn (Hungarian)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ́, ̨, ̈</td>
+<td align="left">is_Latn (Icelandic)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̈, ̀, ̂, ́</td>
+<td align="left">it_Latn (Italian)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̄, ̨, ̇, ̌</td>
+<td align="left">lt_Latn (Lithuanian)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̄, ̌, ̧</td>
+<td align="left">lv_Latn (Latvian)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following base characters are missing from the font: għ, ħ, GĦ, Ħ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̀, ̇, ̂</td>
+<td align="left">mt_Latn (Maltese)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̂, ̊, ́, ̈, ̀</td>
+<td align="left">nb_Latn (Norwegian Bokmål)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following base characters are missing from the font: ÍJ́, íj́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̀, ́, ̈, ̂</td>
+<td align="left">nl_Latn (Dutch)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̨, ́, ̇</td>
+<td align="left">pl_Latn (Polish)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̈, ̂, ̃, ̧, ̀, ́</td>
+<td align="left">pt_Latn (Portuguese)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̂, ̦, ̧, ̆</td>
+<td align="left">ro_Latn (Romanian)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ́, ̂, ̈, ̌</td>
+<td align="left">sk_Latn (Slovak)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̧, ̈</td>
+<td align="left">sq_Latn (Albanian)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ́, ̈, ̀, ̊</td>
+<td align="left">sv_Latn (Swedish)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̆, ̇, ̈, ̦, ̂, ̧</td>
+<td align="left">tr_Latn (Turkish)</td>
+</tr>
+</tbody>
+</table>
+ [code: failed-language-shaping]
 
 
 
@@ -369,6 +333,14 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
+<td align="left">The following auxiliary characters are missing from the font: Ħ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ẞ</td>
+<td align="left"></td>
+</tr>
+<tr>
 <td align="left">The following auxiliary characters are missing from the font: Ŧ</td>
 <td align="left"></td>
 </tr>
@@ -389,6 +361,10 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
+<td align="left">The following auxiliary characters are missing from the font: ħ</td>
+<td align="left"></td>
+</tr>
+<tr>
 <td align="left">The following auxiliary characters are missing from the font: ŧ</td>
 <td align="left"></td>
 </tr>
@@ -402,6 +378,10 @@ definitions.</p>
 </tr>
 <tr>
 <td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ẞ</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -421,63 +401,199 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach uni0307 to Iogonek when shaping the text 'Į̇́'</td>
+<td align="left">The following auxiliary characters are missing from the font: ẞ</td>
+<td align="left">it_Latn (Italian), pl_Latn (Polish) and tr_Latn (Turkish)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach uni0307 to Iogonek when shaping the text 'Į̇̃'</td>
+<td align="left">The following auxiliary characters are missing from the font: Ą́</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach uni0307 to J when shaping the text 'J̇̃'</td>
+<td align="left">The following auxiliary characters are missing from the font: Ą̃</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach tildecomb to M when shaping the text 'M̃'</td>
+<td align="left">The following auxiliary characters are missing from the font: Ę́</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach uni0307 to dotlessi when shaping the text 'i̇́'</td>
+<td align="left">The following auxiliary characters are missing from the font: Ę̃</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach uni0307 to dotlessi when shaping the text 'i̇̀'</td>
+<td align="left">The following auxiliary characters are missing from the font: Ė́</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach uni0307 to dotlessi when shaping the text 'i̇̃'</td>
+<td align="left">The following auxiliary characters are missing from the font: Ė̃</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach acutecomb to iogonek when shaping the text 'į́'</td>
+<td align="left">The following auxiliary characters are missing from the font: İ́</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach uni0307 to iogonek when shaping the text 'į̇́'</td>
+<td align="left">The following auxiliary characters are missing from the font: İ́</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach acutecomb to uni0307 when shaping the text 'į̇́'</td>
+<td align="left">The following auxiliary characters are missing from the font: İ̀</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach tildecomb to iogonek when shaping the text 'į̃'</td>
+<td align="left">The following auxiliary characters are missing from the font: İ̀</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach uni0307 to iogonek when shaping the text 'į̇̃'</td>
+<td align="left">The following auxiliary characters are missing from the font: İ̃</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach tildecomb to uni0307 when shaping the text 'į̇̃'</td>
+<td align="left">The following auxiliary characters are missing from the font: İ̃</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach uni0307 to uni0237 when shaping the text 'j̇̃'</td>
+<td align="left">The following auxiliary characters are missing from the font: Į́</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach tildecomb to m when shaping the text 'm̃'</td>
+<td align="left">The following auxiliary characters are missing from the font: Į̇́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Į̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Į̇̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: J̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: J̇̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: L̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: M̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: R̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ų́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ų̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ū́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ū̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ą́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ą̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ę́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ę̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ė́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ė̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: i̇́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: i̇̀</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: i̇̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: į́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: į̇́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: į̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: į̇̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: j̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: j̇̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: l̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: m̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: r̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ų́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ų̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ū́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ū̃</td>
 <td align="left">lt_Latn (Lithuanian)</td>
 </tr>
 <tr>
@@ -492,9 +608,302 @@ definitions.</p>
 <td align="left">The following auxiliary characters are missing from the font: ŧ</td>
 <td align="left">nb_Latn (Norwegian Bokmål)</td>
 </tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ĳ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ĳ</td>
+<td align="left">nl_Latn (Dutch)</td>
+</tr>
 </tbody>
 </table>
  [code: warning-language-shaping]
+
+
+
+</div>
+</details>
+
+<details>
+    <summary>🔥 <b>FAIL</b> Check Google Fonts glyph coverage. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-glyph-coverage">googlefonts/glyph_coverage</a></summary>
+    <div>
+
+
+
+
+
+
+
+* 🔥 **FAIL** <p>Missing required codepoints:</p>
+<pre><code>- 0x0126 (LATIN CAPITAL LETTER H WITH STROKE)
+
+
+- 0x0127 (LATIN SMALL LETTER H WITH STROKE)
+
+
+- 0x0237 (LATIN SMALL LETTER DOTLESS J)
+
+
+- 0x0300 (COMBINING GRAVE ACCENT)
+
+
+- 0x0301 (COMBINING ACUTE ACCENT)
+
+
+- 0x0302 (COMBINING CIRCUMFLEX ACCENT)
+
+
+- 0x0303 (COMBINING TILDE)
+
+
+- 0x0304 (COMBINING MACRON)
+
+
+- 0x0306 (COMBINING BREVE)
+
+
+- 0x0307 (COMBINING DOT ABOVE)
+
+
+- 0x0308 (COMBINING DIAERESIS)
+
+
+- 0x030A (COMBINING RING ABOVE)
+
+
+- 0x030B (COMBINING DOUBLE ACUTE ACCENT)
+
+
+- 0x030C (COMBINING CARON)
+
+
+- 0x0326 (COMBINING COMMA BELOW)
+
+
+- 0x0327 (COMBINING CEDILLA)
+
+
+- 0x0328 (COMBINING OGONEK)
+
+
+- 0x1E9E (LATIN CAPITAL LETTER SHARP S)
+</code></pre>
+ [code: missing-codepoints]
+
+
+
+</div>
+</details>
+
+<details>
+    <summary>⚠️ <b>WARN</b> Check accent of Lcaron, dcaron, lcaron, tcaron <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#alt-caron">alt_caron</a></summary>
+    <div>
+
+
+
+
+
+
+
+
+
+* ⚠️ **WARN** <p>Lcaron is decomposed and therefore could not be checked. Please check manually.</p>
+ [code: decomposed-outline]
+
+
+
+* ⚠️ **WARN** <p>dcaron is decomposed and therefore could not be checked. Please check manually.</p>
+ [code: decomposed-outline]
+
+
+
+* ⚠️ **WARN** <p>lcaron is decomposed and therefore could not be checked. Please check manually.</p>
+ [code: decomposed-outline]
+
+
+
+* ⚠️ **WARN** <p>tcaron is decomposed and therefore could not be checked. Please check manually.</p>
+ [code: decomposed-outline]
+
+
+
+</div>
+</details>
+
+<details>
+    <summary>⚠️ <b>WARN</b> Are there caret positions declared for every ligature? <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#ligature-carets">ligature_carets</a></summary>
+    <div>
+
+
+
+
+
+
+
+* ⚠️ **WARN** <p>This font lacks caret positioning values for these ligature glyphs:
+- drip.logo</p>
+ [code: incomplete-caret-pos-data]
+
+
+
+</div>
+</details>
+
+<details>
+    <summary>⚠️ <b>WARN</b> Check math signs have the same width. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#math-signs-width">math_signs_width</a></summary>
+    <div>
+
+
+
+
+
+
+
+* ⚠️ **WARN** <p>The most common width is 502 among a set of 3 math glyphs.
+The following math glyphs have a different width, though:</p>
+<p>Width = 636:
+plus</p>
+<p>Width = 497:
+less</p>
+<p>Width = 667:
+notequal, equal</p>
+<p>Width = 496:
+greater</p>
+<p>Width = 651:
+logicalnot</p>
+<p>Width = 747:
+plusminus</p>
+<p>Width = 555:
+multiply</p>
+<p>Width = 637:
+divide</p>
+<p>Width = 521:
+minus</p>
+ [code: width-outliers]
+
+
+
+</div>
+</details>
+
+<details>
+    <summary>⚠️ <b>WARN</b> Check there are no overlapping path segments <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#overlapping-path-segments">overlapping_path_segments</a></summary>
+    <div>
+
+
+
+
+
+
+
+* ⚠️ **WARN** <p>The following glyphs have overlapping path segments:</p>
+<pre><code>* uniA732 (U+A732): L&lt;&lt;664.0,0.0&gt;--&lt;583.0,0.0&gt;&gt; has the same coordinates as a previous segment.
+
+* f_f: L&lt;&lt;558.0,500.0&gt;--&lt;558.0,430.0&gt;&gt; has the same coordinates as a previous segment.
+
+* ampersand.ss03: L&lt;&lt;469.0,633.0&gt;--&lt;411.0,592.0&gt;&gt; has the same coordinates as a previous segment.
+
+* ampersand.ss03: L&lt;&lt;411.0,592.0&gt;--&lt;469.0,633.0&gt;&gt; has the same coordinates as a previous segment.
+
+* ampersand.ss04: L&lt;&lt;477.0,640.0&gt;--&lt;414.0,595.0&gt;&gt; has the same coordinates as a previous segment.
+
+* ampersand.ss04: L&lt;&lt;414.0,595.0&gt;--&lt;477.0,640.0&gt;&gt; has the same coordinates as a previous segment.
+</code></pre>
+ [code: overlapping-path-segments]
+
+
+
+</div>
+</details>
+
+<details>
+    <summary>⚠️ <b>WARN</b> Does the font contain a soft hyphen? <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#soft-hyphen">soft_hyphen</a></summary>
+    <div>
+
+
+
+
+
+
+
+* ⚠️ **WARN** <p>This font has a 'Soft Hyphen' character.</p>
+ [code: softhyphen]
+
+
+
+</div>
+</details>
+
+<details>
+    <summary>⚠️ <b>WARN</b> Validate size, and resolution of article images, and ensure article page has minimum length and includes visual assets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-article-images">googlefonts/article/images</a></summary>
+    <div>
+
+
+
+
+
+
+
+* ⚠️ **WARN** <p>Family metadata at fonts/variable does not have an article.</p>
+ [code: lacks-article]
+
+
+
+</div>
+</details>
+
+<details>
+    <summary>⚠️ <b>WARN</b> Check for codepoints not covered by METADATA subsets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-metadata-unreachable-subsetting">googlefonts/metadata/unreachable_subsetting</a></summary>
+    <div>
+
+
+
+
+
+
+
+* ⚠️ **WARN** <p>The following codepoints supported by the font are not covered by
+any subsets defined in the font's metadata file, and will never
+be served. You can solve this by either manually adding additional
+subset declarations to METADATA.pb, or by editing the glyphset
+definitions.</p>
+<ul>
+<li>U+02D8 BREVE: try adding one of: yi, canadian-aboriginal</li>
+<li>U+02D9 DOT ABOVE: try adding one of: yi, canadian-aboriginal</li>
+<li>U+02DB OGONEK: try adding one of: yi, canadian-aboriginal</li>
+<li>U+0394 GREEK CAPITAL LETTER DELTA: try adding one of: elbasan, greek, math</li>
+<li>U+03A9 GREEK CAPITAL LETTER OMEGA: try adding one of: elbasan, greek, math</li>
+<li>U+03BC GREEK SMALL LETTER MU: try adding one of: math, greek</li>
+<li>U+03C0 GREEK SMALL LETTER PI: try adding one of: yi, math, greek</li>
+<li>U+1EBC LATIN CAPITAL LETTER E WITH TILDE: try adding vietnamese</li>
+<li>U+1EBD LATIN SMALL LETTER E WITH TILDE: try adding vietnamese</li>
+<li>U+2021 DOUBLE DAGGER: try adding adlam</li>
+<li>U+2030 PER MILLE SIGN: try adding adlam</li>
+<li>U+2074 SUPERSCRIPT FOUR: try adding math</li>
+<li>U+2126 OHM SIGN: try adding math</li>
+<li>U+212E ESTIMATED SYMBOL: try adding math</li>
+<li>U+2202 PARTIAL DIFFERENTIAL: try adding math</li>
+<li>U+2206 INCREMENT: try adding math</li>
+<li>U+220F N-ARY PRODUCT: try adding math</li>
+<li>U+2211 N-ARY SUMMATION: try adding math</li>
+<li>U+221A SQUARE ROOT: try adding math</li>
+<li>U+221E INFINITY: try adding math</li>
+<li>U+222B INTEGRAL: try adding math</li>
+<li>U+2248 ALMOST EQUAL TO: try adding math</li>
+<li>U+2260 NOT EQUAL TO: try adding math</li>
+<li>U+2264 LESS-THAN OR EQUAL TO: try adding math</li>
+<li>U+2265 GREATER-THAN OR EQUAL TO: try adding math</li>
+<li>U+25CA LOZENGE: try adding one of: math, symbols</li>
+<li>U+E000 : not included in any glyphset definition</li>
+<li>U+FB01 LATIN SMALL LIGATURE FI: not included in any glyphset definition</li>
+</ul>
+<p>Or you can add the above codepoints to one of the subsets supported by the font: <code>latin</code>, <code>latin-ext</code></p>
+ [code: unreachable-subsetting]
 
 
 
@@ -522,43 +931,6 @@ definitions.</p>
 </details>
 
 <details>
-    <summary>⚠️ <b>WARN</b> Ensure dotted circle glyph is present and can attach marks. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#dotted-circle">dotted_circle</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>No dotted circle glyph present</p>
- [code: missing-dotted-circle]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Ensure soft_dotted characters lose their dot when combined with marks that replace the dot. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#soft-dotted">soft_dotted</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>The dot of soft dotted characters used in orthographies <em>must</em> disappear in the following strings: į̀ į́ į̂ į̃ į̄ į̌</p>
-<p>The dot of soft dotted characters <em>should</em> disappear in other cases, for example: į̆ į̇ į̈ į̊ į̋ į̒ į̦̀ į̦́ į̦̂ į̦̃ į̦̄ į̦̆ į̦̇ į̦̈ į̦̊ į̦̋ į̦̌ į̦̒ į̧̀ į̧́</p>
- [code: soft-dotted]
-
-
-
-</div>
-</details>
-
-<details>
     <summary>⚠️ <b>WARN</b> Are there any misaligned on-curve points? <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#outline-alignment-miss">outline_alignment_miss</a></summary>
     <div>
 
@@ -569,59 +941,71 @@ definitions.</p>
 
 
 * ⚠️ **WARN** <p>The following glyphs have on-curve points which have potentially incorrect y coordinates:</p>
-<pre><code>* Ccedilla (U+00C7): X=318.0,Y=-249.0 (should be at descender -250?)
+<pre><code>* Iogonek (U+012E): X=164.0,Y=1.0 (should be at baseline 0?)
 
-* Ccedilla (U+00C7): X=437.0,Y=-249.0 (should be at descender -250?)
+* Eng (U+014A): X=620.0,Y=-2.0 (should be at baseline 0?)
 
-* Ccedilla (U+00C7): X=318.0,Y=-249.0 (should be at descender -250?)
+* Eng (U+014A): X=539.0,Y=-2.0 (should be at baseline 0?)
 
-* Iogonek (U+012E): X=181.0,Y=1.0 (should be at baseline 0?)
+* uni01EA (U+01EA): X=389.5,Y=0.5 (should be at baseline 0?)
 
-* Lcaron (U+013D): X=365.0,Y=701.0 (should be at cap-height 700?)
+* Scedilla (U+015E): X=393.0,Y=-251.5 (should be at descender -250?)
 
-* Lcaron (U+013D): X=471.0,Y=701.0 (should be at cap-height 700?)
+* eogonek (U+0119): X=356.0,Y=2.0 (should be at baseline 0?)
 
-* uni013B (U+013B): X=365.0,Y=701.0 (should be at cap-height 700?)
+* eng (U+014B): X=425.0,Y=-1.0 (should be at baseline 0?)
 
-* uni013B (U+013B): X=471.0,Y=701.0 (should be at cap-height 700?)
+* eng (U+014B): X=505.0,Y=-2.0 (should be at baseline 0?)
 
-* uni013B.loclMAH: X=365.0,Y=701.0 (should be at cap-height 700?)
+* eng (U+014B): X=425.0,Y=-1.0 (should be at baseline 0?)
 
-* uni013B.loclMAH: X=471.0,Y=701.0 (should be at cap-height 700?)
+* r (U+0072): X=261.5,Y=499.5 (should be at x-height 500?)
 
-* abreve (U+0103): X=112.0,Y=698.0 (should be at cap-height 700?)
+* t (U+0074): X=240.5,Y=-1.0 (should be at baseline 0?)
 
-* ebreve (U+0115): X=138.0,Y=698.0 (should be at cap-height 700?)
+* tcaron (U+0165): X=240.5,Y=-1.0 (should be at baseline 0?)
 
-* gbreve (U+011F): X=145.0,Y=698.0 (should be at cap-height 700?)
+* uni021B (U+021B): X=240.5,Y=-1.0 (should be at baseline 0?)
 
-* obreve (U+014F): X=149.0,Y=698.0 (should be at cap-height 700?)
+* comma.ss01: X=141.0,Y=1.0 (should be at baseline 0?)
 
-* t (U+0074): X=287.5,Y=-1.0 (should be at baseline 0?)
+* comma.ss01: X=88.0,Y=1.0 (should be at baseline 0?)
 
-* tcaron (U+0165): X=287.5,Y=-1.0 (should be at baseline 0?)
+* comma.ss01: X=38.0,Y=1.0 (should be at baseline 0?)
 
-* uni0163 (U+0163): X=287.5,Y=-1.0 (should be at baseline 0?)
+* ampersand.ss04: X=620.5,Y=-1.0 (should be at baseline 0?)
 
-* uni021B (U+021B): X=287.5,Y=-1.0 (should be at baseline 0?)
-
-* ubreve (U+016D): X=128.0,Y=698.0 (should be at cap-height 700?)
-
-* comma.ss01: X=154.0,Y=1.0 (should be at baseline 0?)
-
-* ampersand.ss04: X=616.0,Y=-1.0 (should be at baseline 0?)
-
-* uni20BA (U+20BA): X=309.5,Y=-1.0 (should be at baseline 0?)
-
-* arrowup (U+2191): X=351.0,Y=-1.0 (should be at baseline 0?)
-
-* arrowup (U+2191): X=260.0,Y=-1.0 (should be at baseline 0?)
-
-* uni0306 (U+0306): X=0.0,Y=698.0 (should be at cap-height 700?)
-
-* breve (U+02D8): X=0.0,Y=698.0 (should be at cap-height 700?)
+* uni20BA (U+20BA): X=263.5,Y=-2.0 (should be at baseline 0?)
 </code></pre>
  [code: found-misalignments]
+
+
+
+</div>
+</details>
+
+<details>
+    <summary>⚠️ <b>WARN</b> Check the direction of the outermost contour in each glyph <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#outline-direction">outline_direction</a></summary>
+    <div>
+
+
+
+
+
+
+
+* ⚠️ **WARN** <p>The following glyphs have a counter-clockwise outer contour:</p>
+<pre><code>* j (U+006A) has a counter-clockwise outer contour
+
+* jcircumflex (U+0135) has a counter-clockwise outer contour
+
+* uni20BA (U+20BA) has a counter-clockwise outer contour
+
+* uni20BA (U+20BA) has a counter-clockwise outer contour
+
+* uni20BA (U+20BA) has a counter-clockwise outer contour
+</code></pre>
+ [code: ccw-outer-contour]
 
 
 
@@ -648,7 +1032,7 @@ definitions.</p>
 </div>
 </details>
 
-<details><summary>[14] CircleSans-Italic[wdth,wght].ttf</summary>
+<details><summary>[14] CircleSans-Italic[wght].ttf</summary>
 <div>
 <details>
     <summary>🔥 <b>FAIL</b> Ensure the font supports case swapping for all its glyphs. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#case-mapping">case_mapping</a></summary>
@@ -683,7 +1067,7 @@ definitions.</p>
 </details>
 
 <details>
-    <summary>🔥 <b>FAIL</b> Combined length of family and style must not exceed 31 characters. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#name-family-and-style-max-length">name/family_and_style_max_length</a></summary>
+    <summary>🔥 <b>FAIL</b> Shapes languages in all GF glyphsets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-glyphsets-shape-languages">googlefonts/glyphsets/shape_languages</a></summary>
     <div>
 
 
@@ -692,266 +1076,230 @@ definitions.</p>
 
 
 
-* 🔥 **FAIL** <p>Name ID 16 'Circle Sans' plus STAT table style combination 'ExtraLight SemiCondensed' exceeds 31 characters (the combination is 36 characters).</p>
-<p>This has been found to cause a fallback font to appear for some accented letters, as well as in some scripts such as Thai, in Microsoft Word on Windows 10 and 11. It can also lead to names which are truncated in the Microsoft Word font menu.</p>
- [code: familyname-plus-stat-entries-too-long]
-
-
-
-* 🔥 **FAIL** <p>Name ID 16 'Circle Sans' plus STAT table style combination 'Medium SemiCondensed' exceeds 31 characters (the combination is 32 characters).</p>
-<p>This has been found to cause a fallback font to appear for some accented letters, as well as in some scripts such as Thai, in Microsoft Word on Windows 10 and 11. It can also lead to names which are truncated in the Microsoft Word font menu.</p>
- [code: familyname-plus-stat-entries-too-long]
-
-
-
-* 🔥 **FAIL** <p>Name ID 16 'Circle Sans' plus STAT table style combination 'SemiBold SemiCondensed' exceeds 31 characters (the combination is 34 characters).</p>
-<p>This has been found to cause a fallback font to appear for some accented letters, as well as in some scripts such as Thai, in Microsoft Word on Windows 10 and 11. It can also lead to names which are truncated in the Microsoft Word font menu.</p>
- [code: familyname-plus-stat-entries-too-long]
-
-
-
-* 🔥 **FAIL** <p>Name ID 16 'Circle Sans' plus STAT table style combination 'ExtraBold SemiCondensed' exceeds 31 characters (the combination is 35 characters).</p>
-<p>This has been found to cause a fallback font to appear for some accented letters, as well as in some scripts such as Thai, in Microsoft Word on Windows 10 and 11. It can also lead to names which are truncated in the Microsoft Word font menu.</p>
- [code: familyname-plus-stat-entries-too-long]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Are there caret positions declared for every ligature? <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#ligature-carets">ligature_carets</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>This font lacks caret position values for ligature glyphs on its GDEF table.</p>
- [code: lacks-caret-pos]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Check math signs have the same width. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#math-signs-width">math_signs_width</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>The most common width is 596 among a set of 2 math glyphs.
-The following math glyphs have a different width, though:</p>
-<p>Width = 391:
-less, greater</p>
-<p>Width = 637:
-approxequal, equal</p>
-<p>Width = 665:
-logicalnot</p>
-<p>Width = 623:
-plusminus</p>
-<p>Width = 525:
-multiply</p>
-<p>Width = 491:
-minus</p>
-<p>Width = 645:
-notequal</p>
-<p>Width = 467:
-lessequal, greaterequal</p>
- [code: width-outliers]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Does the font contain a soft hyphen? <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#soft-hyphen">soft_hyphen</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>This font has a 'Soft Hyphen' character.</p>
- [code: softhyphen]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Check font contains no unreachable glyphs <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#unreachable-glyphs">unreachable_glyphs</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>The following glyphs could not be reached by codepoint or substitution rules:</p>
-<pre><code>- uni030C.alt
-</code></pre>
- [code: unreachable-glyphs]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Validate size, and resolution of article images, and ensure article page has minimum length and includes visual assets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-article-images">googlefonts/article/images</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>Family metadata at fonts/variable does not have an article.</p>
- [code: lacks-article]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Check for codepoints not covered by METADATA subsets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-metadata-unreachable-subsetting">googlefonts/metadata/unreachable_subsetting</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>The following codepoints supported by the font are not covered by
-any subsets defined in the font's metadata file, and will never
-be served. You can solve this by either manually adding additional
-subset declarations to METADATA.pb, or by editing the glyphset
-definitions.</p>
-<ul>
-<li>U+02D8 BREVE: try adding one of: canadian-aboriginal, yi</li>
-<li>U+02D9 DOT ABOVE: try adding one of: canadian-aboriginal, yi</li>
-<li>U+02DB OGONEK: try adding one of: canadian-aboriginal, yi</li>
-<li>U+0302 COMBINING CIRCUMFLEX ACCENT: try adding one of: math, tifinagh, cherokee, coptic</li>
-<li>U+0306 COMBINING BREVE: try adding one of: old-permic, tifinagh</li>
-<li>U+0307 COMBINING DOT ABOVE: try adding one of: tai-le, math, syriac, todhri, tifinagh, coptic, hebrew, old-permic, canadian-aboriginal, duployan, malayalam</li>
-<li>U+030A COMBINING RING ABOVE: try adding one of: duployan, syriac</li>
-<li>U+030B COMBINING DOUBLE ACUTE ACCENT: try adding one of: osage, cherokee</li>
-<li>U+030C COMBINING CARON: try adding one of: tai-le, cherokee</li>
-<li>U+0312 COMBINING TURNED COMMA ABOVE: try adding math</li>
-<li>U+0326 COMBINING COMMA BELOW: try adding math</li>
-<li>U+0327 COMBINING CEDILLA: try adding math</li>
-<li>U+0328 COMBINING OGONEK: not included in any glyphset definition</li>
-<li>U+0335 COMBINING SHORT STROKE OVERLAY: not included in any glyphset definition</li>
-<li>U+0336 COMBINING LONG STROKE OVERLAY: not included in any glyphset definition</li>
-<li>U+0394 GREEK CAPITAL LETTER DELTA: try adding one of: elbasan, math, greek</li>
-<li>U+03A9 GREEK CAPITAL LETTER OMEGA: try adding one of: elbasan, math, greek</li>
-<li>U+03BC GREEK SMALL LETTER MU: try adding one of: math, greek</li>
-<li>U+03C0 GREEK SMALL LETTER PI: try adding one of: yi, math, greek</li>
-<li>U+1EBC LATIN CAPITAL LETTER E WITH TILDE: try adding vietnamese</li>
-<li>U+1EBD LATIN SMALL LETTER E WITH TILDE: try adding vietnamese</li>
-<li>U+2000 EN QUAD: try adding symbols2</li>
-<li>U+2001 EM QUAD: try adding symbols2</li>
-<li>U+2003 EM SPACE: try adding nushu</li>
-<li>U+2004 THREE-PER-EM SPACE: try adding symbols2</li>
-<li>U+2005 FOUR-PER-EM SPACE: try adding symbols2</li>
-<li>U+2006 SIX-PER-EM SPACE: try adding symbols2</li>
-<li>U+2007 FIGURE SPACE: try adding symbols2</li>
-<li>U+2008 PUNCTUATION SPACE: try adding symbols2</li>
-<li>U+200A HAIR SPACE: try adding symbols2</li>
-<li>U+2021 DOUBLE DAGGER: try adding adlam</li>
-<li>U+202F NARROW NO-BREAK SPACE: try adding one of: mongolian, phags-pa, yi</li>
-<li>U+2030 PER MILLE SIGN: try adding adlam</li>
-<li>U+205F MEDIUM MATHEMATICAL SPACE: try adding math</li>
-<li>U+2070 SUPERSCRIPT ZERO: try adding math</li>
-<li>U+2074 SUPERSCRIPT FOUR: try adding math</li>
-<li>U+2075 SUPERSCRIPT FIVE: try adding math</li>
-<li>U+2076 SUPERSCRIPT SIX: try adding math</li>
-<li>U+2077 SUPERSCRIPT SEVEN: try adding math</li>
-<li>U+2078 SUPERSCRIPT EIGHT: try adding math</li>
-<li>U+2079 SUPERSCRIPT NINE: try adding math</li>
-<li>U+2080 SUBSCRIPT ZERO: try adding math</li>
-<li>U+2081 SUBSCRIPT ONE: try adding math</li>
-<li>U+2082 SUBSCRIPT TWO: try adding math</li>
-<li>U+2083 SUBSCRIPT THREE: try adding math</li>
-<li>U+2084 SUBSCRIPT FOUR: try adding math</li>
-<li>U+2085 SUBSCRIPT FIVE: try adding math</li>
-<li>U+2086 SUBSCRIPT SIX: try adding math</li>
-<li>U+2087 SUBSCRIPT SEVEN: try adding math</li>
-<li>U+2088 SUBSCRIPT EIGHT: try adding math</li>
-<li>U+2089 SUBSCRIPT NINE: try adding math</li>
-<li>U+2126 OHM SIGN: try adding math</li>
-<li>U+212E ESTIMATED SYMBOL: try adding math</li>
-<li>U+2150 VULGAR FRACTION ONE SEVENTH: try adding symbols</li>
-<li>U+2151 VULGAR FRACTION ONE NINTH: try adding symbols</li>
-<li>U+2152 VULGAR FRACTION ONE TENTH: try adding symbols</li>
-<li>U+2153 VULGAR FRACTION ONE THIRD: try adding symbols</li>
-<li>U+2154 VULGAR FRACTION TWO THIRDS: try adding symbols</li>
-<li>U+2155 VULGAR FRACTION ONE FIFTH: try adding symbols</li>
-<li>U+2156 VULGAR FRACTION TWO FIFTHS: try adding symbols</li>
-<li>U+2157 VULGAR FRACTION THREE FIFTHS: try adding symbols</li>
-<li>U+2158 VULGAR FRACTION FOUR FIFTHS: try adding symbols</li>
-<li>U+2159 VULGAR FRACTION ONE SIXTH: try adding symbols</li>
-<li>U+215A VULGAR FRACTION FIVE SIXTHS: try adding symbols</li>
-<li>U+215B VULGAR FRACTION ONE EIGHTH: try adding symbols</li>
-<li>U+215C VULGAR FRACTION THREE EIGHTHS: try adding symbols</li>
-<li>U+215D VULGAR FRACTION FIVE EIGHTHS: try adding symbols</li>
-<li>U+215E VULGAR FRACTION SEVEN EIGHTHS: try adding symbols</li>
-<li>U+215F FRACTION NUMERATOR ONE: try adding symbols</li>
-<li>U+2189 VULGAR FRACTION ZERO THIRDS: try adding symbols</li>
-<li>U+2190 LEFTWARDS ARROW: try adding one of: symbols, math</li>
-<li>U+2192 RIGHTWARDS ARROW: try adding one of: symbols, math</li>
-<li>U+2194 LEFT RIGHT ARROW: try adding one of: symbols, math</li>
-<li>U+2195 UP DOWN ARROW: try adding one of: symbols, math</li>
-<li>U+2196 NORTH WEST ARROW: try adding one of: symbols, math</li>
-<li>U+2197 NORTH EAST ARROW: try adding one of: symbols, math</li>
-<li>U+2198 SOUTH EAST ARROW: try adding one of: symbols, math</li>
-<li>U+2199 SOUTH WEST ARROW: try adding one of: symbols, math</li>
-<li>U+2202 PARTIAL DIFFERENTIAL: try adding math</li>
-<li>U+2206 INCREMENT: try adding math</li>
-<li>U+220F N-ARY PRODUCT: try adding math</li>
-<li>U+2211 N-ARY SUMMATION: try adding math</li>
-<li>U+221A SQUARE ROOT: try adding math</li>
-<li>U+221E INFINITY: try adding math</li>
-<li>U+222B INTEGRAL: try adding math</li>
-<li>U+2248 ALMOST EQUAL TO: try adding math</li>
-<li>U+2260 NOT EQUAL TO: try adding math</li>
-<li>U+2264 LESS-THAN OR EQUAL TO: try adding math</li>
-<li>U+2265 GREATER-THAN OR EQUAL TO: try adding math</li>
-<li>U+25CA LOZENGE: try adding one of: symbols, math</li>
-<li>U+E000 : not included in any glyphset definition</li>
-<li>U+FB01 LATIN SMALL LIGATURE FI: not included in any glyphset definition</li>
-</ul>
-<p>Or you can add the above codepoints to one of the subsets supported by the font: <code>latin</code>, <code>latin-ext</code></p>
- [code: unreachable-subsetting]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Shapes languages in all GF glyphsets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-glyphsets-shape-languages">googlefonts/glyphsets/shape_languages</a></summary>
-    <div>
-
-
-
-
+* 🔥 **FAIL** <p>GF_Phonetics_SinoExt glyphset:</p>
+<table>
+<thead>
+<tr>
+<th align="left">FAIL messages</th>
+<th align="left">Languages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̈, ̀, ́, ̧</td>
+<td align="left">ca_Latn (Catalan)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̌, ̊, ́</td>
+<td align="left">cs_Latn (Czech)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ́, ̀, ̂, ̈</td>
+<td align="left">cy_Latn (Welsh)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̊, ́</td>
+<td align="left">da_Latn (Danish)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following base characters are missing from the font: ẞ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̀, ́, ̈</td>
+<td align="left">de_Latn (German)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̀, ̂, ̃, ̈, ́, ̧</td>
+<td align="left">en_Latn (English)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̃, ̈, ́</td>
+<td align="left">es_Latn (Spanish)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̈, ̌, ̊, ̃</td>
+<td align="left">fi_Latn (Finnish)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̂, ̈, ̀, ̧, ́</td>
+<td align="left">fr_Latn (French)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̌, ́</td>
+<td align="left">hr_Latn (Croatian)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̋, ́, ̈</td>
+<td align="left">hu_Latn (Hungarian)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̈, ̨, ́</td>
+<td align="left">is_Latn (Icelandic)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̀, ̂, ̈, ́</td>
+<td align="left">it_Latn (Italian)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̇, ̌, ̨, ̄</td>
+<td align="left">lt_Latn (Lithuanian)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̌, ̧, ̄</td>
+<td align="left">lv_Latn (Latvian)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following base characters are missing from the font: Ħ, ħ, għ, GĦ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̇, ̂, ̀</td>
+<td align="left">mt_Latn (Maltese)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̂, ̀, ̊, ́, ̈</td>
+<td align="left">nb_Latn (Norwegian Bokmål)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following base characters are missing from the font: íj́, ÍJ́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̀, ́, ̂, ̈</td>
+<td align="left">nl_Latn (Dutch)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̇, ̨, ́</td>
+<td align="left">pl_Latn (Polish)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̂, ̀, ́, ̈, ̃, ̧</td>
+<td align="left">pt_Latn (Portuguese)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̂, ̆, ̧, ̦</td>
+<td align="left">ro_Latn (Romanian)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̂, ́, ̈, ̌</td>
+<td align="left">sk_Latn (Slovak)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̈, ̧</td>
+<td align="left">sq_Latn (Albanian)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ́, ̀, ̈, ̊</td>
+<td align="left">sv_Latn (Swedish)</td>
+</tr>
+<tr>
+<td align="left">Mandatory orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following mark characters are missing from the font: ̂, ̇, ̈, ̦, ̧, ̆</td>
+<td align="left">tr_Latn (Turkish)</td>
+</tr>
+</tbody>
+</table>
+ [code: failed-language-shaping]
 
 
 
@@ -1005,6 +1353,14 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
+<td align="left">The following auxiliary characters are missing from the font: Ħ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ẞ</td>
+<td align="left"></td>
+</tr>
+<tr>
 <td align="left">The following auxiliary characters are missing from the font: Ŧ</td>
 <td align="left"></td>
 </tr>
@@ -1025,6 +1381,10 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
+<td align="left">The following auxiliary characters are missing from the font: ħ</td>
+<td align="left"></td>
+</tr>
+<tr>
 <td align="left">The following auxiliary characters are missing from the font: ŧ</td>
 <td align="left"></td>
 </tr>
@@ -1038,6 +1398,10 @@ definitions.</p>
 </tr>
 <tr>
 <td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ẞ</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -1057,63 +1421,199 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach uni0307 to Iogonek when shaping the text 'Į̇́'</td>
+<td align="left">The following auxiliary characters are missing from the font: ẞ</td>
+<td align="left">it_Latn (Italian), pl_Latn (Polish) and tr_Latn (Turkish)</td>
+</tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach uni0307 to Iogonek when shaping the text 'Į̇̃'</td>
+<td align="left">The following auxiliary characters are missing from the font: Ą́</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach uni0307 to J when shaping the text 'J̇̃'</td>
+<td align="left">The following auxiliary characters are missing from the font: Ą̃</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach tildecomb to M when shaping the text 'M̃'</td>
+<td align="left">The following auxiliary characters are missing from the font: Ę́</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach uni0307 to dotlessi when shaping the text 'i̇́'</td>
+<td align="left">The following auxiliary characters are missing from the font: Ę̃</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach uni0307 to dotlessi when shaping the text 'i̇̀'</td>
+<td align="left">The following auxiliary characters are missing from the font: Ė́</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach uni0307 to dotlessi when shaping the text 'i̇̃'</td>
+<td align="left">The following auxiliary characters are missing from the font: Ė̃</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach acutecomb to iogonek when shaping the text 'į́'</td>
+<td align="left">The following auxiliary characters are missing from the font: İ́</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach uni0307 to iogonek when shaping the text 'į̇́'</td>
+<td align="left">The following auxiliary characters are missing from the font: İ́</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach acutecomb to uni0307 when shaping the text 'į̇́'</td>
+<td align="left">The following auxiliary characters are missing from the font: İ̀</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach tildecomb to iogonek when shaping the text 'į̃'</td>
+<td align="left">The following auxiliary characters are missing from the font: İ̀</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach uni0307 to iogonek when shaping the text 'į̇̃'</td>
+<td align="left">The following auxiliary characters are missing from the font: İ̃</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach tildecomb to uni0307 when shaping the text 'į̇̃'</td>
+<td align="left">The following auxiliary characters are missing from the font: İ̃</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach uni0307 to uni0237 when shaping the text 'j̇̃'</td>
+<td align="left">The following auxiliary characters are missing from the font: Į́</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">Shaper didn't attach tildecomb to m when shaping the text 'm̃'</td>
+<td align="left">The following auxiliary characters are missing from the font: Į̇́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Į̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Į̇̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: J̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: J̇̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: L̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: M̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: R̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ų́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ų̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ū́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ū̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ą́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ą̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ę́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ę̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ė́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ė̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: i̇́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: i̇̀</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: i̇̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: į́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: į̇́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: į̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: į̇̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: j̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: j̇̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: l̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: m̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: r̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ų́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ų̃</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ū́</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ū̃</td>
 <td align="left">lt_Latn (Lithuanian)</td>
 </tr>
 <tr>
@@ -1128,9 +1628,302 @@ definitions.</p>
 <td align="left">The following auxiliary characters are missing from the font: ŧ</td>
 <td align="left">nb_Latn (Norwegian Bokmål)</td>
 </tr>
+<tr>
+<td align="left">Auxiliary orthography codepoints:</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: Ĳ</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">The following auxiliary characters are missing from the font: ĳ</td>
+<td align="left">nl_Latn (Dutch)</td>
+</tr>
 </tbody>
 </table>
  [code: warning-language-shaping]
+
+
+
+</div>
+</details>
+
+<details>
+    <summary>🔥 <b>FAIL</b> Check Google Fonts glyph coverage. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-glyph-coverage">googlefonts/glyph_coverage</a></summary>
+    <div>
+
+
+
+
+
+
+
+* 🔥 **FAIL** <p>Missing required codepoints:</p>
+<pre><code>- 0x0126 (LATIN CAPITAL LETTER H WITH STROKE)
+
+
+- 0x0127 (LATIN SMALL LETTER H WITH STROKE)
+
+
+- 0x0237 (LATIN SMALL LETTER DOTLESS J)
+
+
+- 0x0300 (COMBINING GRAVE ACCENT)
+
+
+- 0x0301 (COMBINING ACUTE ACCENT)
+
+
+- 0x0302 (COMBINING CIRCUMFLEX ACCENT)
+
+
+- 0x0303 (COMBINING TILDE)
+
+
+- 0x0304 (COMBINING MACRON)
+
+
+- 0x0306 (COMBINING BREVE)
+
+
+- 0x0307 (COMBINING DOT ABOVE)
+
+
+- 0x0308 (COMBINING DIAERESIS)
+
+
+- 0x030A (COMBINING RING ABOVE)
+
+
+- 0x030B (COMBINING DOUBLE ACUTE ACCENT)
+
+
+- 0x030C (COMBINING CARON)
+
+
+- 0x0326 (COMBINING COMMA BELOW)
+
+
+- 0x0327 (COMBINING CEDILLA)
+
+
+- 0x0328 (COMBINING OGONEK)
+
+
+- 0x1E9E (LATIN CAPITAL LETTER SHARP S)
+</code></pre>
+ [code: missing-codepoints]
+
+
+
+</div>
+</details>
+
+<details>
+    <summary>⚠️ <b>WARN</b> Check accent of Lcaron, dcaron, lcaron, tcaron <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#alt-caron">alt_caron</a></summary>
+    <div>
+
+
+
+
+
+
+
+
+
+* ⚠️ **WARN** <p>Lcaron is decomposed and therefore could not be checked. Please check manually.</p>
+ [code: decomposed-outline]
+
+
+
+* ⚠️ **WARN** <p>dcaron is decomposed and therefore could not be checked. Please check manually.</p>
+ [code: decomposed-outline]
+
+
+
+* ⚠️ **WARN** <p>lcaron is decomposed and therefore could not be checked. Please check manually.</p>
+ [code: decomposed-outline]
+
+
+
+* ⚠️ **WARN** <p>tcaron is decomposed and therefore could not be checked. Please check manually.</p>
+ [code: decomposed-outline]
+
+
+
+</div>
+</details>
+
+<details>
+    <summary>⚠️ <b>WARN</b> Are there caret positions declared for every ligature? <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#ligature-carets">ligature_carets</a></summary>
+    <div>
+
+
+
+
+
+
+
+* ⚠️ **WARN** <p>This font lacks caret positioning values for these ligature glyphs:
+- drip.logo</p>
+ [code: incomplete-caret-pos-data]
+
+
+
+</div>
+</details>
+
+<details>
+    <summary>⚠️ <b>WARN</b> Check math signs have the same width. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#math-signs-width">math_signs_width</a></summary>
+    <div>
+
+
+
+
+
+
+
+* ⚠️ **WARN** <p>The most common width is 502 among a set of 3 math glyphs.
+The following math glyphs have a different width, though:</p>
+<p>Width = 636:
+plus</p>
+<p>Width = 497:
+less</p>
+<p>Width = 667:
+notequal, equal</p>
+<p>Width = 496:
+greater</p>
+<p>Width = 651:
+logicalnot</p>
+<p>Width = 747:
+plusminus</p>
+<p>Width = 555:
+multiply</p>
+<p>Width = 637:
+divide</p>
+<p>Width = 521:
+minus</p>
+ [code: width-outliers]
+
+
+
+</div>
+</details>
+
+<details>
+    <summary>⚠️ <b>WARN</b> Check there are no overlapping path segments <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#overlapping-path-segments">overlapping_path_segments</a></summary>
+    <div>
+
+
+
+
+
+
+
+* ⚠️ **WARN** <p>The following glyphs have overlapping path segments:</p>
+<pre><code>* uniA732 (U+A732): L&lt;&lt;614.0,0.0&gt;--&lt;533.0,0.0&gt;&gt; has the same coordinates as a previous segment.
+
+* f_f: L&lt;&lt;608.0,500.0&gt;--&lt;594.0,430.0&gt;&gt; has the same coordinates as a previous segment.
+
+* ampersand.ss03: L&lt;&lt;545.0,633.0&gt;--&lt;479.0,592.0&gt;&gt; has the same coordinates as a previous segment.
+
+* ampersand.ss03: L&lt;&lt;479.0,592.0&gt;--&lt;545.0,633.0&gt;&gt; has the same coordinates as a previous segment.
+
+* ampersand.ss04: L&lt;&lt;554.0,640.0&gt;--&lt;483.0,595.0&gt;&gt; has the same coordinates as a previous segment.
+
+* ampersand.ss04: L&lt;&lt;483.0,595.0&gt;--&lt;554.0,640.0&gt;&gt; has the same coordinates as a previous segment.
+</code></pre>
+ [code: overlapping-path-segments]
+
+
+
+</div>
+</details>
+
+<details>
+    <summary>⚠️ <b>WARN</b> Does the font contain a soft hyphen? <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#soft-hyphen">soft_hyphen</a></summary>
+    <div>
+
+
+
+
+
+
+
+* ⚠️ **WARN** <p>This font has a 'Soft Hyphen' character.</p>
+ [code: softhyphen]
+
+
+
+</div>
+</details>
+
+<details>
+    <summary>⚠️ <b>WARN</b> Validate size, and resolution of article images, and ensure article page has minimum length and includes visual assets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-article-images">googlefonts/article/images</a></summary>
+    <div>
+
+
+
+
+
+
+
+* ⚠️ **WARN** <p>Family metadata at fonts/variable does not have an article.</p>
+ [code: lacks-article]
+
+
+
+</div>
+</details>
+
+<details>
+    <summary>⚠️ <b>WARN</b> Check for codepoints not covered by METADATA subsets. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/googlefonts.html#googlefonts-metadata-unreachable-subsetting">googlefonts/metadata/unreachable_subsetting</a></summary>
+    <div>
+
+
+
+
+
+
+
+* ⚠️ **WARN** <p>The following codepoints supported by the font are not covered by
+any subsets defined in the font's metadata file, and will never
+be served. You can solve this by either manually adding additional
+subset declarations to METADATA.pb, or by editing the glyphset
+definitions.</p>
+<ul>
+<li>U+02D8 BREVE: try adding one of: yi, canadian-aboriginal</li>
+<li>U+02D9 DOT ABOVE: try adding one of: yi, canadian-aboriginal</li>
+<li>U+02DB OGONEK: try adding one of: yi, canadian-aboriginal</li>
+<li>U+0394 GREEK CAPITAL LETTER DELTA: try adding one of: elbasan, greek, math</li>
+<li>U+03A9 GREEK CAPITAL LETTER OMEGA: try adding one of: elbasan, greek, math</li>
+<li>U+03BC GREEK SMALL LETTER MU: try adding one of: math, greek</li>
+<li>U+03C0 GREEK SMALL LETTER PI: try adding one of: yi, math, greek</li>
+<li>U+1EBC LATIN CAPITAL LETTER E WITH TILDE: try adding vietnamese</li>
+<li>U+1EBD LATIN SMALL LETTER E WITH TILDE: try adding vietnamese</li>
+<li>U+2021 DOUBLE DAGGER: try adding adlam</li>
+<li>U+2030 PER MILLE SIGN: try adding adlam</li>
+<li>U+2074 SUPERSCRIPT FOUR: try adding math</li>
+<li>U+2126 OHM SIGN: try adding math</li>
+<li>U+212E ESTIMATED SYMBOL: try adding math</li>
+<li>U+2202 PARTIAL DIFFERENTIAL: try adding math</li>
+<li>U+2206 INCREMENT: try adding math</li>
+<li>U+220F N-ARY PRODUCT: try adding math</li>
+<li>U+2211 N-ARY SUMMATION: try adding math</li>
+<li>U+221A SQUARE ROOT: try adding math</li>
+<li>U+221E INFINITY: try adding math</li>
+<li>U+222B INTEGRAL: try adding math</li>
+<li>U+2248 ALMOST EQUAL TO: try adding math</li>
+<li>U+2260 NOT EQUAL TO: try adding math</li>
+<li>U+2264 LESS-THAN OR EQUAL TO: try adding math</li>
+<li>U+2265 GREATER-THAN OR EQUAL TO: try adding math</li>
+<li>U+25CA LOZENGE: try adding one of: math, symbols</li>
+<li>U+E000 : not included in any glyphset definition</li>
+<li>U+FB01 LATIN SMALL LIGATURE FI: not included in any glyphset definition</li>
+</ul>
+<p>Or you can add the above codepoints to one of the subsets supported by the font: <code>latin</code>, <code>latin-ext</code></p>
+ [code: unreachable-subsetting]
 
 
 
@@ -1158,43 +1951,6 @@ definitions.</p>
 </details>
 
 <details>
-    <summary>⚠️ <b>WARN</b> Ensure dotted circle glyph is present and can attach marks. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#dotted-circle">dotted_circle</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>No dotted circle glyph present</p>
- [code: missing-dotted-circle]
-
-
-
-</div>
-</details>
-
-<details>
-    <summary>⚠️ <b>WARN</b> Ensure soft_dotted characters lose their dot when combined with marks that replace the dot. <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#soft-dotted">soft_dotted</a></summary>
-    <div>
-
-
-
-
-
-
-
-* ⚠️ **WARN** <p>The dot of soft dotted characters used in orthographies <em>must</em> disappear in the following strings: į̀ į́ į̂ į̃ į̄ į̌</p>
-<p>The dot of soft dotted characters <em>should</em> disappear in other cases, for example: į̆ į̇ į̈ į̊ į̋ į̒ į̦̀ į̦́ į̦̂ į̦̃ į̦̄ į̦̆ į̦̇ į̦̈ į̦̊ į̦̋ į̦̌ į̦̒ į̧̀ į̧́</p>
- [code: soft-dotted]
-
-
-
-</div>
-</details>
-
-<details>
     <summary>⚠️ <b>WARN</b> Are there any misaligned on-curve points? <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#outline-alignment-miss">outline_alignment_miss</a></summary>
     <div>
 
@@ -1205,59 +1961,73 @@ definitions.</p>
 
 
 * ⚠️ **WARN** <p>The following glyphs have on-curve points which have potentially incorrect y coordinates:</p>
-<pre><code>* Ccedilla (U+00C7): X=234.0,Y=-249.0 (should be at descender -250?)
+<pre><code>* Iogonek (U+012E): X=220.0,Y=1.0 (should be at baseline 0?)
 
-* Ccedilla (U+00C7): X=353.0,Y=-249.0 (should be at descender -250?)
+* Eng (U+014A): X=570.0,Y=-2.0 (should be at baseline 0?)
 
-* Ccedilla (U+00C7): X=234.0,Y=-249.0 (should be at descender -250?)
+* Eng (U+014A): X=489.0,Y=-2.0 (should be at baseline 0?)
 
-* Iogonek (U+012E): X=139.0,Y=1.0 (should be at baseline 0?)
+* uni01EA (U+01EA): X=340.0,Y=0.5 (should be at baseline 0?)
 
-* Lcaron (U+013D): X=440.0,Y=701.0 (should be at cap-height 700?)
+* Scedilla (U+015E): X=292.5,Y=-251.5 (should be at descender -250?)
 
-* Lcaron (U+013D): X=546.0,Y=701.0 (should be at cap-height 700?)
+* eogonek (U+0119): X=307.0,Y=2.0 (should be at baseline 0?)
 
-* uni013B (U+013B): X=440.0,Y=701.0 (should be at cap-height 700?)
+* eng (U+014B): X=375.0,Y=-1.0 (should be at baseline 0?)
 
-* uni013B (U+013B): X=546.0,Y=701.0 (should be at cap-height 700?)
+* eng (U+014B): X=454.0,Y=-2.0 (should be at baseline 0?)
 
-* uni013B.loclMAH: X=440.0,Y=701.0 (should be at cap-height 700?)
+* eng (U+014B): X=375.0,Y=-1.0 (should be at baseline 0?)
 
-* uni013B.loclMAH: X=546.0,Y=701.0 (should be at cap-height 700?)
+* r (U+0072): X=311.0,Y=499.5 (should be at x-height 500?)
 
-* abreve (U+0103): X=187.0,Y=698.0 (should be at cap-height 700?)
+* t (U+0074): X=190.5,Y=-1.0 (should be at baseline 0?)
 
-* ebreve (U+0115): X=213.0,Y=698.0 (should be at cap-height 700?)
+* tcaron (U+0165): X=190.5,Y=-1.0 (should be at baseline 0?)
 
-* gbreve (U+011F): X=220.0,Y=698.0 (should be at cap-height 700?)
+* uni021B (U+021B): X=190.5,Y=-1.0 (should be at baseline 0?)
 
-* obreve (U+014F): X=224.0,Y=698.0 (should be at cap-height 700?)
+* comma.ss01: X=92.0,Y=1.0 (should be at baseline 0?)
 
-* t (U+0074): X=245.5,Y=-1.0 (should be at baseline 0?)
+* comma.ss01: X=39.0,Y=1.0 (should be at baseline 0?)
 
-* tcaron (U+0165): X=245.5,Y=-1.0 (should be at baseline 0?)
+* comma.ss01: X=-11.0,Y=1.0 (should be at baseline 0?)
 
-* uni0163 (U+0163): X=245.5,Y=-1.0 (should be at baseline 0?)
+* ampersand.ss04: X=570.5,Y=-1.0 (should be at baseline 0?)
 
-* uni021B (U+021B): X=245.5,Y=-1.0 (should be at baseline 0?)
+* uni20BA (U+20BA): X=213.0,Y=-2.0 (should be at baseline 0?)
 
-* ubreve (U+016D): X=203.0,Y=698.0 (should be at cap-height 700?)
-
-* comma.ss01: X=112.0,Y=1.0 (should be at baseline 0?)
-
-* ampersand.ss04: X=574.0,Y=-1.0 (should be at baseline 0?)
-
-* uni20BA (U+20BA): X=267.5,Y=-1.0 (should be at baseline 0?)
-
-* arrowup (U+2191): X=309.0,Y=-1.0 (should be at baseline 0?)
-
-* arrowup (U+2191): X=218.0,Y=-1.0 (should be at baseline 0?)
-
-* uni0306 (U+0306): X=75.0,Y=698.0 (should be at cap-height 700?)
-
-* breve (U+02D8): X=75.0,Y=698.0 (should be at cap-height 700?)
+* tilde (U+02DC): X=229.0,Y=698.0 (should be at cap-height 700?)
 </code></pre>
  [code: found-misalignments]
+
+
+
+</div>
+</details>
+
+<details>
+    <summary>⚠️ <b>WARN</b> Check the direction of the outermost contour in each glyph <a href="https://fontbakery.readthedocs.io/en/stable/fontbakery/checks/universal.html#outline-direction">outline_direction</a></summary>
+    <div>
+
+
+
+
+
+
+
+* ⚠️ **WARN** <p>The following glyphs have a counter-clockwise outer contour:</p>
+<pre><code>* j (U+006A) has a counter-clockwise outer contour
+
+* jcircumflex (U+0135) has a counter-clockwise outer contour
+
+* uni20BA (U+20BA) has a counter-clockwise outer contour
+
+* uni20BA (U+20BA) has a counter-clockwise outer contour
+
+* uni20BA (U+20BA) has a counter-clockwise outer contour
+</code></pre>
+ [code: ccw-outer-contour]
 
 
 
@@ -1291,8 +2061,8 @@ definitions.</p>
 
 | 💥 ERROR | ☠ FATAL | 🔥 FAIL | ⚠️ WARN | ⏩ SKIP | ℹ️ INFO | ✅ PASS | 🔎 DEBUG | 
 | ---|---|---|---|---|---|---|---|
-| 0 | 0 | 4 | 24 | 173 | 13 | 241 | 0 | 
-| 0% | 0% | 1% | 5% | 38% | 3% | 53% | 0% | 
+| 0 | 0 | 6 | 22 | 179 | 13 | 235 | 0 | 
+| 0% | 0% | 1% | 5% | 39% | 3% | 52% | 0% | 
 
 
 
