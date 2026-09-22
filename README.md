@@ -115,9 +115,9 @@ the ring meets cap height, 744 units wide. It takes `currentColor` and scales wi
 
 ### Figures
 
-Figures are **proportional**, and there is no tabular set. Albert Sans 1.25 never had one,
-and its digits are close enough in width that a column of prices lines up the way it always
-has for the team. `font-variant-numeric: tabular-nums` is harmless but does nothing.
+Figures are **proportional**, and there is no tabular set. The digits are close enough in
+width that a column of prices lines up the way it always has for the team.
+`font-variant-numeric: tabular-nums` is harmless but does nothing.
 
 ## Credits
 
