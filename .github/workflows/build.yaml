@@ -30,6 +30,8 @@ jobs:
     # fonts: the key hashes what the font build reads, and nothing else. The
     # installer's Python lives in scripts/ too, hence the exclusions - without them
     # every installer change threw the fonts away and cost a five-minute rebuild.
+    # The derive script is excluded too: the build reads the .glyphs files it
+    # writes, and those are already hashed under sources/.
     # On a hit, everything down to "setup site" is skipped, toolchain included.
     - name: Cache built fonts
       id: cache-fonts
@@ -38,7 +40,7 @@ jobs:
         path: |
           fonts
           out
-        key: ${{ runner.os }}-fonts-${{ hashFiles('sources/**', 'Makefile', 'requirements*.txt', 'scripts/*.py', '!scripts/render-installer-art.py', '!scripts/installer-dmg.py') }}
+        key: ${{ runner.os }}-fonts-${{ hashFiles('sources/**', 'Makefile', 'requirements*.txt', 'scripts/*.py', '!scripts/render-installer-art.py', '!scripts/installer-dmg.py', '!scripts/derive-from-albert-sans.py') }}
 
     - name: Set up Python 3.10
       if: steps.cache-fonts.outputs.cache-hit != 'true'
