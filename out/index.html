@@ -11024,10 +11024,12 @@ fn _vgsl_c10bc925__index_of(p: vec2i, size: vec2u) -> u32 {
           film.reseed();
         });
 
-        // ?dial on the address opens a DialKit panel for the film. Every value
-        // is read by the film on the next frame. The palette is compiled into
-        // the shader and is not on the panel. Copy in the panel's version menu
-        // puts the current values on the clipboard, to bake in above.
+        // ?dial on a local copy (localhost) opens a DialKit panel for the film;
+        // the live site never loads it. Every value is read by the film on the
+        // next frame. The palette is compiled into the shader and is not on the
+        // panel. The clipboard button beside the version menu copies the
+        // current values, to bake in above.
+        if (!/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) return;
         if (!/[?&]dial\b/.test(location.search)) return;
         var DK = "https://cdn.jsdelivr.net/npm/dialkit@2.0.2/dist/vanilla/";
         var css = document.createElement("link");
