@@ -118,6 +118,20 @@
       .masthead--film > *:not(.masthead-film) {
         pointer-events: none;
       }
+      /* Grain over the film, drawn by the browser at screen resolution: the canvas
+     renders below device resolution, so noise in the shader gets resampled into
+     a regular pattern. Between the canvas (-2) and the content. */
+      .masthead--film::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+        background-size: 200px 200px;
+        /* Plain blend: soft-light and overlay all but vanish over greens this dark. */
+        opacity: 0.28;
+      }
       /* No scrim and no text shadow: the film runs at full strength and the type
      takes its chances on top of it. */
       /* Doubled class so these beat the single-class rules below, whatever the
@@ -10346,14 +10360,15 @@ const _vgsl_34fcc4b0__DYE_SIZE = vec2u(1024, 576);
 // One traverse of the palette per this much optical path, which is about one
 // interference order.
 const _vgsl_34fcc4b0__PALETTE_PERIOD = 560.0;
-const _vgsl_34fcc4b0__PALETTE_COUNT = 10;
+const _vgsl_34fcc4b0__PALETTE_COUNT = 5;
 const _vgsl_34fcc4b0__PALETTE_TAPS = 5;
 
 const _vgsl_34fcc4b0__IOR_SOAP = 0.10;
 const _vgsl_34fcc4b0__SUBSTRATE = vec3f(0.008, 0.010, 0.020);
 const _vgsl_34fcc4b0__LIGHT = vec3f(-0.32, 0.50, 0.80);
 
-// The supplied palette, in display sRGB. At full shade the frame reproduces
+// Our Green (#224737) and four darker steps at the same OKLCH hue, chroma
+// falling with lightness, darkest first, in display sRGB. At full shade the frame reproduces
 // these exactly; everything else on screen is a blend of two neighbours or one
 // of them darkened. Edit these and nothing else changes.
 //
@@ -10361,16 +10376,11 @@ const _vgsl_34fcc4b0__LIGHT = vec3f(-0.32, 0.50, 0.80);
 // vgpu's reflection then drops the uniform declared above it and \`config\`
 // vanishes from the binding table at runtime.
 const _vgsl_34fcc4b0__PALETTE = array<vec3f, _vgsl_34fcc4b0__PALETTE_COUNT>(
-  vec3f(0.957, 0.690, 0.173), // #f4b02c  warm yellow
-  vec3f(0.961, 0.643, 0.102), // #f5a41a  amber
-  vec3f(0.937, 0.373, 0.141), // #ef5f24  vermilion
-  vec3f(0.820, 0.000, 0.561), // #d1008f  magenta
-  vec3f(0.604, 0.106, 0.820), // #9a1bd1  violet
-  vec3f(0.247, 0.227, 0.569), // #3f3a91  deep indigo
-  vec3f(0.263, 0.282, 0.671), // #4348ab  indigo
-  vec3f(0.043, 0.373, 0.686), // #0b5faf  blue
-  vec3f(0.024, 0.714, 0.910), // #06b6e8  cyan
-  vec3f(0.039, 1.000, 0.816), // #0affd0  spring green
+  vec3f(0.016, 0.055, 0.035), // #040e09  Our Green, darkest
+  vec3f(0.035, 0.102, 0.075), // #091a13  Our Green, darker
+  vec3f(0.063, 0.153, 0.114), // #10271d  Our Green, darker
+  vec3f(0.098, 0.216, 0.165), // #19372a  Our Green, dark
+  vec3f(0.133, 0.278, 0.216), // #224737  Our Green
 );
 
 @group(0) @binding(0) var<uniform> config: _vgsl_34fcc4b0__DisplayConfig;
@@ -10409,7 +10419,7 @@ fn _vgsl_34fcc4b0__palette(t: f32) -> vec3f {
 }
 
 // Interference is cyclic, but the two ends of the palette are not neighbours --
-// wrapping straight from spring green back to amber would cut through hues that
+// wrapping straight from Our Green back to the darkest step would cut through hues that
 // are not in the set. Folding the cycle back on itself keeps every step between
 // two adjacent swatches.
 fn _vgsl_34fcc4b0__cycle_position(phase: f32) -> f32 {
