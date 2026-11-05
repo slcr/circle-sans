@@ -128,9 +128,9 @@
         z-index: -1;
         pointer-events: none;
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-        background-size: 200px 200px;
+        background-size: var(--grain-size, 450px) var(--grain-size, 450px);
         /* Plain blend: soft-light and overlay all but vanish over greens this dark. */
-        opacity: 0.28;
+        opacity: var(--grain-opacity, 0);
       }
       /* No scrim and no text shadow: the film runs at full strength and the type
      takes its chances on top of it. */
@@ -10983,8 +10983,29 @@ fn _vgsl_c10bc925__index_of(p: vec2i, size: vec2u) -> u32 {
         var film = window.OilSlick.mountOilSlick({
           canvas: canvas,
           maxDpr: 1.5,
-          // Slower and broader than the standalone piece; the grade is left alone.
-          settings: { maxSpeed: 0.22, diffusion: 0.06 },
+          // Dialled in with ?dial on 5 Nov 2026; only the values that differ
+          // from the piece's own defaults.
+          settings: {
+            exposure: 1.17,
+            shading: 0,
+            vignette: 0.71,
+            normalGain: 3.15,
+            viewSpread: 2,
+            ior: 1.09,
+            thicknessMin: 101,
+            thicknessSpan: 186,
+            maxSpeed: 0.32,
+            buoyancy: 0.43,
+            vorticity: 3.1,
+            emitter: 1.2,
+            diffusion: 0.06,
+            dissipation: 0.972,
+            drain: 0.0004,
+            thinTarget: 0.46,
+            pressureIterations: 1,
+            driftCenter: 0.7,
+            driftAmount: 0.31,
+          },
           onUnsupported: drop,
         });
         // R re-pours the film. Modifiers are left alone so cmd/ctrl-R still
@@ -11002,6 +11023,84 @@ fn _vgsl_c10bc925__index_of(p: vec2i, size: vec2u) -> u32 {
             return;
           film.reseed();
         });
+
+        // ?dial on the address opens a DialKit panel for the film. Every value
+        // is read by the film on the next frame. The palette is compiled into
+        // the shader and is not on the panel. Copy in the panel's version menu
+        // puts the current values on the clipboard, to bake in above.
+        if (!/[?&]dial\b/.test(location.search)) return;
+        var DK = "https://cdn.jsdelivr.net/npm/dialkit@2.0.2/dist/vanilla/";
+        var css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = DK + "styles.css";
+        document.head.appendChild(css);
+        var js = document.createElement("script");
+        js.src = DK + "browser.global.js";
+        js.onload = function () {
+          var set = film.settings;
+          var grain = getComputedStyle(masthead);
+          DialKit.createDialRoot({ position: "top-right", theme: "dark" });
+          var kit = DialKit.createDialKit(
+            "Hero film",
+            {
+              grade: {
+                exposure: [set.exposure, 0.2, 2, 0.01],
+                shading: [set.shading, 0, 1, 0.01],
+                vignette: [set.vignette, 0, 1, 0.01],
+                sheen: [set.sheen, 0, 1, 0.01],
+                normalGain: [set.normalGain, 0, 5, 0.05],
+                viewSpread: [set.viewSpread, 0, 4, 0.01],
+                ior: [set.ior, 1, 2, 0.01],
+                thicknessMin: [set.thicknessMin, 0, 200, 1],
+                thicknessSpan: [set.thicknessSpan, 0, 800, 1],
+              },
+              flow: {
+                maxSpeed: [set.maxSpeed, 0, 1, 0.01],
+                buoyancy: [set.buoyancy, 0, 1, 0.01],
+                vorticity: [set.vorticity, 0, 12, 0.1],
+                emitter: [set.emitter, 0, 3, 0.05],
+                diffusion: [set.diffusion, 0, 0.3, 0.005],
+                dissipation: [set.dissipation, 0.95, 1, 0.001],
+                drain: [set.drain, 0, 0.002, 0.0001],
+                thickTarget: [set.thickTarget, 0, 3, 0.01],
+                thinTarget: [set.thinTarget, 0, 1, 0.01],
+                pressureIterations: [set.pressureIterations, 1, 40, 1],
+                _collapsed: true,
+              },
+              drift: {
+                drift: set.drift,
+                driftCenter: [set.driftCenter, 0, 1.5, 0.01],
+                driftAmount: [set.driftAmount, 0, 1, 0.01],
+                target: [set.target, 0, 1.5, 0.01],
+                _collapsed: true,
+              },
+              grain: {
+                opacity: [parseFloat(grain.getPropertyValue("--grain-opacity")) || 0, 0, 1, 0.01],
+                size: [parseFloat(grain.getPropertyValue("--grain-size")) || 450, 40, 800, 10],
+              },
+              repour: { type: "action" },
+            },
+            {
+              id: "hero-film",
+              persist: true,
+              onAction: function (path) {
+                if (path === "repour") film.reseed();
+              },
+            }
+          );
+          kit.subscribe(function (v) {
+            Object.assign(set, v.grade, v.flow, {
+              drift: v.drift.drift,
+              driftCenter: v.drift.driftCenter,
+              driftAmount: v.drift.driftAmount,
+            });
+            // With drift on the film steers its own target every frame.
+            if (!v.drift.drift) set.target = v.drift.target;
+            masthead.style.setProperty("--grain-opacity", v.grain.opacity);
+            masthead.style.setProperty("--grain-size", v.grain.size + "px");
+          });
+        };
+        document.head.appendChild(js);
       })();
     </script>
   </body>
