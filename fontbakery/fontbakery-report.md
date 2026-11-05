@@ -70,7 +70,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ́, ̈, ̧, ̀</td>
+<td align="left">The following mark characters are missing from the font: ̀, ̧, ́, ̈</td>
 <td align="left">ca_Latn (Catalan)</td>
 </tr>
 <tr>
@@ -78,7 +78,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ́, ̊, ̌</td>
+<td align="left">The following mark characters are missing from the font: ̊, ̌, ́</td>
 <td align="left">cs_Latn (Czech)</td>
 </tr>
 <tr>
@@ -86,7 +86,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ́, ̀, ̂, ̈</td>
+<td align="left">The following mark characters are missing from the font: ̂, ̈, ́, ̀</td>
 <td align="left">cy_Latn (Welsh)</td>
 </tr>
 <tr>
@@ -94,7 +94,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̊, ́</td>
+<td align="left">The following mark characters are missing from the font: ́, ̊</td>
 <td align="left">da_Latn (Danish)</td>
 </tr>
 <tr>
@@ -106,7 +106,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ́, ̈, ̀</td>
+<td align="left">The following mark characters are missing from the font: ́, ̀, ̈</td>
 <td align="left">de_Latn (German)</td>
 </tr>
 <tr>
@@ -114,7 +114,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̃, ̀, ́, ̈, ̧, ̂</td>
+<td align="left">The following mark characters are missing from the font: ́, ̂, ̈, ̧, ̀, ̃</td>
 <td align="left">en_Latn (English)</td>
 </tr>
 <tr>
@@ -122,7 +122,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̃, ́, ̈</td>
+<td align="left">The following mark characters are missing from the font: ̃, ̈, ́</td>
 <td align="left">es_Latn (Spanish)</td>
 </tr>
 <tr>
@@ -130,7 +130,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̊, ̌, ̈, ̃</td>
+<td align="left">The following mark characters are missing from the font: ̊, ̃, ̌, ̈</td>
 <td align="left">fi_Latn (Finnish)</td>
 </tr>
 <tr>
@@ -138,7 +138,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̂, ̈, ́, ̀, ̧</td>
+<td align="left">The following mark characters are missing from the font: ̀, ́, ̂, ̈, ̧</td>
 <td align="left">fr_Latn (French)</td>
 </tr>
 <tr>
@@ -154,7 +154,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̋, ̈, ́</td>
+<td align="left">The following mark characters are missing from the font: ̈, ́, ̋</td>
 <td align="left">hu_Latn (Hungarian)</td>
 </tr>
 <tr>
@@ -170,7 +170,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̀, ́, ̈, ̂</td>
+<td align="left">The following mark characters are missing from the font: ́, ̂, ̀, ̈</td>
 <td align="left">it_Latn (Italian)</td>
 </tr>
 <tr>
@@ -178,7 +178,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̄, ̌, ̇, ̨</td>
+<td align="left">The following mark characters are missing from the font: ̌, ̄, ̇, ̨</td>
 <td align="left">lt_Latn (Lithuanian)</td>
 </tr>
 <tr>
@@ -194,7 +194,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following base characters are missing from the font: għ, Ħ, ħ, GĦ</td>
+<td align="left">The following base characters are missing from the font: ħ, għ, Ħ, GĦ</td>
 <td align="left"></td>
 </tr>
 <tr>
@@ -206,7 +206,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̀, ̈, ̊, ́, ̂</td>
+<td align="left">The following mark characters are missing from the font: ̀, ̊, ̈, ́, ̂</td>
 <td align="left">nb_Latn (Norwegian Bokmål)</td>
 </tr>
 <tr>
@@ -214,11 +214,11 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following base characters are missing from the font: íj́, ÍJ́</td>
+<td align="left">The following base characters are missing from the font: ÍJ́, íj́</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̈, ̀, ̂, ́</td>
+<td align="left">The following mark characters are missing from the font: ́, ̈, ̂, ̀</td>
 <td align="left">nl_Latn (Dutch)</td>
 </tr>
 <tr>
@@ -226,7 +226,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ́, ̇, ̨</td>
+<td align="left">The following mark characters are missing from the font: ̇, ̨, ́</td>
 <td align="left">pl_Latn (Polish)</td>
 </tr>
 <tr>
@@ -234,7 +234,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̀, ̃, ́, ̈, ̧, ̂</td>
+<td align="left">The following mark characters are missing from the font: ̀, ́, ̃, ̈, ̂, ̧</td>
 <td align="left">pt_Latn (Portuguese)</td>
 </tr>
 <tr>
@@ -242,7 +242,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̦, ̧, ̂, ̆</td>
+<td align="left">The following mark characters are missing from the font: ̆, ̂, ̦, ̧</td>
 <td align="left">ro_Latn (Romanian)</td>
 </tr>
 <tr>
@@ -250,7 +250,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ́, ̈, ̂, ̌</td>
+<td align="left">The following mark characters are missing from the font: ̈, ́, ̂, ̌</td>
 <td align="left">sk_Latn (Slovak)</td>
 </tr>
 <tr>
@@ -266,7 +266,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̀, ́, ̈, ̊</td>
+<td align="left">The following mark characters are missing from the font: ̈, ̀, ̊, ́</td>
 <td align="left">sv_Latn (Swedish)</td>
 </tr>
 <tr>
@@ -274,7 +274,7 @@ fontbakery version: 1.1.0
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̧, ̂, ̇, ̆, ̈, ̦</td>
+<td align="left">The following mark characters are missing from the font: ̈, ̦, ̂, ̇, ̧, ̆</td>
 <td align="left">tr_Latn (Turkish)</td>
 </tr>
 </tbody>
@@ -873,13 +873,13 @@ be served. You can solve this by either manually adding additional
 subset declarations to METADATA.pb, or by editing the glyphset
 definitions.</p>
 <ul>
-<li>U+02D8 BREVE: try adding one of: yi, canadian-aboriginal</li>
-<li>U+02D9 DOT ABOVE: try adding one of: yi, canadian-aboriginal</li>
-<li>U+02DB OGONEK: try adding one of: yi, canadian-aboriginal</li>
-<li>U+0394 GREEK CAPITAL LETTER DELTA: try adding one of: math, greek, elbasan</li>
-<li>U+03A9 GREEK CAPITAL LETTER OMEGA: try adding one of: math, greek, elbasan</li>
-<li>U+03BC GREEK SMALL LETTER MU: try adding one of: math, greek</li>
-<li>U+03C0 GREEK SMALL LETTER PI: try adding one of: yi, math, greek</li>
+<li>U+02D8 BREVE: try adding one of: canadian-aboriginal, yi</li>
+<li>U+02D9 DOT ABOVE: try adding one of: canadian-aboriginal, yi</li>
+<li>U+02DB OGONEK: try adding one of: canadian-aboriginal, yi</li>
+<li>U+0394 GREEK CAPITAL LETTER DELTA: try adding one of: greek, math, elbasan</li>
+<li>U+03A9 GREEK CAPITAL LETTER OMEGA: try adding one of: greek, math, elbasan</li>
+<li>U+03BC GREEK SMALL LETTER MU: try adding one of: greek, math</li>
+<li>U+03C0 GREEK SMALL LETTER PI: try adding one of: greek, yi, math</li>
 <li>U+1EBC LATIN CAPITAL LETTER E WITH TILDE: try adding vietnamese</li>
 <li>U+1EBD LATIN SMALL LETTER E WITH TILDE: try adding vietnamese</li>
 <li>U+2021 DOUBLE DAGGER: try adding adlam</li>
@@ -898,7 +898,7 @@ definitions.</p>
 <li>U+2260 NOT EQUAL TO: try adding math</li>
 <li>U+2264 LESS-THAN OR EQUAL TO: try adding math</li>
 <li>U+2265 GREATER-THAN OR EQUAL TO: try adding math</li>
-<li>U+25CA LOZENGE: try adding one of: math, symbols</li>
+<li>U+25CA LOZENGE: try adding one of: symbols, math</li>
 <li>U+E000 : not included in any glyphset definition</li>
 <li>U+FB01 LATIN SMALL LIGATURE FI: not included in any glyphset definition</li>
 </ul>
@@ -1090,7 +1090,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ́, ̈, ̀, ̧</td>
+<td align="left">The following mark characters are missing from the font: ̧, ́, ̈, ̀</td>
 <td align="left">ca_Latn (Catalan)</td>
 </tr>
 <tr>
@@ -1098,7 +1098,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ́, ̊, ̌</td>
+<td align="left">The following mark characters are missing from the font: ̌, ́, ̊</td>
 <td align="left">cs_Latn (Czech)</td>
 </tr>
 <tr>
@@ -1106,7 +1106,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̂, ́, ̈, ̀</td>
+<td align="left">The following mark characters are missing from the font: ̂, ̈, ́, ̀</td>
 <td align="left">cy_Latn (Welsh)</td>
 </tr>
 <tr>
@@ -1114,7 +1114,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̊, ́</td>
+<td align="left">The following mark characters are missing from the font: ́, ̊</td>
 <td align="left">da_Latn (Danish)</td>
 </tr>
 <tr>
@@ -1126,7 +1126,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̈, ̀, ́</td>
+<td align="left">The following mark characters are missing from the font: ̀, ́, ̈</td>
 <td align="left">de_Latn (German)</td>
 </tr>
 <tr>
@@ -1134,7 +1134,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̈, ̧, ̀, ̃, ̂, ́</td>
+<td align="left">The following mark characters are missing from the font: ̃, ̈, ̧, ̀, ́, ̂</td>
 <td align="left">en_Latn (English)</td>
 </tr>
 <tr>
@@ -1142,7 +1142,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ́, ̃, ̈</td>
+<td align="left">The following mark characters are missing from the font: ̈, ́, ̃</td>
 <td align="left">es_Latn (Spanish)</td>
 </tr>
 <tr>
@@ -1150,7 +1150,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̊, ̈, ̃, ̌</td>
+<td align="left">The following mark characters are missing from the font: ̊, ̌, ̈, ̃</td>
 <td align="left">fi_Latn (Finnish)</td>
 </tr>
 <tr>
@@ -1158,7 +1158,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̂, ́, ̀, ̈, ̧</td>
+<td align="left">The following mark characters are missing from the font: ̈, ́, ̂, ̧, ̀</td>
 <td align="left">fr_Latn (French)</td>
 </tr>
 <tr>
@@ -1174,7 +1174,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̋, ́, ̈</td>
+<td align="left">The following mark characters are missing from the font: ́, ̈, ̋</td>
 <td align="left">hu_Latn (Hungarian)</td>
 </tr>
 <tr>
@@ -1190,7 +1190,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̀, ́, ̂, ̈</td>
+<td align="left">The following mark characters are missing from the font: ̈, ̂, ́, ̀</td>
 <td align="left">it_Latn (Italian)</td>
 </tr>
 <tr>
@@ -1198,7 +1198,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̄, ̨, ̇, ̌</td>
+<td align="left">The following mark characters are missing from the font: ̌, ̨, ̄, ̇</td>
 <td align="left">lt_Latn (Lithuanian)</td>
 </tr>
 <tr>
@@ -1206,7 +1206,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̧, ̄, ̌</td>
+<td align="left">The following mark characters are missing from the font: ̌, ̧, ̄</td>
 <td align="left">lv_Latn (Latvian)</td>
 </tr>
 <tr>
@@ -1214,11 +1214,11 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following base characters are missing from the font: GĦ, għ, Ħ, ħ</td>
+<td align="left">The following base characters are missing from the font: Ħ, ħ, GĦ, għ</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̇, ̂, ̀</td>
+<td align="left">The following mark characters are missing from the font: ̀, ̇, ̂</td>
 <td align="left">mt_Latn (Maltese)</td>
 </tr>
 <tr>
@@ -1226,7 +1226,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̀, ̊, ̈, ́, ̂</td>
+<td align="left">The following mark characters are missing from the font: ̊, ̀, ̂, ́, ̈</td>
 <td align="left">nb_Latn (Norwegian Bokmål)</td>
 </tr>
 <tr>
@@ -1234,11 +1234,11 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following base characters are missing from the font: ÍJ́, íj́</td>
+<td align="left">The following base characters are missing from the font: íj́, ÍJ́</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ́, ̀, ̈, ̂</td>
+<td align="left">The following mark characters are missing from the font: ́, ̂, ̈, ̀</td>
 <td align="left">nl_Latn (Dutch)</td>
 </tr>
 <tr>
@@ -1246,7 +1246,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̇, ̨, ́</td>
+<td align="left">The following mark characters are missing from the font: ̨, ̇, ́</td>
 <td align="left">pl_Latn (Polish)</td>
 </tr>
 <tr>
@@ -1254,7 +1254,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̀, ̈, ́, ̂, ̃, ̧</td>
+<td align="left">The following mark characters are missing from the font: ́, ̃, ̀, ̈, ̧, ̂</td>
 <td align="left">pt_Latn (Portuguese)</td>
 </tr>
 <tr>
@@ -1262,7 +1262,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̧, ̦, ̂, ̆</td>
+<td align="left">The following mark characters are missing from the font: ̂, ̦, ̆, ̧</td>
 <td align="left">ro_Latn (Romanian)</td>
 </tr>
 <tr>
@@ -1270,7 +1270,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̌, ̈, ̂, ́</td>
+<td align="left">The following mark characters are missing from the font: ̂, ̈, ́, ̌</td>
 <td align="left">sk_Latn (Slovak)</td>
 </tr>
 <tr>
@@ -1278,7 +1278,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̧, ̈</td>
+<td align="left">The following mark characters are missing from the font: ̈, ̧</td>
 <td align="left">sq_Latn (Albanian)</td>
 </tr>
 <tr>
@@ -1286,7 +1286,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̈, ́, ̊, ̀</td>
+<td align="left">The following mark characters are missing from the font: ́, ̈, ̊, ̀</td>
 <td align="left">sv_Latn (Swedish)</td>
 </tr>
 <tr>
@@ -1294,7 +1294,7 @@ definitions.</p>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">The following mark characters are missing from the font: ̇, ̈, ̆, ̧, ̦, ̂</td>
+<td align="left">The following mark characters are missing from the font: ̆, ̂, ̈, ̦, ̇, ̧</td>
 <td align="left">tr_Latn (Turkish)</td>
 </tr>
 </tbody>
@@ -1893,13 +1893,13 @@ be served. You can solve this by either manually adding additional
 subset declarations to METADATA.pb, or by editing the glyphset
 definitions.</p>
 <ul>
-<li>U+02D8 BREVE: try adding one of: yi, canadian-aboriginal</li>
-<li>U+02D9 DOT ABOVE: try adding one of: yi, canadian-aboriginal</li>
-<li>U+02DB OGONEK: try adding one of: yi, canadian-aboriginal</li>
-<li>U+0394 GREEK CAPITAL LETTER DELTA: try adding one of: math, greek, elbasan</li>
-<li>U+03A9 GREEK CAPITAL LETTER OMEGA: try adding one of: math, greek, elbasan</li>
-<li>U+03BC GREEK SMALL LETTER MU: try adding one of: math, greek</li>
-<li>U+03C0 GREEK SMALL LETTER PI: try adding one of: yi, math, greek</li>
+<li>U+02D8 BREVE: try adding one of: canadian-aboriginal, yi</li>
+<li>U+02D9 DOT ABOVE: try adding one of: canadian-aboriginal, yi</li>
+<li>U+02DB OGONEK: try adding one of: canadian-aboriginal, yi</li>
+<li>U+0394 GREEK CAPITAL LETTER DELTA: try adding one of: greek, math, elbasan</li>
+<li>U+03A9 GREEK CAPITAL LETTER OMEGA: try adding one of: greek, math, elbasan</li>
+<li>U+03BC GREEK SMALL LETTER MU: try adding one of: greek, math</li>
+<li>U+03C0 GREEK SMALL LETTER PI: try adding one of: greek, yi, math</li>
 <li>U+1EBC LATIN CAPITAL LETTER E WITH TILDE: try adding vietnamese</li>
 <li>U+1EBD LATIN SMALL LETTER E WITH TILDE: try adding vietnamese</li>
 <li>U+2021 DOUBLE DAGGER: try adding adlam</li>
@@ -1918,7 +1918,7 @@ definitions.</p>
 <li>U+2260 NOT EQUAL TO: try adding math</li>
 <li>U+2264 LESS-THAN OR EQUAL TO: try adding math</li>
 <li>U+2265 GREATER-THAN OR EQUAL TO: try adding math</li>
-<li>U+25CA LOZENGE: try adding one of: math, symbols</li>
+<li>U+25CA LOZENGE: try adding one of: symbols, math</li>
 <li>U+E000 : not included in any glyphset definition</li>
 <li>U+FB01 LATIN SMALL LIGATURE FI: not included in any glyphset definition</li>
 </ul>
